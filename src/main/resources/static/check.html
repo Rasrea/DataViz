@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- 设置文档的字符编码 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口，确保页面在移动设备上正常显示 -->
+    <title>检查和描述</title> <!-- 设置页面标题 -->
+    <link rel="icon" href="images/图标.png"> <!-- 设置页面图标 -->
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 Font Awesome 图标库 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- 自建CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<!-- 导航栏 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark secondary-navbar">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-upload"></i>上传数据</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#"><i class="fas fa-search"></i>检查与描述</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-chart-line"></i>可视化</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- 英雄部分 -->
+<section class="hero-section3 text-center">
+    <div class="container">
+        <h1 class="display">检查与描述</h1>
+        <p class="lead">检查数据类型，描述相关特征，便于后续可视化</p>
+    </div>
+</section>
+
+<!-- 主体部分 -->
+<div class="container-check my-5">
+    <div class="row">
+        <!-- 左边：提示框 -->
+        <div class="col-md-4">
+            <div class="description-box">
+                <label for="dataDescription" class="form-label-check">确保数据看起来正确：</label>
+                <div id="dataDescription" class="alert alert-custom" role="alert">
+                    <p>请确保 DataViz 正确解释您的数据，单击表格标题以编辑列属性。在表格中，
+                        <span class="type-hl highlight-number">数字</span>
+                        列应以蓝色显示，
+                        <span class="type-hl highlight-date">日期</span>
+                        应以绿色显示，但需要手动指名，
+                        <span class="type-hl highlight-text">文本</span>
+                        应以黑色显示。<span class="type-hl highlight-missing">红色</span>
+                        单元格表示数据丢失需要修复。<br>
+                    </p>
+                </div>
+            </div>
+            <div class="button">
+                <a href="visualize.html" class="toolbar-button">可视化</a>
+            </div>
+        </div>
+
+        <!-- 添加图片 -->
+        <div class="col-md-4">
+            <img src="images/check-html/箭头.png" class="img-fluid" alt="转换箭头">
+        </div>
+
+        <!-- 右边：数据表 -->
+        <div id="checkTableContainer">
+            <!-- 显示“请稍等”消息 -->
+            <div id="loadingMessage" style="text-align: center; color: gray; display: none;">请稍等...</div>
+
+            <table class="table table-striped" id="checkCsvTable">
+                <thead>
+                <tr id="checkCsvHeaderRow"></tr>
+                </thead>
+                <tbody id="checkCsvBody"></tbody>
+            </table>
+        </div>
+
+        <!-- 表格信息 -->
+        <div id="checkTableTips"
+             style="display: flex; justify-content: flex-end; align-items: center; margin-top: 120px">
+            <span style="color: gray; margin-right: 180px;">仅显示前250行数据</span>
+            <button onclick="initializeTable()" style="margin-right: 120px;" class="operationButton" id="initializeButton">初始表格</button>
+            <button onclick="downloadTable('checkCsvTable')" style="margin-right: 100px;" class="operationButton" id="downloadTableButton">下载表格</button>
+            <span id="checkTableShape" style="color: gray; margin-right: 20px;">0 rows x 0 cols</span>
+        </div>
+    </div>
+</div>
+
+<!-- 引入 Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 自定义专属JS -->
+<script src="checkTable.js"></script>
+</body>
+</html>

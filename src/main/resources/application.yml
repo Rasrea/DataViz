@@ -1,0 +1,37 @@
+server:
+  port: 8080
+  dataPath: 'http://localhost:8080/data/fetch-csv' # 后缀 "/data/fetch-csv"
+
+spring:
+  application:
+    name: springboot-demo
+  thymeleaf:
+    cache: false # 关闭缓存
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+# 日志格式
+logging:
+  config: classpath:logback.xml
+  level:
+    com.lucky.spring_boot_demo: trace
+
+# 样本数据集网址
+sample-data-path:
+  # 豆瓣读书Top250
+  doubanBookPath: "src/main/resources/sampleData/douban-books.csv"
+  # 猫眼电影榜单
+  maoyanFilmPath: "src/main/resources/sampleData/maoyan-films.csv"
+  # Metacritic游戏
+  metacriticGamePath: "src/main/resources/sampleData/metacritic-games.csv"
+  # 随机生成的误差数据
+  randomDataPath: "src/main/resources/sampleData/random_data_with_nulls.csv"
+
+# Python编译器配置
+python-scripts-path:
+  # 解释器路径
+  pythonPath: "E:/python3.12/python.exe"
+  # 数据预处理脚本
+  dataVizPath: "src/main/resources/python-scripts/dataViz.py"

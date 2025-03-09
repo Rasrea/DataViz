@@ -1,0 +1,819 @@
+/* 共享的导航栏样式 */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 20px; /* 给导航栏之间加间距 */
+    z-index: 1000; /* 保证导航栏在最上层 */
+}
+
+.navbar-nav .nav-link {
+    color: white; /* 设置链接为白色 */
+    font-size: 1.1rem; /* 设置字体大小 */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #8addaa; /* 设置鼠标悬停时链接颜色 */
+}
+
+/* 次导航栏的样式 */
+.secondary-navbar .navbar-nav {
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: center; /* 将按钮水平居中 */
+    width: 100%; /* 确保导航栏占满整个宽度 */
+    padding-left: 0; /* 去掉默认的内边距 */
+    padding-right: 0; /* 去掉默认的内边距 */
+    margin: 0; /* 去掉默认的外边距 */
+}
+
+.secondary-navbar .nav-item {
+    margin-left: 20px; /* 给每个按钮添加左右间距 */
+    margin-right: 20px; /* 给每个按钮添加左右间距 */
+}
+
+/* 让导航链接显示为白色 */
+.secondary-navbar .nav-link {
+    color: white; /* 设置文字颜色 */
+    text-decoration: none; /* 去掉下划线 */
+}
+
+/* 如果需要使当前选中的导航项变色，可以设置如下样式 */
+.secondary-navbar .nav-item.active .nav-link {
+    color: #6bd4c8;
+}
+
+/* 响应式设置，确保小屏幕时导航栏正常显示 */
+@media (max-width: 768px) {
+    .top-navbar, .secondary-navbar {
+        padding: 10px; /* 小屏幕时减小内边距 */
+    }
+}
+
+/* 防止导航栏固定后遮挡内容 */
+body {
+    padding-top: 56px; /* 导航栏的高度，可以根据实际导航栏高度调整 */
+}
+
+
+/* 英雄部分 */
+.hero-section1 {
+    font-family: '宋体', sans-serif;
+    background: linear-gradient(to right, #8addaa, #6bd4c8); /* 渐变背景：从左到右 */
+    padding: 50px 0;
+    margin: 0 auto;
+}
+
+.display {
+    font-family: '华文新魏', sans-serif;
+    font-size: 50px;
+}
+
+.lead {
+    font-family: '华文新魏', sans-serif; /* 设置字体 */
+    font-size: 1.5rem; /* 设置字体大小 */
+    color: #333; /* 设置字体颜色 */
+    line-height: 1.6; /* 设置行高 */
+    text-align: center; /* 居中对齐 */
+}
+
+/* 加粗 .lead 类中的 <strong> 标签 */
+.lead strong {
+    font-weight: bold; /* 加粗字体 */
+    color: #297EA8; /* 设置加粗字体颜色 */
+}
+
+/* 卡片整体样式 */
+.card {
+    border: none; /* 去除边框 */
+    border-radius: 10px; /* 卡片本身的圆角 */
+    overflow: hidden; /* 隐藏超出卡片范围的部分 */
+    width: 100%; /* 卡片宽度 */
+    height: 500px; /* 设置卡片的固定高度 */
+    background-color: #fff; /* 卡片背景颜色 */
+    text-align: center; /* 使文本内容居中 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加卡片阴影 */
+}
+
+/* 图片部分样式 */
+.card-img-top {
+    max-height: 300px; /* 限制图片最大高度 */
+    width: 100%; /* 使图片宽度占满整个卡片 */
+    height: 400px; /* 设置图片高度一致，避免高度不统一 */
+    object-fit: cover; /* 保持图片比例，覆盖区域 */
+    transition: transform 0.3s ease; /* 平滑的缩放动画 */
+}
+
+/* 鼠标悬停时图片放大 */
+.card-img-top:hover {
+    transform: scale(1.2); /* 鼠标悬停时放大1.2倍 */
+}
+
+/* 文字部分样式 */
+.card-body {
+    padding: 20px;
+    text-align: center; /* 使文字居中 */
+    flex-direction: column; /* 垂直排列 */
+    justify-content: center; /* 垂直居中 */
+    height: 200px; /* 固定文字区域高度 */
+    display: flex; /* 使用flexbox布局 */
+}
+
+/* 图片放大时的缩放效果 */
+.hover-zoom {
+    transition: transform 0.3s ease; /* 设置缩放过渡动画 */
+}
+
+/* 卡片图片和文字整体放大效果 */
+.card:hover .card-img-top {
+    transform: scale(1.2); /* 鼠标悬停时放大1.2倍 */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* 自定义按钮 */
+#hero-button {
+    font-size: 18px;
+    padding: 15px 30px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+#hero-button:hover {
+    background-color: #4361c2;
+    transform: translateY(-2px); /* 鼠标悬停时微微向上浮动 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 悬停时阴影效果 */
+}
+
+/* 鼠标点击时效果 */
+#hero-button:active {
+    background-color: #004085; /* 点击时背景颜色 */
+    transform: translateY(1px); /* 点击时按钮向下移动 */
+}
+
+/* upload.html */
+
+/* 英雄部分 */
+.hero-section2 {
+    font-family: '宋体', sans-serif;
+    background: linear-gradient(to right, #4a87d3, #6bd4c8); /* 渐变背景：从左到右 */
+    padding: 50px 0;
+    margin: 0 auto;
+}
+
+/* 设置文件标签 */
+.form-label {
+    font-family: '华文新魏', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-left: 10px;
+    margin-top: -30px;
+    display: block;
+    letter-spacing: 1px; /* 增加字母间距，使文本更清晰 */
+}
+
+/* 设置表格容器的固定范围 */
+#tableContainer {
+    max-height: 420px; /* 表格容器的固定高度 */
+    max-width: 100%; /* 表格容器的宽度为页面宽度 */
+    overflow: auto; /* 超出范围时添加滚动条 */
+    border: 1px solid #ddd; /* 添加边框 */
+    margin-top: -30px; /* 添加顶部间距 */
+    padding: 10px; /* 添加内边距 */
+}
+
+table {
+    width: 100%; /* 表格宽度自适应 */
+    border-collapse: collapse; /* 合并表格边框 */
+}
+
+th, td {
+    text-align: center; /* 居中显示 */
+    padding: 8px; /* 单元格内边距 */
+    border: 1px solid #ddd; /* 单元格边框 */
+    max-width: 200px; /* 固定列宽 */
+    height: 50px; /* 固定行高 */
+    word-wrap: break-word; /* 自动换行 */
+    text-overflow: ellipsis; /* 文本超出时显示省略号 */
+    overflow: hidden; /* 隐藏溢出的文本 */
+    white-space: nowrap; /* 单行显示 */
+}
+
+th {
+    background-color: #f8f9fa; /* 表头背景颜色 */
+    text-align: center; /* 居中显示 */
+}
+
+
+/* 工具栏样式 */
+.toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar .btn {
+    margin-right: 15px;
+    font-weight: 600;
+}
+
+/* 按钮样式 */
+.toolbar .btn-light {
+    background-color: #ffffff;
+    color: #333;
+    border: none;
+}
+
+.toolbar .btn-light:hover {
+    background-color: #f1f1f1;
+}
+
+.toolbar .btn-outline-light {
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+.toolbar .btn-outline-light:hover {
+    background-color: #ffffff;
+    color: #333;
+}
+
+/* 按钮基本样式 */
+.toolbar-button {
+    display: inline-block;
+    padding: 10px 20px; /* 设置按钮的内边距 */
+    font-size: 16px; /* 设置字体大小 */
+    font-weight: 600; /* 设置字体粗细 */
+    text-align: center; /* 文本居中对齐 */
+    text-decoration: none; /* 去掉链接的下划线 */
+    color: white; /* 设置文字颜色 */
+    background-color: #4a87d3; /* 按钮背景颜色 */
+    border-radius: 5px; /* 设置按钮圆角 */
+    border: 2px solid transparent; /* 设置按钮边框透明 */
+    transition: all 0.3s ease; /* 添加过渡效果 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+/* 鼠标悬停时效果 */
+.toolbar-button:hover {
+    background-color: #0056b3; /* 悬停时背景颜色 */
+    border-color: #0056b3; /* 悬停时边框颜色 */
+    transform: translateY(-2px); /* 鼠标悬停时微微向上浮动 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 悬停时阴影效果 */
+}
+
+/* 鼠标点击时效果 */
+.toolbar-button:active {
+    background-color: #004085; /* 点击时背景颜色 */
+    transform: translateY(1px); /* 点击时按钮向下移动 */
+}
+
+/* 设置父容器为 flexbox */
+.button {
+    display: flex; /* 设置父容器为 Flexbox */
+    justify-content: center; /* 水平居中子元素 */
+    align-items: center; /* 垂直居中子元素 */
+}
+
+/* 样本数据集选择框 */
+/* Excel数据选择框 */
+.datasetSelect {
+    width: 10%;
+    position: absolute; /* 设置为绝对定位 */
+    right: 10px; /* 距离右侧 10px */
+    top: 280px; /* 距离顶部 280px */
+    padding: 8px 12px; /* 内边距：上/下 8px，左/右 12px */
+    font-size: 17px; /* 字体大小 16px */
+    font-family: '楷体', sans-serif;
+    text-align: center; /* 水平居中 */
+    text-align-last: center; /* 选中的选项居中 */
+    background-color: #fff; /* 背景颜色为白色 */
+    border: 1px solid #ccc; /* 边框为 1px 实线，颜色为 #ccc */
+    border-radius: 6px; /* 边框圆角 4px */
+    cursor: pointer; /* 鼠标悬停时显示为指针 */
+}
+
+.datasetSelect:focus {
+    border-color: #0088cc; /* 聚焦时边框颜色为 #0088cc */
+    outline: none; /* 移除默认焦点外框 */
+}
+
+/* check.html */
+
+/* 英雄部分 */
+.hero-section3 {
+    font-family: '宋体', sans-serif;
+    background: linear-gradient(to right, #6bd4c8, #cccccc); /* 渐变背景：从左到右 */
+    padding: 50px 0;
+    margin: 0 auto;
+}
+
+
+/* 美化提示框 */
+.description-box .alert-custom {
+    font-size: 22px;
+    padding: 20px;
+    color: #333; /* 字体颜色 */
+    border: 2px solid #80c0ff; /* 边框颜色，增加一些对比 */
+    border-radius: 12px; /* 圆角效果，使边框更加圆润 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果，使框体立体 */
+    font-family: '楷体', sans-serif; /* 字体样式 */
+    letter-spacing: 2px; /* 增加字母间距，使文本更清晰 */
+
+    /* 调整顶部间距 */
+    /* 设置文本框与左侧边缘的间距 */
+    /* 设置文本框与右侧边缘的间距 */
+    /* 设置文本框与底部的间距 */
+    margin: 20px 20px 20px 20px;
+}
+
+
+/* 基础样式，统一使用 */
+.type-hl {
+    padding: 0 5px; /* 设置内边距，上下为0，左右为5px */
+    border-radius: 4px; /* 设置边框圆角为4px */
+}
+
+/* 数字列的样式 */
+.highlight-number {
+    color: #297EA8;
+    border: 2px solid #297EA8; /* 蓝色边框 */
+    background-color: rgba(41, 126, 168, 0.1); /* 淡蓝色背景 */
+}
+
+/* 日期列的样式 */
+.highlight-date {
+    color: #39A832;
+    border: 2px solid #39A832; /* 绿色边框 */
+    background-color: rgba(57, 168, 50, 0.1); /* 淡绿色背景 */
+}
+
+/* 文本列的样式 */
+.highlight-text {
+    color: black;
+    border: 2px solid black; /* 黑色边框 */
+    background-color: rgba(0, 0, 0, 0.1); /* 淡黑色背景 */
+}
+
+/* 红色列的样式 */
+.highlight-missing {
+    color: #c00;
+    background-color: #fee; /* 背景色为淡红色 */
+    border: 2px solid #c00; /* 红色边框 */
+}
+
+
+/* 改进 label 样式，使其更显眼 */
+.form-label-check {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: '幼圆', sans-serif;
+    color: #333;
+    margin-left: 30px;
+    margin-top: 70px;
+    display: block;
+    letter-spacing: 1px; /* 增加字母间距，使文本更清晰 */
+}
+
+
+/* 数据框设置 */
+#checkTableContainer {
+    max-height: 550px; /* 表格容器的固定高度 */
+    max-width: 50%; /* 表格容器的宽度为页面宽度 */
+    overflow: auto; /* 超出范围时添加滚动条 */
+    border: 1px solid #ddd; /* 添加边框 */
+    margin-top: -30px; /* 添加顶部间距 */
+    padding: 10px; /* 添加内边距 */
+    position: absolute; /* 绝对定位 */
+    right: 10px; /* 右侧对齐 */
+}
+
+/* 给序号列单独添加样式 */
+.row-index {
+    font-weight: bold; /* 加粗字体 */
+    background-color: #f4f4f4; /* 背景颜色 */
+    text-align: center; /* 居中显示 */
+}
+
+#tableIndex {
+    text-align: center; /* 居中显示 */
+}
+
+
+/* 根据数据类型，添加相应颜色 */
+#Number {
+    color: #297EA8;
+}
+
+#Nan {
+    color: indianred;
+}
+
+#Date {
+    color: #39A832;
+}
+
+/* 美化图片 */
+.img-fluid {
+    max-width: 50%; /* 确保图片不会超过其容器的宽度 */
+    height: auto; /* 保持图片的纵横比 */
+    margin-top: 160px;
+    margin-left: -30px;
+}
+
+/* 表头按钮样式 */
+.header-button {
+    font-size: 18px;
+    border-radius: 4px; /* 设置边框圆角为4px */
+    border: none; /* 不添加边框 */
+    font-weight: bold; /* 加粗字体 */
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+.header-button:hover {
+    background-color: #6bd4c8;
+    transform: translateY(-2px); /* 鼠标悬停时微微向上浮动 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 悬停时阴影效果 */
+}
+
+/* 鼠标点击时效果 */
+.header-button:active {
+    background-color: #4a87d3; /* 点击时背景颜色 */
+    transform: translateY(1px); /* 点击时按钮向下移动 */
+}
+
+/* 鼠标悬停在单元格时显示提示框 */
+.tooltip-cell {
+    position: relative;
+    cursor: pointer;
+}
+
+/* 定义 tooltip 样式 */
+.tooltip-cell:hover::after {
+    content: attr(title);
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.85); /* 更柔和的黑色背景 */
+    color: #dddddd;
+    padding: 10px 15px; /* 增加内边距使提示框更大 */
+    border-radius: 8px; /* 圆角效果 */
+    font-size: 14px; /* 更适合阅读的字体大小 */
+    line-height: 1.4;
+    white-space: nowrap;
+    z-index: 10;
+    top: 120%; /* 稍微向下偏移一点，使框体不紧贴单元格 */
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 加入阴影效果 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* 平滑的显示/隐藏过渡 */
+}
+
+/* 鼠标悬停时显示 tooltip */
+.tooltip-cell:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease; /* 使过渡效果更加平滑 */
+}
+
+/* 保存文件按钮和初始化表格数据按钮 */
+.operationButton {
+    background-color: #8addaa;
+    border: none;
+    padding: 8px 10px;
+    text-align: center;
+    text-decoration: none; /* 去掉文字下划线 */
+    display: inline-block; /* 使按钮表现为行内块元素 */
+    font-size: 16px; /* 字体大小 */
+    border-radius: 8px; /* 圆角 */
+    cursor: pointer; /* 鼠标悬停时显示为指针 */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* 按钮的过渡效果 */
+}
+
+.operationButton:hover {
+    background-color: rgba(45, 179, 0, 0.75); /* 鼠标悬停时的背景色 */
+    transform: scale(1.05); /* 鼠标悬停时按钮微微放大 */
+}
+
+.operationButton:active {
+    background-color: rgb(45, 179, 0); /* 鼠标点击时的背景色 */
+    transform: scale(0.98); /* 鼠标点击时按钮略微缩小 */
+}
+
+/* operation.html */
+
+.operationBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 视口高度 */
+    margin: 0; /* 去除默认边距 */
+}
+
+.chartText {
+    width: 400px;
+    height: 300px;
+    border: 1px solid #80c0ff; /* 添加边框 */
+    position: absolute; /* 绝对定位 */
+    font-size: 24px;
+    font-family: '华文宋体', sans-serif;
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    padding: 40px; /* 设置字体距离方框的距离 */
+    border-radius: 15px; /* 添加圆角，半径为15px */
+    background: linear-gradient(to right, #6bd4c8, rosybrown); /* 渐变背景 */
+    -webkit-background-clip: text; /* 仅对文字应用背景 */
+    color: transparent; /* 使文字本身透明 */
+
+    overflow: hidden; /* 超出部分隐藏 */
+    opacity: 0; /* 初始时文本不可见 */
+    animation: splitText 2s forwards; /* 执行动画 */
+}
+
+
+/* 劈裂效果的动画 */
+@keyframes splitText {
+    0% {
+        opacity: 0;
+        clip-path: inset(0 50% 0 50%); /* 初始时文字被切割成左右两半 */
+    }
+    50% {
+        opacity: 1;
+        clip-path: inset(0 0 0 0); /* 文字逐渐显示出来 */
+    }
+    100% {
+        opacity: 1;
+        clip-path: inset(0 0 0 0); /* 文字完全显示 */
+    }
+}
+
+.chart {
+    width: 600px;
+    height: 400px;
+    position: absolute; /* 绝对定位 */
+}
+
+
+/* 表单主题 */
+.form-container {
+    background-color: #fff; /* 设置背景颜色为白色 */
+    padding: 20px; /* 设置内边距为20px */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* 添加阴影效果，阴影颜色为黑色，透明度为0.1，模糊半径为10px */
+    border-radius: 8px; /* 设置边框圆角为8px */
+    width: 300px; /* 设置宽度为300px */
+
+    overflow: hidden; /* 超出部分隐藏 */
+    opacity: 0; /* 初始时文本不可见 */
+    animation: fadeIn 2s forwards; /* 应用淡入动画，持续2秒 */
+}
+
+/* 定义淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* 初始时透明 */
+    }
+    to {
+        opacity: 1; /* 最终完全显示 */
+    }
+}
+
+
+/* 表单标题 */
+.form-title {
+    white-space: nowrap; /* 防止换行 */
+    font-family: '华文新魏', sans-serif;
+    font-size: 30px;
+    text-align: center;
+    color: #333;
+}
+
+/* 表单单列内容 */
+.form-group {
+    font-family: '宋体', sans-serif;
+    margin-bottom: 15px;
+}
+
+/* 选项标签 */
+label {
+    font-size: 18px;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* 选项内容 */
+.operationSelect {
+    font-family: '宋体', sans-serif;
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.operationSelect option[value="Nan"] {
+    color: #e11414;
+    font-weight: 600;
+}
+
+.operationSelect option[value="Number"] {
+    color: #278bf4;
+    font-weight: 600;
+}
+
+.operationSelect option[value="String"] {
+    color: #070707;
+    font-weight: 600;
+}
+
+.operationSelect option[value="Date"] {
+    color: #39A832;
+    font-weight: 600;
+}
+
+/* 提交按钮设置 */
+.submitButton {
+    background-color: #4CAF50;
+    font-family: '华文行楷', serif;
+    font-size: 20px;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* 水平居中 */
+
+}
+
+.submitButton:hover {
+    background-color: #45a049;
+    border-color: #2db300;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+/* visualize */
+
+/* 英雄部分 */
+.hero-section4 {
+    font-family: '宋体', sans-serif;
+    background: linear-gradient(to right, rgb(41, 85, 168), rgb(135, 250, 237)); /* 渐变背景：从左到右 */
+    padding: 50px 0;
+    margin: 0 auto;
+}
+
+/* 图像选择框 */
+.select-chart-container {
+    position: absolute;
+    top: 170px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 5px; /* 圆角边框 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 阴影效果 */
+}
+
+/* 界面一：选项内容 */
+.operation-label {
+    font-family: '宋体', sans-serif;
+    width: 85%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.operation-label:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 鼠标悬停时显示阴影 */
+}
+
+/* 标签的不同类型所对应的颜色 */
+.operation-label option[class="Nan-label"] {
+    color: #e11414;
+    font-weight: 600;
+}
+
+.operation-label option[class="Number-label"] {
+    color: #278bf4;
+    font-weight: 600;
+}
+
+.operation-label option[class="String-label"] {
+    color: #070707;
+    font-weight: 600;
+}
+
+.operation-label option[class="Date-label"] {
+    color: #39A832;
+    font-weight: 600;
+}
+
+/* 可视化表单主题 */
+.vis-form-container {
+    background-color: #fff; /* 设置背景颜色为白色 */
+    padding: 20px; /* 设置内边距为20px */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* 添加阴影效果，阴影颜色为黑色，透明度为0.1，模糊半径为10px */
+    border-radius: 8px; /* 设置边框圆角为8px */
+    width: 600px; /* 设置宽度为 */
+    max-height: 400px; /* 设置最大高度为500px */
+    overflow-y: auto; /* 超出部分显示滚动条 */
+    opacity: 0; /* 初始时文本不可见 */
+    animation: fadeIn 1s forwards; /* 应用淡入动画，持续2秒 */
+    margin-left: 30px;
+}
+
+.vis-form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 调整 label 和 select 之间的间距 */
+}
+
+.vis-form-label {
+    /*white-space: nowrap; !* 防止换行 *!*/
+    width: 300px;
+    font-weight: bold;
+}
+
+/* 设置场景切换条的样式 */
+.switch-scene {
+    display: flex;
+    margin-left: 80px; /* 调整场景切换条与左侧的间距 */
+    width: 450px;
+    list-style-type: none;
+    justify-content: space-between; /* 标签之间均匀分布 */
+    align-items: center; /* 标签垂直居中 */
+    gap: 5px; /* 标签之间的间距 */
+}
+
+/* 单个场景项样式 */
+.option-link {
+    color: black;
+    font-size: 1.1rem;
+    text-decoration: none;  /* 去除下划线 */
+    margin: 0 15px;
+}
+
+.option-link:hover {
+    color: #8addaa;
+}
+
+.scene-item.active .option-link {
+    color: #6bd4c8;
+}
+
+/* 多个 Y 轴容器 */
+.selected-y-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* 调整徽章之间的间距 */
+    padding: 10px;
+    border: 1px solid #ddd; /* 添加边框，使其更清晰 */
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.selected-y-item {
+    display: flex;
+    align-items: center;
+    background-color: rgba(135, 250, 237, 0.6); /* 蓝色背景 */
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}
+
+.selected-y-item:hover {
+    background-color: #00ffe3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.selected-y-item .remove-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.selected-y-item .remove-btn:hover {
+    color: #ffcccc;
+}

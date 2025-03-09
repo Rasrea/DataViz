@@ -1,0 +1,102 @@
+{
+    "title": {
+        "text": "自定义散点图",
+        "subtext": "这是副标题",
+        "left": "center",
+        "textStyle": {
+            "fontSize": 20,
+            "fontWeight": "bold"
+        }
+    },
+    "tooltip": {
+        "trigger": "item",
+        "formatter": "X: {b0}<br/>Y: {c0}",
+        "borderRadius": 6,
+        "padding": 10
+    },
+    "legend": {
+        "show": true,
+        "top": "5%",
+        "left": "right",
+        "textStyle": {
+            "fontSize": 12
+        }
+    },
+    "xAxis": {
+        "name": "X 轴",
+        "nameLocation": "end",
+        "nameTextStyle": {
+            "fontSize": 14,
+            "fontWeight": "bold"
+        },
+        "min": "dataMin",
+        "max": "dataMax",
+        "boundaryGap": false,
+        "axisTick": {
+            "show": true
+        },
+        "splitLine": {
+            "show": true,
+            "lineStyle": {
+                "type": "dashed"
+            }
+        }
+    },
+    "yAxis": {
+        "name": "Y 轴",
+        "nameLocation": "end",
+        "nameTextStyle": {
+            "fontSize": 14,
+            "fontWeight": "bold"
+        },
+        "min": "dataMin",
+        "max": "dataMax",
+        "boundaryGap": false,
+        "axisLine": {
+            "show": true
+        },
+        "axisTick": {
+            "show": true
+        },
+        "splitLine": {
+            "show": true,
+            "lineStyle": {
+                "type": "dotted"
+            }
+        }
+    },
+    "series": [
+        {
+            "name": "数据点",
+            "type": "scatter",
+            "symbolSize": 10,
+            "itemStyle": {
+                "color": ""
+            },
+            "emphasis": {
+                "itemStyle": {
+                    "borderWidth": 2,
+                    "shadowBlur": 8,
+                    "shadowColor": "rgba(0, 0, 0, 0.5)"
+                },
+                "symbolSize": 14
+            },
+            "markPoint": {
+                "data": [
+                    {
+                        "type": "",
+                        "name": "最大值"
+                    },
+                    {
+                        "type": "",
+                        "name": "最小值"
+                    }
+                ]
+            },
+            "markLine": {
+                "data": [
+                ]
+            }
+        }
+    ]
+}

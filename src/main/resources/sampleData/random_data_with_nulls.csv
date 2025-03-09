@@ -1,0 +1,101 @@
+ID,Name,Age,City,Salary
+1,,36,Chicago,11111
+2,David,61,Los Angeles,9524.95
+3,Grace,18,New York,22222
+4,,,Los Angeles,
+5,Alice,55,Chicago,8897.75
+6,Alice,,Chicago,
+7,,20,Houston,5899.94
+8,,18,Los Angeles,
+9,Eva,,Los Angeles,3719.43
+10,,,Los Angeles,
+11,Charlie,30,Los Angeles,
+12,David,33,Los Angeles,
+13,Charlie,25,New York,
+14,NNN,21,XC,
+15,Alice,33,,8782.31
+16,,54,Chicago,7343.37
+17,,34,Los Angeles,5158.82
+18,Eva,,New York,3002.72
+19,Bob,,Chicago,
+20,Bob,41,Houston,9575.45
+21,HHH,,HB,
+22,Grace,,New York,
+23,,,New York,8187.85
+24,David,63,Los Angeles,
+25,Charlie,24,,3600.87
+26,David,,Los Angeles,
+27,Bob,,Los Angeles,5775.51
+28,Charlie,28,New York,
+29,Bob,23,Los Angeles,8642.11
+30,Charlie,44,Chicago,
+31,Alice,,Los Angeles,
+32,David,27,New York,
+33,,31,Los Angeles,7857.91
+34,,20,Los Angeles,5542.43
+35,David,60,Houston,
+36,Charlie,,,9061.85
+37,Charlie,53,New York,
+38,Grace,,Chicago,
+39,Eva,58,Los Angeles,
+40,Eva,57,New York,
+41,Alice,41,Houston,
+42,Eva,27,New York,4523.62
+43,,49,Chicago,9340
+44,Bob,,New York,8513.37
+45,Charlie,58,Chicago,3534.56
+46,,62,Chicago,4236.31
+47,Grace,45,,
+48,Alice,,Chicago,
+49,Alice,38,New York,5659.22
+50,Eva,21,Houston,
+51,David,,Chicago,
+52,,,,
+53,Alice,,Chicago,8349.65
+54,Bob,61,Los Angeles,
+55,Eva,,New York,
+56,Charlie,,,
+57,Eva,21,New York,8870.86
+58,Eva,,Chicago,
+59,Alice,,Houston,5632.25
+60,David,,,7585.04
+61,,20,Houston,
+62,Eva,,Chicago,9522.71
+63,Alice,,New York,
+64,Grace,21,,3474.6
+65,Charlie,24,,4600.58
+66,Eva,,,
+67,David,31,Los Angeles,
+68,David,60,Los Angeles,
+69,Eva,,Houston,
+70,Bob,,New York,
+71,,40,,9722.09
+72,Eva,44,,6287.35
+73,Grace,,Houston,
+74,David,,New York,
+75,Alice,60,Los Angeles,
+76,Charlie,,New York,5260.83
+77,Charlie,,New York,
+78,Grace,,Chicago,7124.89
+79,Alice,,New York,
+80,Eva,,,
+81,Bob,65,Chicago,7744.93
+82,Bob,58,,7794.44
+83,Bob,,Chicago,9246.3
+84,Bob,,Chicago,6681.46
+85,Alice,,Houston,4583.89
+86,Charlie,64,New York,9295.91
+87,Eva,62,Los Angeles,
+88,Alice,,New York,
+89,Grace,,Houston,5330.65
+90,Charlie,,Los Angeles,
+91,David,37,New York,
+92,David,27,Chicago,
+93,David,,Los Angeles,
+94,Charlie,,Los Angeles,7395.83
+95,Grace,,New York,8181.22
+96,Alice,,Chicago,6002.53
+97,,,Los Angeles,8664.93
+98,,25,New York,5429.02
+99,David,,New York,9176.63
+100,Grace,,,

@@ -1,0 +1,59 @@
+{
+    "title": {
+        "text": "自定义饼图",
+        "subtext": "数据分类占比",
+        "left": "center",
+        "textStyle": {
+            "fontSize": 20,
+            "fontWeight": "bold"
+        }
+    },
+    "tooltip": {
+        "trigger": "item",
+        "formatter": "{a} <br/>{b}: {c} ({d}%)",
+        "borderWidth": 1
+    },
+    "legend": {
+        "show": true,
+        "orient": "vertical",
+        "left": "right",
+        "top": "center",
+        "textStyle": {
+            "fontSize": 14,
+            "fontWeight": "bold"
+        }
+    },
+    "series": [
+        {
+            "name": "类别",
+            "type": "pie",
+            "radius": ["0%", "75%"],
+            "center": ["50%", "50%"],
+            "roseType": "",
+            "itemStyle": {
+                "borderRadius": 10,
+                "borderColor": "#fff",
+                "borderWidth": 2
+            },
+            "label": {
+                "show": true,
+                "position": "outside",
+                "fontSize": 14,
+                "formatter": "{b}: {c} ({d}%)"
+            },
+            "labelLine": {
+                "show": true,
+                "smooth": true,
+                "length": 20,
+                "length2": 15
+            },
+            "emphasis": {
+                "itemStyle": {
+                    "shadowBlur": 10,
+                    "shadowOffsetX": 0,
+                    "shadowColor": "rgba(0, 0, 0, 0.5)"
+                }
+            }
+        }
+    ]
+}

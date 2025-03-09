@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- 设置文档的字符编码 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口，确保页面在移动设备上正常显示 -->
+    <title>数据列处理</title> <!-- 设置页面标题 -->
+    <link rel="icon" href="images/图标.png"> <!-- 设置页面图标 -->
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 ECharts 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <!-- 引入词云插件 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud/dist/echarts-wordcloud.min.js"></script>
+    <!-- 自建CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="operationBody">
+<!-- 图一：绘制数据列中空值分布饼图 -->
+<div id="chart1" class="chart" style="width: 700px; height: 500px; top: 0; left: -5%"></div>
+
+<!-- 图二：Number类型绘制箱型图，String类型绘制词云图 -->
+<div id="chart2Text" class="chartText" style="display: none; top: 10%; right: 5%;"></div>
+<div id="chart2" class="chart" style="top: 5%; right: 1%"></div>
+
+<!-- 图三：-->
+<div id="chart3Text" class="chartText" style="display: none; top: 55%; left: 5%;"></div>
+<div id="chart3" class="chart" style="top: 50%; left: 1%; width: 550px; height: 400px"></div>
+
+<!-- 图四：-->
+<div id="chart4" class="chart" style="top: 50%; right: 1%;"></div>
+
+<!-- 数据列修改表格 -->
+<div id="form-container" class="form-container">
+    <h2 id="form-title" class="form-title"></h2>
+    <form id="colAlterForm">
+        <div class="form-group">
+            <label for="colType">可选列类型:</label>
+            <select class="operationSelect" id="colType" name="colType" required>
+                <!--                <option value="Nan">Nan</option>-->
+                <!--                <option value="String">String</option>-->
+                <!--                <option value="Number">Number</option>-->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="isDropNa">是否删除缺失值:</label>
+            <select class="operationSelect" id="isDropNa" name="isDropNa" required>
+                <option value="true">是</option>
+                <option value="false">否</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="fillType">填充缺失值:</label>
+            <select class="operationSelect" id="fillType" name="fillType" required>
+                <!--                <option value="mean">使用均值</option>-->
+                <!--                <option value="median">使用中位数</option>-->
+                <!--                <option value="mode">使用众数</option>-->
+                <!--                <option value="upperAndLowerMean">使用上下值的均值</option>-->
+                <!--                <option value="fillUnknown">使用'Unknown'填充</option>-->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="submitButton">提交</button>
+        </div>
+    </form>
+</div>
+
+<!-- 引入 Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 引入自制绘图模块 JS -->
+<script src="plotCharts/Chart.js"></script>
+<script src="plotCharts/ChartServer.js"></script>
+<!-- 自定义专属JS -->
+<script src="operation.js"></script>
+</body>
+</html>

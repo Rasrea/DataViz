@@ -1,0 +1,36 @@
+<configuration>
+        <!-- 定义日志输出格式和存储路径 -->
+        <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
+        <property name="FILE_PATH" value="D:/Study/logs/data-visual/logger.%d{yyyy-MM-dd}.log" />
+
+        <!-- 定义控制台输出 -->
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <!-- 按照上面配置的LOG_PATTERN来打印日志 -->
+                <pattern>${LOG_PATTERN}</pattern>
+                <charset>UTF-8</charset> <!-- 设置控制台输出编码为UTF-8 -->
+            </encoder>
+        </appender>
+
+        <!-- 定义日志文件的相关参数 -->
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- 按照上面配置的FILE_PATH路径来保存日志 -->
+                <fileNamePattern>${FILE_PATH}</fileNamePattern>
+                <!-- 日志保存15天 -->
+                <maxHistory>15</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <!-- 按照上面配置的LOG_PATTERN来打印日志 -->
+                <pattern>${LOG_PATTERN}</pattern>
+                <charset>UTF-8</charset> <!-- 设置文件输出编码为UTF-8 -->
+            </encoder>
+        </appender>
+
+        <!-- 定义日志输出级别 -->
+        <logger name="com.lucky" level="INFO" />
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </root>
+    </configuration>

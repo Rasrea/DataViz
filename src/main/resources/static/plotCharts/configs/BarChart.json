@@ -1,0 +1,85 @@
+{
+    "title": {
+        "text": "自定义条形图",
+        "subtext": "数据统计结果",
+        "left": "center",
+        "textStyle": {
+            "fontSize": 20,
+            "fontWeight": "bold"
+        },
+        "subtextStyle": {
+            "fontSize": 14
+        }
+    },
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        },
+        "borderRadius": 8,
+        "padding": 10,
+        "textStyle": {
+            "fontSize": 14
+        }
+    },
+    "grid": {
+        "left": "8%",
+        "right": "8%",
+        "bottom": "10%",
+        "containLabel": true
+    },
+    "xAxis": {
+        "type": "category",
+        "name": "X 轴",
+        "nameTextStyle": {
+            "fontSize": 14,
+            "fontWeight": "bold"
+        },
+        "axisLine": {
+            "lineStyle": {
+                "color": "#888"
+            }
+        },
+        "axisLabel": {
+            "fontSize": 12,
+            "rotate": 45
+        },
+        "splitLine": {
+            "show": true,
+            "lineStyle": {
+                "type": "dashed",
+                "color": "#ddd"
+            }
+        }
+    },
+    "yAxis": {
+        "type": "value",
+        "name": "Y 轴",
+        "nameTextStyle": {
+            "fontSize": 14,
+            "fontWeight": "bold"
+        },
+        "axisLine": {
+            "lineStyle": {
+                "color": "#888"
+            }
+        },
+        "axisLabel": {
+            "fontSize": 12
+        }
+    },
+    "series": [
+        {
+            "name": "数量",
+            "type": "bar",
+            "barWidth": "50%",
+            "itemStyle": {
+                "borderRadius": [8, 8, 0, 0],
+                "shadowBlur": 10,
+                "shadowOffsetX": 0,
+                "shadowOffsetY": 6,
+                "shadowColor": "rgba(0, 0, 0, 0.1)"
+            }
+        }
+    ]
+}

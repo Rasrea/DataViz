@@ -1,0 +1,42 @@
+{
+    "title": {
+        "text": "自定义词云图",
+        "subtext": "关键词可视化",
+        "left": "center",
+        "textStyle": {
+            "fontSize": 20,
+            "fontWeight": "bold"
+        }
+    },
+    "tooltip": {
+        "show": true,
+        "borderRadius": 8,
+        "padding": 10,
+        "textStyle": {
+            "fontSize": 14
+        }
+    },
+    "series": [
+        {
+            "type": "wordCloud",
+            "gridSize": 8,
+            "sizeRange": [14, 80],
+            "rotationRange": [-45, 45],
+            "rotationStep": 30,
+            "shape": "pentagon",
+            "width": "100%",
+            "height": "100%",
+            "drawOutOfBound": false,
+            "textStyle": {
+                "fontFamily": "Arial",
+                "fontWeight": "bold"
+            },
+            "emphasis": {
+                "focus": "self",
+                "textStyle": {
+                    "shadowBlur": 10
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+# 开发环境配置文件
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev

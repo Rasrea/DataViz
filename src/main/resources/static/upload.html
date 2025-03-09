@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上传数据</title>
+    <link rel="icon" href="images/图标.png">
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 Font Awesome 图标库 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- 自建CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<!-- 导航栏 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark secondary-navbar">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#"><i class="fas fa-upload"></i> 上传数据</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-search"></i> 检查与描述</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-chart-line"></i> 可视化</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- 英雄部分 -->
+<section class="hero-section2 text-center">
+    <div class="container">
+        <h1 class="display">上传数据</h1>
+        <p class="lead">请选择您要上传的数据文件</p>
+    </div>
+</section>
+
+<!-- 样本数据集选择框 -->
+<div class="mb-3">
+    <label for="demoDataset"></label>
+    <select id="demoDataset" class="datasetSelect">
+        <option value="--" style="font-family: '华文新魏', serif">样本数据集</option>
+        <option value="douban-books">豆瓣读书Top250</option>
+        <option value="maoyan-films">猫眼电影榜单</option>
+        <option value="metacritic-games">Metacritic游戏</option>
+        <option value="random-data">randomData</option>
+    </select>
+</div>
+
+<!-- Excel表格选择框 -->
+<div class="mb-3">
+    <label for="excelDataSelect"></label>
+    <select id="excelDataSelect" class="datasetSelect" style="display: none; border: 3px solid #ff7f50; top: 325px;">
+        <!-- 根据表格数据动态修改 -->
+    </select>
+</div>
+
+<div class="container my-5">
+    <!-- 文件上传表单 -->
+    <div class="container my-5">
+        <div class="mb-3">
+            <label for="fileInput" class="form-label">选择一个 CSV 或 Excel 文件：</label>
+            <input type="file" class="form-control" id="fileInput" accept=".csv, .xls, .xlsx">
+        </div>
+    </div>
+
+    <!-- 表格容器，限制显示范围 -->
+    <div id="tableContainer">
+        <!-- 显示“请稍等”消息 -->
+        <div id="loadingMessage" style="text-align: center; color: gray; display: none;">请稍等...</div>
+
+        <table class="table table-striped" id="csvTable">
+            <thead>
+            <tr id="csvHeaderRow"></tr>
+            </thead>
+            <tbody id="csvBody"></tbody>
+        </table>
+    </div>
+
+    <!-- 表格信息 -->
+    <div id="tableTips" style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="margin-left: 10px; color: gray;">仅显示前250行数据</span>
+        <span id="table-shape" style="margin-right: 10px; color: gray;">0 rows x 0 cols</span>
+    </div>
+
+    <div class="button">
+        <a href="check.html" class="toolbar-button">检查与描述</a>
+    </div>
+</div>
+
+<!-- 引入 Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JavaScript 实现 CSV 文件解析 -->
+<script src="upload.js"></script>
+</body>
+</html>

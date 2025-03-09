@@ -1,0 +1,114 @@
+{
+    "title": {
+        "text": "自定义折线图",
+        "subtext": "这是副标题",
+        "left": "center",
+        "textStyle": {
+            "fontSize": 20,
+            "fontWeight": "bold"
+        }
+    },
+    "xAxis": {
+        "name": "X轴",
+        "nameLocation": "end",
+        "nameTextStyle": {
+            "fontWeight": "bold",
+            "fontSize": 14
+        },
+        "min": "dataMin",
+        "max": "dataMax",
+        "boundaryGap": false,
+        "axisTick": {
+            "show": true
+        },
+        "splitLine": {
+            "show": true,
+            "lineStyle": {
+                "type": "dashed"
+            }
+        }
+    },
+    "yAxis": {
+        "name": "Y轴",
+        "nameLocation": "end",
+        "nameTextStyle": {
+            "fontWeight": "bold",
+            "fontSize": 14
+        },
+        "min": "dataMin",
+        "max": "dataMax",
+        "boundaryGap": false,
+        "axisLine": {
+            "show": true,
+            "lineStyle": {
+                "color": "#666"
+            }
+        },
+        "axisTick": {
+            "show": true
+        },
+        "splitLine": {
+            "show": true,
+            "lineStyle": {
+                "type": "dotted"
+            }
+        },
+        "type": "value"
+    },
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "cross",
+            "label": {
+                "backgroundColor": "#6a7985"
+            }
+        },
+        "formatter": "{b}<br/>{a0}: {c0}<br/>"
+    },
+    "legend": {
+        "show": true,
+        "top": "5%",
+        "left": "right",
+        "textStyle": {
+            "fontSize": 12
+        }
+    },
+    "series": [
+        {
+            "name": "数值1",
+            "type": "line",
+            "smooth": false,
+            "symbolSize": 6,
+            "itemStyle": {
+                "color": ""
+            },
+            "emphasis": {
+                "itemStyle": {
+                    "borderWidth": 2,
+                    "shadowBlur": 8,
+                    "shadowColor": "rgba(0, 0, 0, 0.2)"
+                },
+                "symbolSize": 14
+            },
+            "areaStyle": {
+                "opacity": 0.0
+            },
+            "markPoint": {
+                "data": [
+                    {
+                        "type": "",
+                        "name": "最大值"
+                    },
+                    {
+                        "type": "",
+                        "name": "最小值"
+                    }
+                ]
+            },
+            "markLine": {
+                "data": [
+                ]
+            }
+        }
+    ]
+}

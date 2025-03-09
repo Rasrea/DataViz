@@ -1,0 +1,60 @@
+{
+    "title": {
+        "text": "自定义箱线图",
+        "subText": "这是副标题",
+        "left": "center",
+        "fontWeight": "bold",
+        "fontSize": 20
+    },
+    "tooltip": {},
+    "xAxis": {
+        "type": "category",
+        "data": [],
+        "axisLabel": {
+            "fontWeight": "bold",
+            "fontSize": 14
+        }
+    },
+    "yAxis": {
+        "type": "value",
+        "name": "Value",
+        "nameTextStyle": {
+            "fontWeight": "bold",
+            "fontSize": 14
+        }
+    },
+    "series": [
+        {
+            "name": "箱线图",
+            "type": "boxplot",
+            "data": [],
+            "itemStyle": {
+                "color": "#66CC99"
+            },
+            "tooltip": {},
+            "markLine": {
+                "data": [
+                    {
+                        "name": "中位数",
+                        "lineStyle": {
+                            "color": "#ffa600"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "离群点",
+            "type": "scatter",
+            "data": [],
+            "itemStyle": {
+                "color": "transparent",
+                "borderColor": "#ff0000",
+                "borderWidth": 2
+            },
+            "tooltip": {
+                "trigger": "item"
+            }
+        }
+    ]
+}
