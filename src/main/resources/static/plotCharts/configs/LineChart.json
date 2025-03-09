@@ -62,8 +62,7 @@
             "label": {
                 "backgroundColor": "#6a7985"
             }
-        },
-        "formatter": "{b}<br/>{a0}: {c0}<br/>"
+        }
     },
     "legend": {
         "show": true,

@@ -22,7 +22,7 @@ function createCharts(data, colName) {
             const chart = new Chart('chart1', haveNullData, roseChartElements, new SingleColumnStrategy());
             chart.plot();
         })
-        .catch(error => console.error('配置文件有误(LineChart):', error));
+        .catch(error => console.error('配置文件有误(PieChart):', error));
 
     // 创建统计前 K 项频数的玫瑰图
     fetch('plotCharts/configs/PieChart.json')
@@ -49,8 +49,6 @@ function createCharts(data, colName) {
                 scatterChartElements.tooltip.formatter = `数据1：<br/>Index: {b0}<br/>${colName}: {c0}`;
                 const chart = new Chart('chart3', chartServer.convertSingleColumnDataToLabelsAndValues(colData), scatterChartElements, new DoubleColumnStrategy());
                 chart.plot();
-
-                console.log(chartServer.convertSingleColumnDataToLabelsAndValues(colData));
             })
 
         // 绘制箱线图

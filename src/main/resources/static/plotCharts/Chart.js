@@ -82,11 +82,9 @@ class DoubleColumnStrategy extends ColumnStrategy {
 class MultiColumnStrategy extends ColumnStrategy {
     applyDataFormat(data) {
         return {
-            xAxis: {type: 'category', data: data.labels},
+            xAxis: {type: 'category'},
             yAxis: {},
-            series: data.values.map(values => ({
-                data: values
-            }))
+            series: data.values
         };
     }
 }

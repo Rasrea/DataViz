@@ -97,23 +97,62 @@ async function getAxisData(axisLabels) {
         const yData = yColNames.map(yColName => fileData.map(row => row[yColName]));
 
         return {
-            'xData': xData,
-            'yData': yData
+            'labels': xData,
+            'values': yData
         };
     } catch (error) {
         console.error('数据读取失败：', error);
         return {
-            'xData': [],
-            'yData': []
+            'labels': [],
+            'values': []
         };
+    }
+}
+
+// 是否对 axisData 的X轴进行排序
+// 检查并排序数组
+function sortAxisData(axisData, chartConfig) {
+    if (Array.isArray(axisData.labels)) {
+        // 如果 X 轴数据是数组，则修改数据轴
+        chartConfig.xAxis.type = 'value';
+
+        // 合并 X 轴和 Y 轴数据
+        let rowAxisData = axisData.labels.map((value, index) => [value, ...axisData.values.map(arr => arr[index])]);
+
+        // 根据 X 轴数据排序
+        rowAxisData.sort((a, b) => a[0] - b[0]);
+
+        return {
+            'labels': rowAxisData.map(row => row[0]),
+            'values': rowAxisData
+        }
+    } else {
+        alert('X 轴数据不是数组！');
     }
 }
 
 // 绘图函数
 async function plotChart() {
+    // 读取坐标轴标签和数据
     const axisLabels = getAxisLabels();
-    const axisData = await getAxisData(axisLabels)
-    console.log(axisData.xData);
+    let axisData = await getAxisData(axisLabels)
+
+    // 读取图表类型
+    const chartType = document.getElementById('chartOptions').value;
+    console.log(chartType);
+    // const chartType = 'ScatterChart'
+
+    // 绘制相关图表
+    fetch(`plotCharts/configs/${chartType}.json`)
+        .then(response => response.json())
+        .then(chartConfig => {
+            axisData = sortAxisData(axisData, chartConfig);
+
+            const chart = new Chart('chartContainer', axisData, chartConfig, new DoubleColumnStrategy());
+            chart.plot();
+
+            console.log(axisData);
+        })
 }
 
 // 页面加载时调用初始化函数
@@ -135,7 +174,7 @@ window.onload = function () {
             createSeriesLabel(data['colTypes']['currentColType']); // 创建坐标轴标签选型
             initializeForm(itemDict); // 保存表格参数，防止刷新丢失
             showTab(1); // 默认显示界面一：数据列选择
-            plotChart(); // 绘图
+            plotChart().then(r => r); // 绘图
         })
         .catch(error => {
             console.error('数据读取失败：', error)
