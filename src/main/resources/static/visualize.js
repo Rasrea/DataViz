@@ -112,22 +112,19 @@ async function getAxisData(axisLabels) {
 // 是否对 axisData 的X轴进行排序
 // 检查并排序数组
 function sortAxisData(axisData, chartConfig) {
-    if (Array.isArray(axisData.labels)) {
-        // 如果 X 轴数据是数组，则修改数据轴
-        chartConfig.xAxis.type = 'value';
+    // 合并 X 轴和 Y 轴数据
+    let rowAxisData = axisData.labels.map((value, index) => [value, ...axisData.values.map(arr => arr[index])]);
 
-        // 合并 X 轴和 Y 轴数据
-        let rowAxisData = axisData.labels.map((value, index) => [value, ...axisData.values.map(arr => arr[index])]);
+    if (Array.isArray(axisData.labels) && axisData.labels.every(item => typeof item === 'number')) {
+        // 如果 X 轴数据是数值，则修改数据轴
+        chartConfig.xAxis.type = 'value';
 
         // 根据 X 轴数据排序
         rowAxisData.sort((a, b) => a[0] - b[0]);
-
-        return {
-            'labels': rowAxisData.map(row => row[0]),
-            'values': rowAxisData
-        }
-    } else {
-        alert('X 轴数据不是数组！');
+    }
+    return {
+        'labels': rowAxisData.map(row => row[0]),
+        'values': rowAxisData
     }
 }
 
@@ -135,12 +132,11 @@ function sortAxisData(axisData, chartConfig) {
 async function plotChart() {
     // 读取坐标轴标签和数据
     const axisLabels = getAxisLabels();
-    let axisData = await getAxisData(axisLabels)
+    let axisData = await getAxisData(axisLabels);
 
     // 读取图表类型
     const chartType = document.getElementById('chartOptions').value;
     console.log(chartType);
-    // const chartType = 'ScatterChart'
 
     // 绘制相关图表
     fetch(`plotCharts/configs/${chartType}.json`)
@@ -152,7 +148,7 @@ async function plotChart() {
             chart.plot();
 
             console.log(axisData);
-        })
+        });
 }
 
 // 页面加载时调用初始化函数
@@ -167,6 +163,12 @@ window.onload = function () {
         addYDataItem(container, value, text);
     });
 
+    // 设置 chartOptions 的默认值
+    const savedChartOption = sessionStorage.getItem('chartOptions');
+    if (savedChartOption) {
+        document.getElementById('chartOptions').value = savedChartOption;
+    }
+
     fetch('http://localhost:8080/data/fetch-csv')
         .then(response => response.json())
         .then(data => {
@@ -180,7 +182,6 @@ window.onload = function () {
             console.error('数据读取失败：', error)
         });
 }
-
 
 // 选择多个Y轴标签
 document.getElementById("yData").addEventListener("change", function () {
@@ -208,6 +209,18 @@ document.getElementById("yData").addEventListener("change", function () {
     savedYData.push({value: selectedValue, text: selectedText});
     sessionStorage.setItem('selectedYData', JSON.stringify(savedYData));
 });
+
+// 监听 chartOptions 的变化并存储到 sessionStorage
+document.getElementById('chartOptions').addEventListener('change', function () {
+    const selectedChart = this.value;
+    sessionStorage.setItem('chartOptions', selectedChart);
+});
+
+// 监听 chartOptions, xData, yData, zData 的变化
+document.getElementById('chartOptions').addEventListener('change', plotChart);
+document.getElementById('xData').addEventListener('change', plotChart);
+document.getElementById('yData').addEventListener('change', plotChart);
+document.getElementById('zData').addEventListener('change', plotChart);
 
 // 添加 Y 轴标签的函数
 function addYDataItem(container, value, text) {

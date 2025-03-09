@@ -10,7 +10,6 @@
     },
     "tooltip": {
         "trigger": "item",
-        "formatter": "X: {b0}<br/>Y: {c0}",
         "borderRadius": 6,
         "padding": 10
     },
@@ -69,7 +68,7 @@
         {
             "name": "数据点",
             "type": "scatter",
-            "symbolSize": 10,
+            "symbolSize": 14,
             "itemStyle": {
                 "color": ""
             },
