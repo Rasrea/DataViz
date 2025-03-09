@@ -54,7 +54,7 @@ public class DataController {
         operateJsonResult.setData(result.getData());
     }
 
-    @Operation(summary = "获取CSV操作数据", description = "存储操作数据")
+    @Operation(summary = "获取 CSV/Excel 操作数据", description = "存储操作数据")
     @GetMapping("/fetch-csv")
     public JsonResult<List<Map<String, Object>>> getTableData() {
         if (operateJsonResult.getStatusCode() != HttpStatusCode.OK) logger.error("!!!!!! 操作数据上传错误 !!!!!!");

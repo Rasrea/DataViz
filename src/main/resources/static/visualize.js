@@ -62,8 +62,58 @@ function generateItemDict() {
     return itemDict;
 }
 
+// 获取 x轴 和 y 轴标签的列表
+function getAxisLabels() {
+    // 获取所有 selected-y-item 元素
+    let selectedItems = document.querySelectorAll('.selected-y-item');
+
+    // 创建存储 x轴 和 y 轴标签的列表
+    const xColName = document.getElementById('xData').value;
+    let yColNames = [];
+
+    // 遍历每个元素，获取 data-value 属性值并放入列表中
+    selectedItems.forEach(item => {
+        yColNames.push(item.getAttribute('data-value'));
+    });
+
+    return {
+        'xColName': xColName,
+        'yColNames': yColNames
+    }
+}
+
+// 获取 x轴 和 y 轴标签的数据
+async function getAxisData(axisLabels) {
+    // 读取 X 和 Y 轴标签
+    const xColName = axisLabels['xColName'];
+    const yColNames = axisLabels['yColNames'];
+
+    try {
+        // 读取数据
+        const response = await fetch('http://localhost:8080/data/fetch-csv');
+        const data = await response.json();
+        const fileData = data['data'];
+        const xData = fileData.map(row => row[xColName]);
+        const yData = yColNames.map(yColName => fileData.map(row => row[yColName]));
+
+        return {
+            'xData': xData,
+            'yData': yData
+        };
+    } catch (error) {
+        console.error('数据读取失败：', error);
+        return {
+            'xData': [],
+            'yData': []
+        };
+    }
+}
+
 // 绘图函数
-function plotChart() {
+async function plotChart() {
+    const axisLabels = getAxisLabels();
+    const axisData = await getAxisData(axisLabels)
+    console.log(axisData.xData);
 }
 
 // 页面加载时调用初始化函数
