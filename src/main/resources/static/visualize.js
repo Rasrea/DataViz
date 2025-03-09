@@ -128,6 +128,23 @@ function sortAxisData(axisData, chartConfig) {
     }
 }
 
+// 将 原始axis.values ：
+// [['a', 1, 2, 12], ['b', 3, 4, 34], ['c', 5, 6, 56]]
+// 分解为[
+//   {data: [['a', 1], ['a', 2], ['a', 12]]},
+//   {data: [['b', 3], ['b', 4], ['b', 34]]},
+//   {data: [['c', 5], ['c', 6], ['c', 56]]}
+// ]
+function splitAxisValues(axisValues) {
+    // 生成 rowData，相当于 Python 的列表推导式
+    const rowData = axisValues.map(item => item.slice(1).map(y => [item[0], y]));
+
+    // 转置 rowData（zip 逻辑）
+    return rowData[0].map((_, colIndex) => ({
+        data: rowData.map(row => row[colIndex])
+    }))
+}
+
 // 绘图函数
 async function plotChart() {
     // 读取坐标轴标签和数据
@@ -143,11 +160,13 @@ async function plotChart() {
         .then(response => response.json())
         .then(chartConfig => {
             axisData = sortAxisData(axisData, chartConfig);
-
-            const chart = new Chart('chartContainer', axisData, chartConfig, new DoubleColumnStrategy());
-            chart.plot();
-
             console.log(axisData);
+
+            axisData.values = splitAxisValues(axisData.values);
+            console.log(axisData);
+
+            const chart = new Chart('chartContainer', axisData, chartConfig, new MultiColumnStrategy());
+            chart.plot();
         });
 }
 

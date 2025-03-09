@@ -1,30 +1,81 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>深色模式 ECharts 图表</title>
+    <title>共轭折线图示例</title>
+    <!-- 引入 ECharts -->
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts/theme/dark.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud/dist/echarts-wordcloud.min.js"></script>
     <style>
-        .chart-container {
+        /* 设置图表容器的大小 */
+        #main {
             width: 600px;
             height: 400px;
-            margin: 20px auto;
-            border: 1px solid #ddd;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
 
-<!-- 容器 -->
-<div id="barChart" class="chart-container"></div>
-<div id="pieChart" class="chart-container"></div>
+<!-- 图表容器 -->
+<div id="main"></div>
 
-<script src="../plotCharts/Chart.js"></script>
-<script src="../plotCharts/ChartServer.js"></script>
-<script src="script.js"></script>
+<script>
+    // 初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 图表的配置项
+    var option = {
+        title: {
+            text: '共轭折线图示例'
+        },
+        tooltip: {
+            trigger: "axis",
+            axisPointer: {
+                type: "cross",
+                label: {
+                    backgroundColor: "#6a7985"
+                }
+            }
+        },
+        legend: {
+            data: ['数据1', '数据2']
+        },
+        xAxis: {
+            type: 'category',
+            // data: ['A', 'B', 'C', 'D', 'E', 'F']
+        },
+        yAxis: [
+            {
+                type: 'value',
+                name: 'Y轴1',
+                // position: 'left'
+            },
+            {
+                type: 'value',
+                name: 'Y轴2',
+                // position: 'right',
+            }
+        ],
+        series: [
+            {
+                name: '数据1',
+                type: 'line',
+                data: [['a', 1], ['b', 2], ['c', 3], ['d', 4], ['e', 5], ['f', 6]],
+                yAxisIndex: 0 // 第一个系列对应第一个 Y 轴
+            },
+            {
+                name: '数据2',
+                type: 'line',
+                data: [['a', 12], ['b', 21], ['c', 31], ['d', 14], ['e', 15], ['f', 16]],
+                yAxisIndex: 1 // 第二个系列对应第二个 Y 轴
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表
+    myChart.setOption(option);
+</script>
 
 </body>
 </html>

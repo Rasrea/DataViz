@@ -74,6 +74,7 @@
     },
     "series": [
         {
+            "yAxisIndex": 0,
             "name": "数值1",
             "type": "line",
             "smooth": false,

@@ -20,8 +20,8 @@ class Chart {
         elements.forEach(element => {
             if (this.chartElements[element]) {
                 if (element === 'series') {
-                    option.series = option.series ? option.series.map((seriesItem, index) => {
-                        return {...seriesItem, ...this.chartElements.series[index]};
+                    option.series = option.series ? option.series.map((seriesItem, _) => {
+                        return {...seriesItem, ...this.chartElements.series[0]};
                     }) : this.chartElements.series;
                 } else {
                     option[element] = option[element] ? {...option[element], ...this.chartElements[element]} : this.chartElements[element];
@@ -92,7 +92,6 @@ class MultiColumnStrategy extends ColumnStrategy {
 // 特殊数据：全部自定义
 class NullColumnStrategy extends ColumnStrategy {
     applyDataFormat(data) {
-        return {
-        };
+        return {};
     }
 }
