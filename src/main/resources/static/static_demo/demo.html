@@ -1,81 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>共轭折线图示例</title>
-    <!-- 引入 ECharts -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-    <style>
-        /* 设置图表容器的大小 */
-        #main {
-            width: 600px;
-            height: 400px;
-            margin: 0 auto;
-        }
-    </style>
+    <title>检测 Y 轴选择变动</title>
 </head>
 <body>
 
-<!-- 图表容器 -->
-<div id="main"></div>
+    <div id="selectedYDataContainer" class="selected-y-container">
+        <!-- 这里动态显示已选择的列 -->
+    </div>
+    <button onclick="addYData()">添加 Y 轴数据</button>
 
-<script>
-    // 初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
+    <script>
+        // 获取要监听的 div
+        let targetNode = document.getElementById('selectedYDataContainer');
 
-    // 图表的配置项
-    var option = {
-        title: {
-            text: '共轭折线图示例'
-        },
-        tooltip: {
-            trigger: "axis",
-            axisPointer: {
-                type: "cross",
-                label: {
-                    backgroundColor: "#6a7985"
+        // 创建 MutationObserver 实例
+        let observer = new MutationObserver((mutationsList) => {
+            for (let mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    console.log("Y 轴选择已更新:", targetNode.innerHTML);
                 }
             }
-        },
-        legend: {
-            data: ['数据1', '数据2']
-        },
-        xAxis: {
-            type: 'category',
-            // data: ['A', 'B', 'C', 'D', 'E', 'F']
-        },
-        yAxis: [
-            {
-                type: 'value',
-                name: 'Y轴1',
-                // position: 'left'
-            },
-            {
-                type: 'value',
-                name: 'Y轴2',
-                // position: 'right',
-            }
-        ],
-        series: [
-            {
-                name: '数据1',
-                type: 'line',
-                data: [['a', 1], ['b', 2], ['c', 3], ['d', 4], ['e', 5], ['f', 6]],
-                yAxisIndex: 0 // 第一个系列对应第一个 Y 轴
-            },
-            {
-                name: '数据2',
-                type: 'line',
-                data: [['a', 12], ['b', 21], ['c', 31], ['d', 14], ['e', 15], ['f', 16]],
-                yAxisIndex: 1 // 第二个系列对应第二个 Y 轴
-            }
-        ]
-    };
+        });
 
-    // 使用刚指定的配置项和数据显示图表
-    myChart.setOption(option);
-</script>
+        // 配置观察选项
+        let config = { childList: true, subtree: true };
+
+        // 开始观察
+        observer.observe(targetNode, config);
+
+        // 测试函数：动态添加 Y 轴数据
+        function addYData() {
+            let newElement = document.createElement("div");
+            newElement.textContent = "Y 轴数据 " + (targetNode.children.length + 1);
+            targetNode.appendChild(newElement);
+        }
+    </script>
 
 </body>
 </html>

@@ -117,20 +117,29 @@ function initializeTable() {
     fetch('http://localhost:8080/api/csv/initData', {
         method: 'POST'
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('初始化失败');
-        }
-        else {
-            window.location.reload(); // 刷新页面
-        };
-    })
-    .catch(error => {
-        console.error('操作失败：', error);
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('初始化失败');
+            } else {
+                window.location.reload(); // 刷新页面
+            }
+        })
+        .catch(error => {
+            console.error('操作失败：', error);
+        });
 }
 
 // 根据数据类型格式化值
 window.onload = function () {
     fetchDataAndCreateTable();
-}
+};
+
+window.addEventListener('DOMContentLoaded', function () {
+    let params = new URLSearchParams(window.location.search);
+    if (params.get('refresh') === 'true') {
+        location.reload(); // 刷新页面
+        // 刷新完成后将 URL 恢复成原来的样子
+        window.location = 'check.html';
+    }
+});
+

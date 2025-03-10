@@ -6,6 +6,7 @@ class Chart {
         this.chartElements = chartElements; // 图表详细信息
         this.strategy = strategy; // 绘图策略
         this.chart = null; // ECharts 实例
+        this.chartConfigAfterProcessing = null; // 处理后的图表配置
     }
 
     // 初始化 ECharts 实例
@@ -15,29 +16,37 @@ class Chart {
     }
 
     // 设置图表的细节
-    applyChartStyles(option) {
+    applyChartStyles() {
+        this.chartConfigAfterProcessing = this.strategy.applyDataFormat(this.chartData);
+
         const elements = ['title', 'xAxis', 'yAxis', 'series', 'tooltip', 'legend'];
         elements.forEach(element => {
             if (this.chartElements[element]) {
                 if (element === 'series') {
-                    option.series = option.series ? option.series.map((seriesItem, _) => {
+                    this.chartConfigAfterProcessing.series = this.chartConfigAfterProcessing.series ? this.chartConfigAfterProcessing.series.map((seriesItem, _) => {
                         return {...seriesItem, ...this.chartElements.series[0]};
                     }) : this.chartElements.series;
                 } else {
-                    option[element] = option[element] ? {...option[element], ...this.chartElements[element]} : this.chartElements[element];
+                    this.chartConfigAfterProcessing[element] = this.chartConfigAfterProcessing[element] ? {...this.chartConfigAfterProcessing[element], ...this.chartElements[element]} : this.chartElements[element];
                 }
             }
         });
 
-        console.log(option);
+        // console.log(this.chartConfigAfterProcessing);
     }
 
     // 绘图方法
     plot() {
         this.initChart();
-        const option = this.strategy.applyDataFormat(this.chartData);
-        this.applyChartStyles(option);
-        this.chart.setOption(option);
+        // const option = this.strategy.applyDataFormat(this.chartData);
+        this.applyChartStyles();
+        this.chart.setOption(this.chartConfigAfterProcessing);
+    }
+
+    // 传入 图表参数 绘图
+    plotWithConfig(chartConfig) {
+        this.initChart();
+        this.chart.setOption(chartConfig, true);
     }
 }
 

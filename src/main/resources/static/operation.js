@@ -171,7 +171,11 @@ function sentFormData(formId, colName) {
             },
             body: JSON.stringify(formDataObject),
         })
-            .then(_ => window.location.reload())
+            .then(_ => {
+                // window.location.reload();
+                window.location.href = "check.html?refresh=true"; // 提交成功后刷新页面
+
+            })
             .catch(error => {
                 console.error("请求失败:", error);
                 alert("提交失败，请重试！");

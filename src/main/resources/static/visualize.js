@@ -147,26 +147,32 @@ function splitAxisValues(axisValues) {
 
 // 绘图函数
 async function plotChart() {
-    // 读取坐标轴标签和数据
+    // 读取 坐标轴标签 和 数据
     const axisLabels = getAxisLabels();
     let axisData = await getAxisData(axisLabels);
 
     // 读取图表类型
     const chartType = document.getElementById('chartOptions').value;
-    console.log(chartType);
 
     // 绘制相关图表
     fetch(`plotCharts/configs/${chartType}.json`)
         .then(response => response.json())
         .then(chartConfig => {
+            // 转化 axisData 数据格式
             axisData = sortAxisData(axisData, chartConfig);
-            console.log(axisData);
-
             axisData.values = splitAxisValues(axisData.values);
-            console.log(axisData);
 
+            // 创建 绘图对象 并 设置 图表参数
             const chart = new Chart('chartContainer', axisData, chartConfig, new MultiColumnStrategy());
-            chart.plot();
+            chart.applyChartStyles()
+            let chartConfigAfterProcessing = chart.chartConfigAfterProcessing;
+
+            // 初始化 图像参数
+            chartConfigAfterProcessing.series.forEach((seriesItem, index) => {
+                seriesItem.name = axisLabels['yColNames'][index];
+            }); // 将各个数据序列命名为对应的 Y 轴标签
+
+            chart.plotWithConfig(chart.chartConfigAfterProcessing);
         });
 }
 
@@ -235,7 +241,7 @@ document.getElementById('chartOptions').addEventListener('change', function () {
     sessionStorage.setItem('chartOptions', selectedChart);
 });
 
-// 监听 chartOptions, xData, yData, zData 的变化
+// 监听 chartOptions, xData, yData, selectedYDataContainer, zData 的变化
 document.getElementById('chartOptions').addEventListener('change', plotChart);
 document.getElementById('xData').addEventListener('change', plotChart);
 document.getElementById('yData').addEventListener('change', plotChart);
@@ -255,6 +261,9 @@ function addYDataItem(container, value, text) {
         const savedYData = JSON.parse(sessionStorage.getItem('selectedYData')) || [];
         const updatedYData = savedYData.filter(data => data.value !== value);
         sessionStorage.setItem('selectedYData', JSON.stringify(updatedYData));
+
+        // 调用 plotChart 函数更新图表
+        plotChart().then(r => r);
     });
 
     container.appendChild(item);
