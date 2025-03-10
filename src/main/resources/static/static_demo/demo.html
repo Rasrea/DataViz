@@ -1,43 +1,80 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>检测 Y 轴选择变动</title>
+    <title>修改 JSON 示例</title>
 </head>
 <body>
 
-    <div id="selectedYDataContainer" class="selected-y-container">
-        <!-- 这里动态显示已选择的列 -->
-    </div>
-    <button onclick="addYData()">添加 Y 轴数据</button>
+<h1>修改 JSON 数据</h1>
 
-    <script>
-        // 获取要监听的 div
-        let targetNode = document.getElementById('selectedYDataContainer');
+<!-- 表单部分 -->
+<form id="jsonForm">
+    <label for="name">Name: </label>
+    <input type="text" id="name" name="name"><br><br>
 
-        // 创建 MutationObserver 实例
-        let observer = new MutationObserver((mutationsList) => {
-            for (let mutation of mutationsList) {
-                if (mutation.type === 'childList') {
-                    console.log("Y 轴选择已更新:", targetNode.innerHTML);
-                }
-            }
-        });
+    <label for="age">Age: </label>
+    <input type="number" id="age" name="age"><br><br>
 
-        // 配置观察选项
-        let config = { childList: true, subtree: true };
+    <label for="email">Email: </label>
+    <input type="email" id="email" name="email"><br><br>
 
-        // 开始观察
-        observer.observe(targetNode, config);
+    <!-- 性别选择 -->
+    <label for="male" style="margin-right: 10px;">Male</label>
+    <input type="radio" id="male" name="gender" value="male" style="margin-right: 20px;">
 
-        // 测试函数：动态添加 Y 轴数据
-        function addYData() {
-            let newElement = document.createElement("div");
-            newElement.textContent = "Y 轴数据 " + (targetNode.children.length + 1);
-            targetNode.appendChild(newElement);
+    <label for="female" style="margin-right: 10px;">Female</label>
+    <input type="radio" id="female" name="gender" value="female">
+
+    <h2>最新的 JSON 数据：</h2>
+    <pre id="jsonOutput"></pre>
+</form>
+
+<script>
+    // 初始 JSON 数据
+    let jsonData = {
+        name: "John Doe",
+        age: 25,
+        email: "john.doe@example.com",
+        gender: "male" // 添加性别字段
+    };
+
+    // 将 JSON 数据显示到表单中
+    function populateForm() {
+        document.getElementById('name').value = jsonData.name;
+        document.getElementById('age').value = jsonData.age;
+        document.getElementById('email').value = jsonData.email;
+
+        // 根据 JSON 数据选择对应的性别单选框
+        if (jsonData.gender === 'male') {
+            document.getElementById('male').checked = true;
+        } else if (jsonData.gender === 'female') {
+            document.getElementById('female').checked = true;
         }
-    </script>
+    }
+
+    // 实时更新 JSON 数据
+    document.getElementById('jsonForm').addEventListener('input', function () {
+        // 获取表单中的数据并更新 JSON
+        jsonData.name = document.getElementById('name').value;
+        jsonData.age = document.getElementById('age').value;
+        jsonData.email = document.getElementById('email').value;
+
+        // 更新性别字段
+        if (document.getElementById('male').checked) {
+            jsonData.gender = 'male';
+        } else if (document.getElementById('female').checked) {
+            jsonData.gender = 'female';
+        }
+
+        // 打印最新的 JSON
+        document.getElementById('jsonOutput').textContent = JSON.stringify(jsonData, null, 2);
+    });
+
+    // 初始化表单
+    populateForm();
+</script>
 
 </body>
 </html>

@@ -145,11 +145,23 @@ function splitAxisValues(axisValues) {
     }))
 }
 
+// 将 JSON 数据显示到表单中
+function populateForm(chartConfigAfterProcessing) {
+    document.getElementById('chartTitle').value = chartConfigAfterProcessing.title.text;
+    document.getElementById('chartExplain').value = chartConfigAfterProcessing.title.subtext;
+    document.getElementById('xLabel').value = chartConfigAfterProcessing.xAxis.name;
+    document.getElementById('yLabel').value = chartConfigAfterProcessing.yAxis.name;
+}
+
+// 设置图标参数的全局变量
+let chartConfigAfterProcessing
+let axisData
+
 // 绘图函数
 async function plotChart() {
     // 读取 坐标轴标签 和 数据
     const axisLabels = getAxisLabels();
-    let axisData = await getAxisData(axisLabels);
+    axisData = await getAxisData(axisLabels);
 
     // 读取图表类型
     const chartType = document.getElementById('chartOptions').value;
@@ -162,15 +174,20 @@ async function plotChart() {
             axisData = sortAxisData(axisData, chartConfig);
             axisData.values = splitAxisValues(axisData.values);
 
-            // 创建 绘图对象 并 设置 图表参数
+            // 创建 绘图对象 并设置 图表参数
             const chart = new Chart('chartContainer', axisData, chartConfig, new MultiColumnStrategy());
             chart.applyChartStyles()
-            let chartConfigAfterProcessing = chart.chartConfigAfterProcessing;
+            chartConfigAfterProcessing = chart.chartConfigAfterProcessing;
 
             // 初始化 图像参数
             chartConfigAfterProcessing.series.forEach((seriesItem, index) => {
                 seriesItem.name = axisLabels['yColNames'][index];
             }); // 将各个数据序列命名为对应的 Y 轴标签
+            chartConfigAfterProcessing.xAxis.name = axisLabels['xColName']; // 将 X 轴命名为对应的 X 轴标签
+            chartConfigAfterProcessing.yAxis.name = 'Values'; // 将 Y 轴命名为对应的 Y 轴标签
+
+            // 初始化表单数据
+            populateForm(chartConfigAfterProcessing);
 
             chart.plotWithConfig(chart.chartConfigAfterProcessing);
         });
@@ -194,6 +211,7 @@ window.onload = function () {
         document.getElementById('chartOptions').value = savedChartOption;
     }
 
+    // 获取后端数据并绘制图表
     fetch('http://localhost:8080/data/fetch-csv')
         .then(response => response.json())
         .then(data => {
@@ -268,3 +286,16 @@ function addYDataItem(container, value, text) {
 
     container.appendChild(item);
 }
+
+// 实时更新 JSON 数据
+document.getElementById('tab2').addEventListener('input', function () {
+    // 获取表单中的数据并更新 JSON
+    chartConfigAfterProcessing.title.text = document.getElementById('chartTitle').value;
+    chartConfigAfterProcessing.title.subtext = document.getElementById('chartExplain').value;
+    chartConfigAfterProcessing.xAxis.name = document.getElementById('xLabel').value;
+    chartConfigAfterProcessing.yAxis.name = document.getElementById('yLabel').value;
+
+    // 重新绘制图表
+    const chart = new Chart('chartContainer', axisData, chartConfigAfterProcessing, new MultiColumnStrategy());
+    chart.plotWithConfig(chartConfigAfterProcessing);
+});
