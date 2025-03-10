@@ -1,4 +1,4 @@
-# 🚀 DataViz - 数据可视化平台
+# DataViz - 数据可视化平台
 
 ## 📌 项目简介
 DataViz 是一个基于 Spring Boot 和前端技术的可视化数据平台，旨在提供用户友好的数据处理和可视化功能。用户可以上传 CSV 或 Excel 文件，对数据进行预处理，并通过交互式图表进行可视化分析。
@@ -74,7 +74,7 @@ DataViz 是一个基于 Spring Boot 和前端技术的可视化数据平台，�
 4. **🌍 启动服务器**
    进入com.lucky.data_visual，使用 IDE 或 VS Code 运行 `MyApplication.java`。
 5. **🌐 访问网站**
-   打开浏览器，访问 `http://localhost:8080`。
+   打开浏览器，访问 `http://localhost:63342/data-visual/static/DataViz.html`。
 
 ## 🤝 7. 贡献指南
 欢迎贡献代码！请提交 Pull Request，或者在 Issues 反馈 Bug 和建议。作为一名水大学生，我会尽快回复🤥。
