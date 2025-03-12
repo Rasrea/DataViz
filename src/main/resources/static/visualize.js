@@ -1,6 +1,9 @@
 // 设置图标参数的全局变量
-let chartConfigAfterProcessing
-let axisData
+let chartConfigAfterProcessing // 图表参数
+let axisData // 坐标轴数据
+let axisLabels // 坐标轴标签
+let chart // 图表对象
+let chartType // 图表类型
 
 /**
  * 创建数据列选项
@@ -130,14 +133,16 @@ function splitAxisValues(axisValues) {
 }
 
 /**
- * 将 chartConfigAfterProcessing 中的数据填充到表单中
- * @param chartConfigAfterProcessing
+ * 初始化 图表参数
  */
-function populateForm(chartConfigAfterProcessing) {
-    document.getElementById('chartTitle').value = chartConfigAfterProcessing.title.text;
-    document.getElementById('chartExplain').value = chartConfigAfterProcessing.title.subtext;
-    document.getElementById('xLabel').value = chartConfigAfterProcessing.xAxis.name;
-    document.getElementById('yLabel').value = chartConfigAfterProcessing.yAxis.name;
+function initChartConfig() {
+    chartConfigAfterProcessing.series.forEach((seriesItem, index) => {
+        seriesItem.name = axisLabels['yColNames'][index];
+    }); // 将各个数据序列命名为对应的 Y 轴标签
+    chartConfigAfterProcessing.title.text = document.getElementById('chartTitle').value;
+    chartConfigAfterProcessing.title.subtext = document.getElementById('chartExplain').value;
+    chartConfigAfterProcessing.xAxis.name = document.getElementById('yLabel').value;
+    chartConfigAfterProcessing.yAxis.name = document.getElementById('yLabel').value;
 }
 
 /**
@@ -146,11 +151,11 @@ function populateForm(chartConfigAfterProcessing) {
  */
 async function plotChart() {
     // 读取 坐标轴标签 和 数据
-    const axisLabels = getAxisLabels();
+    axisLabels = getAxisLabels();
     axisData = await getAxisData(axisLabels);
 
     // 读取图表类型
-    const chartType = document.getElementById('chartOptions').value;
+    chartType = document.getElementById('chartOptions').value;
 
     // 绘制相关图表
     fetch(`plotCharts/configs/${chartType}.json`)
@@ -161,26 +166,18 @@ async function plotChart() {
             axisData.values = splitAxisValues(axisData.values);
 
             // 创建 绘图对象 并设置 图表参数
-            const chart = new Chart('chartContainer', axisData, chartConfig, new MultiColumnStrategy());
+            chart = new Chart('chartContainer', axisData, chartConfig, new MultiColumnStrategy());
             chart.applyChartStyles()
             chartConfigAfterProcessing = chart.chartConfigAfterProcessing;
 
-            // 初始化 图像参数
-            chartConfigAfterProcessing.series.forEach((seriesItem, index) => {
-                seriesItem.name = axisLabels['yColNames'][index];
-            }); // 将各个数据序列命名为对应的 Y 轴标签
-            chartConfigAfterProcessing.xAxis.name = axisLabels['xColName']; // 将 X 轴命名为对应的 X 轴标签
-            chartConfigAfterProcessing.yAxis.name = 'Values'; // 将 Y 轴命名为对应的 Y 轴标签
+            initChartConfig() // 初始化 图像参数
 
-            // 初始化表单数据
-            populateForm(chartConfigAfterProcessing);
-
-            chart.plotWithConfig(chart.chartConfigAfterProcessing);
+            chart.plotWithConfig(chartConfigAfterProcessing);
         });
 }
 
 /**
- * 添加 Y 轴标签
+ * 添加 Y 轴标签，并保存到 sessionStorage
  * @param container
  * @param value
  * @param text
@@ -210,9 +207,9 @@ function addYDataItem(container, value, text) {
  * 当 chartOptions, xData, yData, selectedYDataContainer, zData
  * 任何一个元素发生变化时，重新绘制图像
  */
-function addEventListenersToPlot(eventType, elements, listener) {
+function addEventListenersToPlot(eventType, elements, plot) {
     elements.forEach(elementId => {
-        document.getElementById(elementId).addEventListener(eventType, listener);
+        document.getElementById(elementId).addEventListener(eventType, plot);
     });
 }
 
@@ -231,6 +228,20 @@ function addEventListenersToSaveElements(elements, eventType) {
 }
 
 /**
+ * 读取 sessionStorage 中的数据，填充到表单中
+ */
+function populateFormWithSavedData(elements) {
+    elements.forEach(elementId => {
+        const savedValue = sessionStorage.getItem(elementId);
+        if (savedValue) {
+            document.getElementById(elementId).value = savedValue;
+
+            console.log(savedValue);
+        }
+    });
+}
+
+/**
  * 页面加载时调用的初始化函数
  */
 window.onload = function () {
@@ -245,20 +256,13 @@ window.onload = function () {
     fetch('http://localhost:8080/data/fetch-csv')
         .then(response => response.json())
         .then(data => {
-            // 创建数据列选项
             createSeriesLabel(data['colTypes']['currentColType']); // 创建坐标轴标签选型
-
-            // 读取 chartOptions 的保存值
-            const savedChartOption = sessionStorage.getItem('chartOptions');
-            if (savedChartOption) {
-                document.getElementById('chartOptions').value = savedChartOption;
-            }
-
-            const savedXData = sessionStorage.getItem('xData');
-            if (savedXData) {
-                document.getElementById('xData').value = savedXData;
-            }
-
+            populateFormWithSavedData(
+                [
+                    'chartOptions', 'xData', 'zData',
+                    'chartTitle', 'chartExplain', 'xLabel', 'yLabel'
+                ]
+            ); // 填充表单
             showTab(1); // 默认显示界面一：数据列选择
             plotChart().then(r => r); // 绘图
         })
@@ -295,13 +299,16 @@ document.getElementById("yData").addEventListener("change", function () {
 });
 
 addEventListenersToSaveElements(
-    ['chartOptions', 'xData', 'zData'],
+    [
+        'chartOptions', 'xData', 'zData',
+        'chartTitle', 'chartExplain', 'xLabel', 'yLabel'
+    ],
     'change'
 )
 
 addEventListenersToPlot(
     'change',
-    ['chartOptions', 'xData', 'yData', 'zData'],
+    ['chartOptions', 'xData', 'yData', 'zData', 'selectedYDataContainer'],
     plotChart
 );
 
@@ -316,6 +323,5 @@ document.getElementById('tab2').addEventListener('input', function () {
     chartConfigAfterProcessing.yAxis.name = document.getElementById('yLabel').value;
 
     // 重新绘制图表
-    const chart = new Chart('chartContainer', axisData, chartConfigAfterProcessing, new MultiColumnStrategy());
     chart.plotWithConfig(chartConfigAfterProcessing);
 });
