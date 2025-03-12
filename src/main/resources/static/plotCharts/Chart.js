@@ -1,106 +1,109 @@
 // 创建图表类 Chart
 class Chart {
-    constructor(containerId, chartData, chartElements, strategy) {
+    constructor(containerId) {
         this.containerId = containerId; // 图像位置
-        this.chartData = chartData; // 图表数据
-        this.chartElements = chartElements; // 图表详细信息
-        this.strategy = strategy; // 绘图策略
-        this.chart = null; // ECharts 实例
+
+        this.chartConfig = null; // 图表默认配置信息
+        this.strategy = null; // 绘图策略
+        this.eChart = null; // ECharts 实例
+        this.axisData = null; // 坐标轴数据
+        this.axisLabels = null; // 坐标轴标签
         this.chartConfigAfterProcessing = null; // 处理后的图表配置
+        this.chartType = null; // 图表类型
     }
 
     // 初始化 ECharts 实例
     initChart() {
         // this.chart = echarts.init(document.getElementById(this.containerId), 'dark'); // 深色
-        this.chart = echarts.init(document.getElementById(this.containerId));
+        this.eChart = echarts.init(document.getElementById(this.containerId));
     }
 
     // 设置图表的细节
     applyChartStyles() {
-        this.chartConfigAfterProcessing = this.strategy.applyDataFormat(this.chartData);
+        this.chartConfigAfterProcessing = this.strategy.applyDataFormat(this.axisData);
 
         const elements = ['title', 'xAxis', 'yAxis', 'series', 'tooltip', 'legend'];
         elements.forEach(element => {
-            if (this.chartElements[element]) {
+            if (this.chartConfig[element]) {
                 if (element === 'series') {
                     this.chartConfigAfterProcessing.series = this.chartConfigAfterProcessing.series ? this.chartConfigAfterProcessing.series.map((seriesItem, _) => {
-                        return {...seriesItem, ...this.chartElements.series[0]};
-                    }) : this.chartElements.series;
+                        return {...seriesItem, ...this.chartConfig.series[0]};
+                    }) : this.chartConfig.series;
                 } else {
-                    this.chartConfigAfterProcessing[element] = this.chartConfigAfterProcessing[element] ? {...this.chartConfigAfterProcessing[element], ...this.chartElements[element]} : this.chartElements[element];
+                    this.chartConfigAfterProcessing[element] = this.chartConfigAfterProcessing[element] ? {...this.chartConfigAfterProcessing[element], ...this.chartConfig[element]} : this.chartConfig[element];
                 }
             }
         });
-
-        // console.log(this.chartConfigAfterProcessing);
     }
 
     // 绘图方法
     plot() {
         this.initChart();
-        // const option = this.strategy.applyDataFormat(this.chartData);
+        // const option = this.strategy.applyDataFormat(this.axisData);
         this.applyChartStyles();
-        this.chart.setOption(this.chartConfigAfterProcessing);
+        this.eChart.setOption(this.chartConfigAfterProcessing);
     }
 
     // 传入 图表参数 绘图
     plotWithConfig(chartConfig) {
         this.initChart();
-        this.chart.setOption(chartConfig, true);
+        this.eChart.setOption(chartConfig, true);
     }
-}
 
-// 统一绘图策略的基类
-class ColumnStrategy {
-    // 设计数据表现格式
-    applyDataFormat(data) {
-        throw new Error('applyChartData 需要在子类中实现！');
+    // Getter and Setter
+    getChartConfigAfterProcessing() {
+        return this.chartConfigAfterProcessing;
     }
-}
 
-// 单列数据：适用于分类统计
-class SingleColumnStrategy extends ColumnStrategy {
-    applyDataFormat(data) {
-        return {
-            series: [
-                {
-                    data: data.values.map((value, index) => ({
-                        name: data.labels[index],
-                        value
-                    }))
-                }
-            ]
-        };
+    setChartConfigAfterProcessing() {
+        this.chartConfigAfterProcessing = chartConfigAfterProcessing;
     }
-}
 
-// 双列数据：适用于双坐标轴
-class DoubleColumnStrategy extends ColumnStrategy {
-    applyDataFormat(data) {
-        return {
-            xAxis: {type: 'category', data: data.labels},
-            yAxis: {},
-            series: [
-                {data: data.values}
-            ]
-        }
+    getAxisData() {
+        return this.axisData;
     }
-}
 
-// 绘制多列数据
-class MultiColumnStrategy extends ColumnStrategy {
-    applyDataFormat(data) {
-        return {
-            xAxis: {type: 'category'},
-            yAxis: {},
-            series: data.values
-        };
+    setAxisData(axisData) {
+        this.axisData = axisData;
     }
-}
 
-// 特殊数据：全部自定义
-class NullColumnStrategy extends ColumnStrategy {
-    applyDataFormat(data) {
-        return {};
+    getAxisLabels() {
+        return this.axisLabels;
+    }
+
+    setAxisLabels(axisLabels) {
+        this.axisLabels = axisLabels;
+    }
+
+    getChartType() {
+        return this.chartType;
+    }
+
+    setChartType(chartType) {
+        this.chartType = chartType;
+    }
+
+    getContainerId() {
+        return this.containerId;
+    }
+
+    setContainerId(containerId) {
+        this.containerId = containerId;
+    }
+
+    getStrategy() {
+        return this.strategy;
+    }
+
+    setStrategy(strategy) {
+        this.strategy = strategy;
+    }
+
+    getChartConfig() {
+        return this.chartConfig;
+    }
+
+    setChartConfig(chartConfig) {
+        this.chartConfig = chartConfig;
     }
 }

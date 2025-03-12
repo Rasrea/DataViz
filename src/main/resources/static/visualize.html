@@ -19,9 +19,16 @@
         .tab-content {
             display: none;
         }
-
         .tab-content.active {
             display: block;
+        }
+
+        /* 设置placeholder的颜色和透明度 */
+        #chartTitle::placeholder,
+        #chartExplain::placeholder,
+        #xLabel::placeholder,
+        #yLabel::placeholder {
+            color: #6c757d;
         }
     </style>
 </head>
@@ -134,7 +141,8 @@
 
                 <div class="mb-3">
                     <label for="chartExplain" class="vis-form-label">说明</label>
-                    <textarea id="chartExplain" name="chartColor" class="form-control" placeholder="输入图表说明"
+                    <textarea id="chartExplain" name="chartColor" class="form-control"
+                              placeholder="输入图表说明"
                               rows="4" cols="50"></textarea>
                 </div>
 
@@ -186,6 +194,7 @@
 <!-- 引入自制绘图模块 JS -->
 <script src="plotCharts/Chart.js"></script>
 <script src="plotCharts/ChartServer.js"></script>
+<script src="plotCharts/ColumnStrategy.js"></script>
 <!-- 自定义专属JS -->
 <script src="visualize.js"></script>
 </body>
