@@ -1,21 +1,11 @@
-// 用于初始化表单和设置事件监听器
-function initializeForm(itemDict) {
-    Object.entries(itemDict).forEach(([key, type]) => {
-        // 获取 SessionStorage 中保存的选项
-        const data = sessionStorage.getItem(key);
-        // 如果有保存的数据，更新表单的选项
-        if (data) {
-            document.getElementById(key).value = data;
-        }
+// 设置图标参数的全局变量
+let chartConfigAfterProcessing
+let axisData
 
-        // 在用户选择或输入时，保存数据到 SessionStorage
-        document.getElementById(key).addEventListener(type === 'textarea' ? 'input' : type, function () {
-            sessionStorage.setItem(key, this.value);
-        });
-    });
-}
-
-// 创建数据列选项
+/**
+ * 创建数据列选项
+ * @param currentColType
+ */
 function createSeriesLabel(currentColType) {
     const labelID = ['xData', 'yData', 'zData'];
     labelID.forEach(elementID => {
@@ -29,7 +19,10 @@ function createSeriesLabel(currentColType) {
     });
 }
 
-// 显示指定的页面
+/**
+ * 显示选项卡
+ * @param tabNumber
+ */
 function showTab(tabNumber) {
     // 隐藏所有tab内容和标签
     document.querySelectorAll('.tab-content').forEach(function (tab) {
@@ -44,25 +37,10 @@ function showTab(tabNumber) {
     document.getElementById('scene' + tabNumber).classList.add('active');
 }
 
-// 自动生成 itemDict 对象
-function generateItemDict() {
-    const itemDict = {};
-    document.querySelectorAll('form input, form select, form textarea').forEach(element => {
-        const id = element.id;
-        if (id) {
-            if (element.tagName.toLowerCase() === 'textarea') {
-                itemDict[id] = 'input';
-            } else if (element.tagName.toLowerCase() === 'select') {
-                itemDict[id] = 'change';
-            } else {
-                itemDict[id] = 'input';
-            }
-        }
-    });
-    return itemDict;
-}
-
-// 获取 x轴 和 y 轴标签的列表
+/**
+ * 获取 x轴 和 y 轴标签的列表
+ * @returns {{xColName: *, yColNames: *[]}}
+ */
 function getAxisLabels() {
     // 获取所有 selected-y-item 元素
     let selectedItems = document.querySelectorAll('.selected-y-item');
@@ -82,7 +60,11 @@ function getAxisLabels() {
     }
 }
 
-// 获取 x轴 和 y 轴标签的数据
+/**
+ * 获取 x轴 和 y 轴标签的数据
+ * @param axisLabels
+ * @returns {Promise<{labels: *[], values: *[]}|{labels: *, values: *[]}>}
+ */
 async function getAxisData(axisLabels) {
     // 读取 X 和 Y 轴标签
     const xColName = axisLabels['xColName'];
@@ -109,8 +91,12 @@ async function getAxisData(axisLabels) {
     }
 }
 
-// 是否对 axisData 的X轴进行排序
-// 检查并排序数组
+/**
+ * 对 axisData 进行检查并排序
+ * @param axisData
+ * @param chartConfig
+ * @returns {{labels: *[], values: *[][]}}
+ */
 function sortAxisData(axisData, chartConfig) {
     // 合并 X 轴和 Y 轴数据
     let rowAxisData = axisData.labels.map((value, index) => [value, ...axisData.values.map(arr => arr[index])]);
@@ -128,24 +114,25 @@ function sortAxisData(axisData, chartConfig) {
     }
 }
 
-// 将 原始axis.values ：
-// [['a', 1, 2, 12], ['b', 3, 4, 34], ['c', 5, 6, 56]]
-// 分解为[
-//   {data: [['a', 1], ['a', 2], ['a', 12]]},
-//   {data: [['b', 3], ['b', 4], ['b', 34]]},
-//   {data: [['c', 5], ['c', 6], ['c', 56]]}
-// ]
+/**
+ * 将 axisValues 转换为适合绘图的格式
+ * @param axisValues
+ * @returns {*}
+ */
 function splitAxisValues(axisValues) {
     // 生成 rowData，相当于 Python 的列表推导式
     const rowData = axisValues.map(item => item.slice(1).map(y => [item[0], y]));
 
-    // 转置 rowData（zip 逻辑）
+    // 转置 rowData（Python zip 逻辑）
     return rowData[0].map((_, colIndex) => ({
         data: rowData.map(row => row[colIndex])
     }))
 }
 
-// 将 JSON 数据显示到表单中
+/**
+ * 将 chartConfigAfterProcessing 中的数据填充到表单中
+ * @param chartConfigAfterProcessing
+ */
 function populateForm(chartConfigAfterProcessing) {
     document.getElementById('chartTitle').value = chartConfigAfterProcessing.title.text;
     document.getElementById('chartExplain').value = chartConfigAfterProcessing.title.subtext;
@@ -153,11 +140,10 @@ function populateForm(chartConfigAfterProcessing) {
     document.getElementById('yLabel').value = chartConfigAfterProcessing.yAxis.name;
 }
 
-// 设置图标参数的全局变量
-let chartConfigAfterProcessing
-let axisData
-
-// 绘图函数
+/**
+ * 绘制图表
+ * @returns {Promise<void>}
+ */
 async function plotChart() {
     // 读取 坐标轴标签 和 数据
     const axisLabels = getAxisLabels();
@@ -193,11 +179,61 @@ async function plotChart() {
         });
 }
 
-// 页面加载时调用初始化函数
-window.onload = function () {
-    // 定义表单参数
-    const itemDict = generateItemDict();
+/**
+ * 添加 Y 轴标签
+ * @param container
+ * @param value
+ * @param text
+ */
+function addYDataItem(container, value, text) {
+    let item = document.createElement("div");
+    item.className = "selected-y-item";
+    item.setAttribute("data-value", value);
+    item.innerHTML = `${text} <button type="button" class="remove-btn">❌</button>`;
 
+    // 绑定删除事件
+    item.querySelector(".remove-btn").addEventListener("click", function () {
+        item.remove();
+        // 从 sessionStorage 中移除
+        const savedYData = JSON.parse(sessionStorage.getItem('selectedYData')) || [];
+        const updatedYData = savedYData.filter(data => data.value !== value);
+        sessionStorage.setItem('selectedYData', JSON.stringify(updatedYData));
+
+        // 调用 plotChart 函数更新图表
+        plotChart().then(r => r);
+    });
+
+    container.appendChild(item);
+}
+
+/**
+ * 当 chartOptions, xData, yData, selectedYDataContainer, zData
+ * 任何一个元素发生变化时，重新绘制图像
+ */
+function addEventListenersToPlot(eventType, elements, listener) {
+    elements.forEach(elementId => {
+        document.getElementById(elementId).addEventListener(eventType, listener);
+    });
+}
+
+/**
+ * 为 elements 中的元素添加 eventType 事件监听器，当事件发生时将元素的值保存到 sessionStorage
+ * @param elements
+ * @param eventType
+ */
+function addEventListenersToSaveElements(elements, eventType) {
+    elements.forEach(elementId => {
+        document.getElementById(elementId).addEventListener(eventType, function () {
+            const selectedValue = this.value;
+            sessionStorage.setItem(elementId, selectedValue);
+        });
+    });
+}
+
+/**
+ * 页面加载时调用的初始化函数
+ */
+window.onload = function () {
     // 加载已保存的 Y 轴标签
     const savedYData = JSON.parse(sessionStorage.getItem('selectedYData')) || [];
     const container = document.getElementById("selectedYDataContainer");
@@ -205,19 +241,24 @@ window.onload = function () {
         addYDataItem(container, value, text);
     });
 
-    // 设置 chartOptions 的默认值
-    const savedChartOption = sessionStorage.getItem('chartOptions');
-    if (savedChartOption) {
-        document.getElementById('chartOptions').value = savedChartOption;
-    }
-
-    // 获取后端数据并绘制图表
+    // 获取后端数据
     fetch('http://localhost:8080/data/fetch-csv')
         .then(response => response.json())
         .then(data => {
             // 创建数据列选项
             createSeriesLabel(data['colTypes']['currentColType']); // 创建坐标轴标签选型
-            initializeForm(itemDict); // 保存表格参数，防止刷新丢失
+
+            // 读取 chartOptions 的保存值
+            const savedChartOption = sessionStorage.getItem('chartOptions');
+            if (savedChartOption) {
+                document.getElementById('chartOptions').value = savedChartOption;
+            }
+
+            const savedXData = sessionStorage.getItem('xData');
+            if (savedXData) {
+                document.getElementById('xData').value = savedXData;
+            }
+
             showTab(1); // 默认显示界面一：数据列选择
             plotChart().then(r => r); // 绘图
         })
@@ -253,41 +294,20 @@ document.getElementById("yData").addEventListener("change", function () {
     sessionStorage.setItem('selectedYData', JSON.stringify(savedYData));
 });
 
-// 监听 chartOptions 的变化并存储到 sessionStorage
-document.getElementById('chartOptions').addEventListener('change', function () {
-    const selectedChart = this.value;
-    sessionStorage.setItem('chartOptions', selectedChart);
-});
+addEventListenersToSaveElements(
+    ['chartOptions', 'xData', 'zData'],
+    'change'
+)
 
-// 监听 chartOptions, xData, yData, selectedYDataContainer, zData 的变化
-document.getElementById('chartOptions').addEventListener('change', plotChart);
-document.getElementById('xData').addEventListener('change', plotChart);
-document.getElementById('yData').addEventListener('change', plotChart);
-document.getElementById('zData').addEventListener('change', plotChart);
+addEventListenersToPlot(
+    'change',
+    ['chartOptions', 'xData', 'yData', 'zData'],
+    plotChart
+);
 
-// 添加 Y 轴标签的函数
-function addYDataItem(container, value, text) {
-    let item = document.createElement("div");
-    item.className = "selected-y-item";
-    item.setAttribute("data-value", value);
-    item.innerHTML = `${text} <button type="button" class="remove-btn">❌</button>`;
-
-    // 绑定删除事件
-    item.querySelector(".remove-btn").addEventListener("click", function () {
-        item.remove();
-        // 从 sessionStorage 中移除
-        const savedYData = JSON.parse(sessionStorage.getItem('selectedYData')) || [];
-        const updatedYData = savedYData.filter(data => data.value !== value);
-        sessionStorage.setItem('selectedYData', JSON.stringify(updatedYData));
-
-        // 调用 plotChart 函数更新图表
-        plotChart().then(r => r);
-    });
-
-    container.appendChild(item);
-}
-
-// 实时更新 JSON 数据
+/**
+ * 当 tab2 中的表单元素发生变化时，更新图表
+ */
 document.getElementById('tab2').addEventListener('input', function () {
     // 获取表单中的数据并更新 JSON
     chartConfigAfterProcessing.title.text = document.getElementById('chartTitle').value;
