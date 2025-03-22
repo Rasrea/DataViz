@@ -2,6 +2,13 @@
 let chart = new Chart('chartContainer');
 let jsonData // 后端数据
 
+const PlotStrategy = {
+    'SINGLE_COLUMN': 'SINGLE_COLUMN',
+    'DOUBLE_COLUMN': 'DOUBLE_COLUMN',
+    'MULTI_COLUMN': 'MULTI_COLUMN',
+    'NULL_COLUMN': 'NULL_COLUMN'
+}
+
 /**
  * 将 JSON 数据发送到后端
  * @param url
@@ -196,7 +203,13 @@ async function plotChart() {
         throw new Error(`HTTP 错误! 状态: ${isReadChartConfig.status}`);
     }
 
-    const response = await fetch('http://localhost:8080/api/chart/processedChartData');
+
+    // 指定 绘图策略
+    if (chartType === 'LineChart') {
+        await fetch(`http://localhost:8080/api/chart/columnStrategy?columnStrategy=${PlotStrategy.MULTI_COLUMN}`);
+    }
+
+    const response = await fetch('http://localhost:8080/api/chart/chartConfigAfterProcess');
     const data = await response.json();
     console.log(data);
     // console.log(response);

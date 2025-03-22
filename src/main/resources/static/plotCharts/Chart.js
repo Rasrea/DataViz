@@ -34,6 +34,8 @@ class Chart {
                 }
             }
         });
+
+        console.log(this.chartConfigAfterProcessing);
     }
 
     // 绘图方法

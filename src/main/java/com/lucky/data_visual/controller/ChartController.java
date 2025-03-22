@@ -2,8 +2,10 @@ package com.lucky.data_visual.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lucky.data_visual.enums.ColumnStrategy;
 import com.lucky.data_visual.model.Chart;
 import com.lucky.data_visual.model.JsonResult;
+import com.lucky.data_visual.model.columnStrategy.MultiColumnStrategy;
 import com.lucky.data_visual.server.ChartServer;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -63,6 +65,38 @@ public class ChartController {
     }
 
     @Operation(
+            summary = "设置绘图策略",
+            description = "此接口用于设置绘图策略，返回设置后的绘图策略。",
+            parameters = {
+                    @Parameter(
+                            name = "columnStrategy",
+                            description = "绘图策略",
+                            required = true,
+                            content = @Content(mediaType = "application/json")
+                    )
+            }
+    )
+    @GetMapping("/columnStrategy")
+    public ResponseEntity<String> setColumnStrategy(@RequestParam String columnStrategy) {
+        try {
+            ColumnStrategy strategy = ColumnStrategy.valueOf(columnStrategy);
+            if (strategy == ColumnStrategy.SINGLE_COLUMN) {
+//                 chart.setColumnStrategy(new SingleColumnStrategy());
+            } else if (strategy == ColumnStrategy.DOUBLE_COLUMN) {
+//                 chart.setColumnStrategy(new DoubleColumnStrategy());
+            } else if (strategy == ColumnStrategy.MULTI_COLUMN) {
+                chart.setColumnStrategy(new MultiColumnStrategy());
+            }
+
+            return ResponseEntity.ok("Column strategy set successfully!");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid column strategy: " + columnStrategy);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Operation(
             summary = "读取前端选择的图表配置文件",
             description = "此接口用于读取前端选择的图表配置文件，返回配置文件的内容。",
             parameters = {
@@ -75,14 +109,14 @@ public class ChartController {
             }
     )
     @GetMapping("/chartConfig")
-    public ResponseEntity<String> setChartConfig(@RequestParam String chartType) {
+    public ResponseEntity<JsonNode> setChartConfig(@RequestParam String chartType) {
         ObjectMapper objectMapper = new ObjectMapper();
         Path basePath = Paths.get("src/main/resources/static/plotCharts/configs").toAbsolutePath();
         Path targetPath = basePath.resolve(chartType + ".json").normalize();
 
         try {
             chart.setChartConfig(objectMapper.readTree(targetPath.toFile()));
-            return ResponseEntity.ok("图像配置文件读取成功！");
+            return ResponseEntity.ok(chart.getChartConfig());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -124,11 +158,44 @@ public class ChartController {
         return chartServer.sortedOrGroupAxisData(chart.getRawChartData(), chart.getChartConfig());
     }
 
+    @Operation(
+            summary = "处理图表数据",
+            description = "此接口用于将数据格式转为图表所需格式，返回处理后的图表数据。",
+            parameters = {
+                    @Parameter(
+                            name = "chartType",
+                            description = "图表类型",
+                            required = true,
+                            content = @Content(mediaType = "application/json")
+                    )
+            }
+    )
     @GetMapping("/processedChartData")
     public List<Map<String, List<Object>>> getProcessedChartData() {
         chart.setRawChartData(chartServer.getRawAxisData(chart.getAxisLabels(), operateJsonResult.getData()));
         Map<String, Object> sortedOrGroupedData = chartServer.sortedOrGroupAxisData(chart.getRawChartData(), chart.getChartConfig());
-        return chartServer.processedChartData(sortedOrGroupedData);
+        chart.setProcessedChartData(chartServer.processedChartData(sortedOrGroupedData));
+        return chart.getProcessedChartData();
     }
 
+
+    @GetMapping("/chartConfigAfterProcess")
+    public JsonNode getChartConfigAfterProcess() {
+        // 对数据进行预处理，包括 排序 和 格式转换
+        chart.setRawChartData(chartServer.getRawAxisData(chart.getAxisLabels(), operateJsonResult.getData()));
+        Map<String, Object> sortedOrGroupedData = chartServer.sortedOrGroupAxisData(chart.getRawChartData(), chart.getChartConfig());
+        chart.setProcessedChartData(chartServer.processedChartData(sortedOrGroupedData));
+
+        // 将数据列插入到图表配置中
+        JsonNode chartConfigAfterProcess = chartServer.insertDataIntoChartConfig(chart);
+        chart.setChartConfigAfterProcess(chartConfigAfterProcess);
+
+        return chart.getChartConfigAfterProcess();
+    }
+
+    @GetMapping("/")
+    public JsonNode getChart() {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.valueToTree(chart);
+    }
 }

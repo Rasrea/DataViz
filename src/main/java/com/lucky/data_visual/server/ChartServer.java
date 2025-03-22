@@ -1,6 +1,8 @@
 package com.lucky.data_visual.server;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.lucky.data_visual.model.Chart;
 import org.springframework.stereotype.Service;
@@ -107,10 +109,38 @@ public class ChartServer {
 
     /**
      * 将数据列插入到图表配置中
+     *
      * @param chart 图表对象
      * @return 处理后的图表对象
      */
-//    public Chart insertDataIntoChartConfig(Chart chart) {
-//
-//    }
+    public JsonNode insertDataIntoChartConfig(Chart chart) {
+        JsonNode chartConfigAfterProcess = chart.getColumnStrategy().designDataForm(chart.getProcessedChartData());
+        JsonNode chartConfig = chart.getChartConfig(); // 原始图表配置信息
+        String[] elementConfig = {"title", "xAxis", "yAxis", "series", "tooltip", "legend"};
+
+        for (String element : elementConfig) {
+            if (chartConfig.has(element)) {
+                if (element.equals("series")) {
+                    ArrayNode updatedSeries = new ObjectMapper().createArrayNode();
+                    for (JsonNode seriesNode : chartConfigAfterProcess.get(element)) {
+                        ObjectNode mergedSeriesNode = new ObjectMapper().createObjectNode();
+                        mergedSeriesNode.setAll((ObjectNode) seriesNode);
+                        mergedSeriesNode.setAll((ObjectNode) chartConfig.get("series").get(0));
+                        updatedSeries.add(mergedSeriesNode);
+                    }
+                    ((ObjectNode) chartConfigAfterProcess).set("series", updatedSeries);
+                } else {
+                    // 其他元素合并
+                    ObjectNode mergedNode = new ObjectMapper().createObjectNode();
+                    if (chartConfigAfterProcess.has(element)) {
+                        mergedNode.setAll((ObjectNode) chartConfigAfterProcess.get(element));
+                    }
+                    mergedNode.setAll((ObjectNode) chartConfig.get(element));
+                    ((ObjectNode) chartConfigAfterProcess).set(element, mergedNode);
+                }
+            }
+        }
+
+        return chartConfigAfterProcess;
+    }
 }
