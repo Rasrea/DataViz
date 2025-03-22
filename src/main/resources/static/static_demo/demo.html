@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>API Test</title>
-    </head>
-    <body>
-        <h1>API Test</h1>
-        <label for="chartType">Chart Type:</label>
-        <input type="text" id="chartType" name="chartType">
-        <button onclick="testApi()">Test API</button>
-        <pre id="result"></pre>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API 测试</title>
+</head>
+<body>
+<h1>API 测试</h1>
+<label for="chartType">图表类型:</label>
+<input type="text" id="chartType" name="chartType">
+<button onclick="testApi()">测试 API</button>
+<pre id="result"></pre>
 
-        <script>
-            async function testApi() {
-                const chartType = document.getElementById('chartType').value;
-                const resultElement = document.getElementById('result');
+<script>
+    async function testApi() {
+        const chartType = document.getElementById('chartType').value;
+        const resultElement = document.getElementById('result');
 
-                try {
-                    const response = await fetch(`/api/chart/chartConfig?chartType=${chartType}`);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    const data = await response.json();
-                    resultElement.textContent = JSON.stringify(data, null, 2);
-                } catch (error) {
-                    resultElement.textContent = `Error: ${error.message}`;
-                }
+        try {
+            const response = await fetch(`http://localhost:8080/api/chart/chartConfig?chartType=LineChart`);
+            if (!response.ok) {
+                throw new Error(`HTTP 错误! 状态: ${response.status}`);
             }
-        </script>
-    </body>
-    </html>
+            const data = await response.json();
+            resultElement.textContent = JSON.stringify(data, null, 2);
+        } catch (error) {
+            resultElement.textContent = `错误: ${error.message}`;
+        }
+    }
+</script>
+</body>
+</html>

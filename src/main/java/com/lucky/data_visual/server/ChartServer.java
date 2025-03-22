@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,8 +30,8 @@ public class ChartServer {
      */
     public Map<String, Object> getRawAxisData(Map<String, List<String>> axisLabels, List<Map<String, Object>> fileData) {
         // 读取 X 和 Y 轴标签
-        String xAxisLabel = axisLabels.get("xAxis").get(0);
-        List<String> yAxisLabels = axisLabels.get("yAxis");
+        String xAxisLabel = axisLabels.get("xColName").get(0);
+        List<String> yAxisLabels = axisLabels.get("yColNames");
 
         // 读取对应列的数据
         List<Object> xAxisData = new ArrayList<>();
@@ -58,7 +55,9 @@ public class ChartServer {
     }
 
     /**
-     * 根据 X 轴类型，排序（Number）或聚合（String）数据
+     * 根据 X 轴类型，排序（Number）或聚合（String）数据，返回数据类型：
+     * labels: [x1, x2, ...]
+     * values: [[y11, y12, ...], [y21, y22, ...], ...]
      */
     public Map<String, Object> sortedOrGroupAxisData(Map<String, Object> rawAxisData, JsonNode chartConfig) {
         // 合并 XY 轴数据，如: [[x1, y11, y21], [x2, y12, y22], ...]
@@ -79,17 +78,26 @@ public class ChartServer {
 
         if (allNumbers) {
             ((ObjectNode) chartConfig.get("xAxis")).put("type", "Value");
-            mergeData.sort((o1, o2) -> {
-                double x1 = (double) o1.get(0);
-                double x2 = (double) o2.get(0);
-                return Double.compare(x1, x2);
-            });
+            mergeData.sort(Comparator.comparingDouble(o -> ((Number) o.get(0)).doubleValue()));
         }
 
         Map<String, Object> result = new HashMap<>();
         result.put("labels", mergeData.stream().map(e -> e.get(0)).collect(Collectors.toList()));
-        result.put("values", mergeData);
+        result.put("values", mergeData.stream()
+                .map(e -> e.subList(1, e.size()))
+                .collect(Collectors.toList()));
         return result;
+    }
+
+    public List<Map<String, List<Object>>> processedChartData(Map<String, Object> sortedOrGroupAxisData) {
+        List<Object> labels = (List<Object>) sortedOrGroupAxisData.get("labels");
+        List<List<Object>> values = (List<List<Object>>) sortedOrGroupAxisData.get("values");
+        int yAxisSize = values.get(0).size(); // Y 轴数据列数
+
+        List<Map<String, List<Object>>> result = new ArrayList<>();
+        for (int i = 0; i < yAxisSize; i++) {
+
+        }
     }
 
     public Chart getChart() {

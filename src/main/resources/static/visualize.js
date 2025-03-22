@@ -3,6 +3,36 @@ let chart = new Chart('chartContainer');
 let jsonData // 后端数据
 
 /**
+ * 将 JSON 数据发送到后端
+ * @param url
+ * @param method
+ * @param data
+ * @returns {Promise<any|null>}
+ */
+async function pullJSON(url, method = 'POST', data = null) {
+    try {
+        let options = {
+            method,
+            headers: {'Content-Type': 'application/json'}
+        };
+
+        if (data) {
+            options.body = JSON.stringify(data); // 仅在 POST/PUT 时需要 body
+        }
+
+        let response = await fetch(url, options);
+        if (!response.ok) {
+            throw new Error(`请求失败: ${response.status}`);
+        }
+
+        return await response.json(); // 解析 JSON 响应
+    } catch (error) {
+        console.error("请求出错:", error);
+        return null;
+    }
+}
+
+/**
  * 创建数据列选项
  * @param currentColType
  */
@@ -150,13 +180,32 @@ async function plotChart() {
         'chartTitle', 'chartExplain', 'xLabel', 'yLabel'
     ])
 
+    // 将前端选择的坐标轴标签发送到后端
+    pullJSON('http://localhost:8080/api/chart/axisLabels', 'POST', getAxisLabels());
+    // 将前端选择的图表类型发送到后端
+    const chartType = document.getElementById('chartOptions').value
+    const isReadChartConfig = await fetch(`http://localhost:8080/api/chart/chartConfig?chartType=${chartType}`);
+    if (!isReadChartConfig.ok) {
+        throw new Error(`HTTP 错误! 状态: ${isReadChartConfig.status}`);
+    }
+
+    // const response = await fetch('http://localhost:8080/api/chart/sortedOrGroupedData');
+    // const response = await fetch('http://localhost:8080/api/chart/rawChartData');
+    // const data = await response.json();
+    // console.log(data);
+    // console.log(response);
+
+
     chart.setAxisLabels(getAxisLabels()); // 设置图表的坐标轴标签
     const rawAxisData = getAxisData(chart.getAxisLabels(), jsonData.data) // 获取原始坐标轴数据
     chart.setAxisData(sortAxisData(rawAxisData, chart.getChartConfig())); // 设置图表的坐标轴数据
+
     chart.getAxisData().values = splitAxisValues(chart.getAxisData().values); // 设置图表的坐标轴数据
+    console.log(chart.getAxisData().values)
     chart.setStrategy(new MultiColumnStrategy()); // 设置图表的绘图策略
     chart.applyChartStyles(); // 设置图表的细节
     initChartConfig(); // 初始化图表参数
+
 
     chart.plotWithConfig(chart.getChartConfigAfterProcessing()); // 绘制图表
 }
@@ -230,9 +279,14 @@ window.onload = async function () {
     // 获取 后端数据 和 原始图表数据
     let response = await fetch('http://localhost:8080/data/fetch-csv');
     jsonData = await response.json();
+
+
+    // <-可以删除
     chart.setChartType(document.getElementById('chartOptions').value); // 设置图表类型
     response = await fetch(`plotCharts/configs/${chart.getChartType()}.json`)
     chart.setChartConfig(await response.json());
+    // 可以删除->
+
 
     // 设置表单数据
     createSeriesLabel(jsonData['colTypes']['currentColType']);
