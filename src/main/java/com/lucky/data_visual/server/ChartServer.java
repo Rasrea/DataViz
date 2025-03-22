@@ -3,8 +3,6 @@ package com.lucky.data_visual.server;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.lucky.data_visual.model.Chart;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,13 +10,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class ChartServer {
-
-    private Chart chart;
-
-    @Autowired
-    public ChartServer(@Qualifier("chartParams") Chart chart) {
-        this.chart = chart;
-    }
 
     /**
      * 根据 x, y 轴标签名读取原始数据
@@ -89,6 +80,10 @@ public class ChartServer {
         return result;
     }
 
+    /**
+     * 处理图表数据，返回数据类型：
+     * data: [[[x1, y11], [x1, y12], ...], [[x1, y21], [x1, y22], ...], ...]
+     */
     public List<Map<String, List<Object>>> processedChartData(Map<String, Object> sortedOrGroupAxisData) {
         List<Object> labels = (List<Object>) sortedOrGroupAxisData.get("labels");
         List<List<Object>> values = (List<List<Object>>) sortedOrGroupAxisData.get("values");
@@ -96,11 +91,26 @@ public class ChartServer {
 
         List<Map<String, List<Object>>> result = new ArrayList<>();
         for (int i = 0; i < yAxisSize; i++) {
-
+            List<Object> yAxisData = new ArrayList<>();
+            for (int j = 0; j < values.size(); j++) {
+                List<Object> dataCouple = new ArrayList<>(); // 一对数据
+                dataCouple.add(labels.get(j));
+                dataCouple.add(values.get(j).get(i));
+                yAxisData.add(dataCouple);
+            }
+            Map<String, List<Object>> map = new HashMap<>();
+            map.put("data", yAxisData); // 一列数据
+            result.add(map);
         }
+        return result;
     }
 
-    public Chart getChart() {
-        return chart;
-    }
+    /**
+     * 将数据列插入到图表配置中
+     * @param chart 图表对象
+     * @return 处理后的图表对象
+     */
+//    public Chart insertDataIntoChartConfig(Chart chart) {
+//
+//    }
 }

@@ -90,6 +90,13 @@ function getAxisLabels() {
     }
 }
 
+
+
+
+
+
+
+
 /**
  * 获取 x轴 和 y 轴标签的数据
  * @param axisLabels
@@ -189,19 +196,19 @@ async function plotChart() {
         throw new Error(`HTTP 错误! 状态: ${isReadChartConfig.status}`);
     }
 
-    // const response = await fetch('http://localhost:8080/api/chart/sortedOrGroupedData');
-    // const response = await fetch('http://localhost:8080/api/chart/rawChartData');
-    // const data = await response.json();
-    // console.log(data);
+    const response = await fetch('http://localhost:8080/api/chart/processedChartData');
+    const data = await response.json();
+    console.log(data);
     // console.log(response);
 
 
+    // <- delete
     chart.setAxisLabels(getAxisLabels()); // 设置图表的坐标轴标签
     const rawAxisData = getAxisData(chart.getAxisLabels(), jsonData.data) // 获取原始坐标轴数据
     chart.setAxisData(sortAxisData(rawAxisData, chart.getChartConfig())); // 设置图表的坐标轴数据
-
     chart.getAxisData().values = splitAxisValues(chart.getAxisData().values); // 设置图表的坐标轴数据
-    console.log(chart.getAxisData().values)
+
+
     chart.setStrategy(new MultiColumnStrategy()); // 设置图表的绘图策略
     chart.applyChartStyles(); // 设置图表的细节
     initChartConfig(); // 初始化图表参数
@@ -294,6 +301,17 @@ window.onload = async function () {
     // 绘制图表
     await plotChart();
 }
+
+
+
+
+
+
+
+
+
+
+
 
 // 选择多个Y轴标签
 document.getElementById("yData").addEventListener("change", function () {

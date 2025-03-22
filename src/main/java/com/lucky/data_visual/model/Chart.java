@@ -16,8 +16,6 @@ public class Chart {
     private String chartType; // 图表类型
     private Map<String, Object> rawChartData; // 原始数据
 
-    public Chart() {};
-
     // Getter and Setter
     public JsonNode getChartConfig() {
         return chartConfig;
