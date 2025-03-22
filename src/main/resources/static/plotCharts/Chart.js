@@ -55,7 +55,7 @@ class Chart {
         return this.chartConfigAfterProcessing;
     }
 
-    setChartConfigAfterProcessing() {
+    setChartConfigAfterProcessing(chartConfigAfterProcessing) {
         this.chartConfigAfterProcessing = chartConfigAfterProcessing;
     }
 

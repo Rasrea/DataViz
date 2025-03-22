@@ -1,80 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>修改 JSON 示例</title>
-</head>
-<body>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>API Test</title>
+    </head>
+    <body>
+        <h1>API Test</h1>
+        <label for="chartType">Chart Type:</label>
+        <input type="text" id="chartType" name="chartType">
+        <button onclick="testApi()">Test API</button>
+        <pre id="result"></pre>
 
-<h1>修改 JSON 数据</h1>
+        <script>
+            async function testApi() {
+                const chartType = document.getElementById('chartType').value;
+                const resultElement = document.getElementById('result');
 
-<!-- 表单部分 -->
-<form id="jsonForm">
-    <label for="name">Name: </label>
-    <input type="text" id="name" name="name"><br><br>
-
-    <label for="age">Age: </label>
-    <input type="number" id="age" name="age"><br><br>
-
-    <label for="email">Email: </label>
-    <input type="email" id="email" name="email"><br><br>
-
-    <!-- 性别选择 -->
-    <label for="male" style="margin-right: 10px;">Male</label>
-    <input type="radio" id="male" name="gender" value="male" style="margin-right: 20px;">
-
-    <label for="female" style="margin-right: 10px;">Female</label>
-    <input type="radio" id="female" name="gender" value="female">
-
-    <h2>最新的 JSON 数据：</h2>
-    <pre id="jsonOutput"></pre>
-</form>
-
-<script>
-    // 初始 JSON 数据
-    let jsonData = {
-        name: "John Doe",
-        age: 25,
-        email: "john.doe@example.com",
-        gender: "male" // 添加性别字段
-    };
-
-    // 将 JSON 数据显示到表单中
-    function populateForm() {
-        document.getElementById('name').value = jsonData.name;
-        document.getElementById('age').value = jsonData.age;
-        document.getElementById('email').value = jsonData.email;
-
-        // 根据 JSON 数据选择对应的性别单选框
-        if (jsonData.gender === 'male') {
-            document.getElementById('male').checked = true;
-        } else if (jsonData.gender === 'female') {
-            document.getElementById('female').checked = true;
-        }
-    }
-
-    // 实时更新 JSON 数据
-    document.getElementById('jsonForm').addEventListener('input', function () {
-        // 获取表单中的数据并更新 JSON
-        jsonData.name = document.getElementById('name').value;
-        jsonData.age = document.getElementById('age').value;
-        jsonData.email = document.getElementById('email').value;
-
-        // 更新性别字段
-        if (document.getElementById('male').checked) {
-            jsonData.gender = 'male';
-        } else if (document.getElementById('female').checked) {
-            jsonData.gender = 'female';
-        }
-
-        // 打印最新的 JSON
-        document.getElementById('jsonOutput').textContent = JSON.stringify(jsonData, null, 2);
-    });
-
-    // 初始化表单
-    populateForm();
-</script>
-
-</body>
-</html>
+                try {
+                    const response = await fetch(`/api/chart/chartConfig?chartType=${chartType}`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    resultElement.textContent = JSON.stringify(data, null, 2);
+                } catch (error) {
+                    resultElement.textContent = `Error: ${error.message}`;
+                }
+            }
+        </script>
+    </body>
+    </html>
