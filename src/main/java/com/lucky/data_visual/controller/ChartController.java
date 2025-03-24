@@ -29,16 +29,15 @@ import java.util.Map;
 @RequestMapping("/api/chart")
 public class ChartController {
     private final static Logger logger = LoggerFactory.getLogger(ChartController.class);
+    private final ChartServer chartServer = new ChartServer();
     private final JsonResult<List<Map<String, Object>>> operateJsonResult; // 操作数据
     private final Chart chart; // 图表
-    private final ChartServer chartServer;
 
     @Autowired
     public ChartController(@Qualifier("operationalData") JsonResult<List<Map<String, Object>>> operateJsonResult,
-                           @Qualifier("chartParams") Chart chart, ChartServer chartServer) {
+                           @Qualifier("chartParams") Chart chart) {
         this.operateJsonResult = operateJsonResult;
         this.chart = chart;
-        this.chartServer = chartServer;
     }
 
     public JsonResult<List<Map<String, Object>>> getOperateJsonResult() {
@@ -179,6 +178,18 @@ public class ChartController {
     }
 
 
+    @Operation(
+            summary = "插入数据到图表配置中",
+            description = "此接口用于将数据列插入到图表配置中，返回处理后的图表配置。",
+            parameters = {
+                    @Parameter(
+                            name = "chartType",
+                            description = "图表类型",
+                            required = true,
+                            content = @Content(mediaType = "application/json")
+                    )
+            }
+    )
     @GetMapping("/chartConfigAfterProcess")
     public JsonNode getChartConfigAfterProcess() {
         // 对数据进行预处理，包括 排序 和 格式转换

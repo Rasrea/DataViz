@@ -10,7 +10,8 @@ import java.util.Map;
 public class MultiColumnStrategy extends ColumnStrategy {
 
     @Override
-    public JsonNode designDataForm(List<Map<String, List<Object>>> chartData) {
+    public JsonNode designDataForm(Object objectChartData) {
+        List<Map<String, List<Object>>> chartData = (List<Map<String, List<Object>>>) objectChartData;
         ObjectMapper mapper = new ObjectMapper();
 
         // 创建 X 轴

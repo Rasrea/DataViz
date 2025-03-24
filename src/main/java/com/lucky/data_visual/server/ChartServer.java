@@ -70,7 +70,7 @@ public class ChartServer {
         boolean allNumbers = labels.stream().allMatch(e -> e instanceof Number);
 
         if (allNumbers) {
-            ((ObjectNode) chartConfig.get("xAxis")).put("type", "Value");
+            ((ObjectNode) chartConfig.get("xAxis")).put("type", "value");
             mergeData.sort(Comparator.comparingDouble(o -> ((Number) o.get(0)).doubleValue()));
         }
 
@@ -142,5 +142,86 @@ public class ChartServer {
         }
 
         return chartConfigAfterProcess;
+    }
+
+    /**
+     * 读取数据列
+     *
+     * @param fileData 数据
+     * @param colName  列名
+     * @return 数据列
+     */
+    public List<Object> readLineData(List<Map<String, Object>> fileData, String colName) {
+        List<Object> colData = new ArrayList<>();
+        for (Map<String, Object> map : fileData) {
+            colData.add(map.get(colName));
+        }
+        return colData;
+    }
+
+    /**
+     * 统计数据列中空值和非空值的数据量
+     *
+     * @param colData 数据列
+     * @return [{name: '空值', value: 2}, {name: '非空值', value: 3}]
+     */
+    public List<Map<String, Object>> countEmptyAndNonEmptyData(List<Object> colData) {
+        // 统计空值数量
+        double nullCount = 0;
+        for (Object data : colData) {
+            if (data.equals("")) {
+                nullCount++;
+            }
+        }
+
+        // 整合数据
+        Map<String, Object> nullData = new HashMap<>();
+        nullData.put("name", "空值");
+        nullData.put("value", nullCount);
+        Map<String, Object> nonNullData = new HashMap<>();
+        nonNullData.put("name", "非空值");
+        nonNullData.put("value", colData.size() - nullCount);
+        List<Map<String, Object>> resultList = new ArrayList<>();
+        resultList.add(nullData);
+        resultList.add(nonNullData);
+        return resultList;
+    }
+
+    /**
+     * 统计前 K 项频数，以及 K 项目之后的总数
+     *
+     * @param colData 数据列
+     * @param k       前 K 项
+     * @return [{name: 'A', value: 2}, {name: 'B', value: 3}]
+     */
+    public List<Map<String, Object>> countTopKFrequency(List<Object> colData, int k) {
+        // 统计频数
+        Map<Object, Integer> frequencyMap = new HashMap<>();
+        for (Object data : colData) {
+            frequencyMap.put(data, frequencyMap.getOrDefault(data, 0) + 1);
+        }
+
+        // 排序
+        List<Map.Entry<Object, Integer>> frequencyList = new ArrayList<>(frequencyMap.entrySet());
+        frequencyList.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
+
+        // 整合数据
+        List<Map<String, Object>> resultList = new ArrayList<>();
+        int limit = Math.min(k, frequencyList.size());
+        for (int i = 0; i < limit; i++) {
+            Map<String, Object> data = new HashMap<>();
+            data.put("name", frequencyList.get(i).getKey());
+            data.put("value", frequencyList.get(i).getValue());
+            resultList.add(data);
+        }
+
+        if (k < frequencyList.size()) {
+            resultList.add(new HashMap<>() {{
+                put("name", "Others");
+                put("value", frequencyList.stream().skip(k).mapToInt(Map.Entry::getValue).sum());
+            }});
+        }
+
+        return resultList;
     }
 }

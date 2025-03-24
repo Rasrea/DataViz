@@ -98,136 +98,25 @@ function getAxisLabels() {
 }
 
 
-
-
-
-
-
-
-/**
- * 获取 x轴 和 y 轴标签的数据
- * @param axisLabels
- * @param fileData
- * @returns {{labels: *, values: *[]}}
- */
-function getAxisData(axisLabels, fileData) {
-    // 读取 X 和 Y 轴标签
-    const xColName = axisLabels['xColName'];
-    const yColNames = axisLabels['yColNames'];
-
-    // 读取数据
-    const xData = fileData.map(row => row[xColName]);
-    const yData = yColNames.map(yColName => fileData.map(row => row[yColName]));
-
-    return {
-        'labels': xData,
-        'values': yData
-    };
-}
-
-/**
- * 对 axisData 进行检查并排序
- * @param axisData
- * @param chartConfig
- * @returns {{labels: *[], values: *[][]}}
- */
-function sortAxisData(axisData, chartConfig) {
-    // 合并 X 轴和 Y 轴数据
-    let rowAxisData = axisData.labels.map((value, index) => [value, ...axisData.values.map(arr => arr[index])]);
-
-    if (Array.isArray(axisData.labels) && axisData.labels.every(item => typeof item === 'number')) {
-        // 如果 X 轴数据是数值，则修改数据轴
-        chartConfig.xAxis.type = 'value';
-
-        // 根据 X 轴数据排序
-        rowAxisData.sort((a, b) => a[0] - b[0]);
-    }
-    return {
-        'labels': rowAxisData.map(row => row[0]),
-        'values': rowAxisData
-    }
-}
-
-/**
- * 将 axisValues 转换为适合绘图的格式
- * @param axisValues
- * @returns {*}
- */
-function splitAxisValues(axisValues) {
-    // 生成 rawData，相当于 Python 的列表推导式
-    const rawData = axisValues.map(item => item.slice(1).map(y => [item[0], y]));
-
-    // 转置 rawData（Python zip 逻辑）
-    return rawData[0].map((_, colIndex) => ({
-        data: rawData.map(row => row[colIndex])
-    }))
-}
-
 /**
  * 根据用户填写的表格更新图像配置信息
  */
 function updateChartConfigAfterProcessing() {
-    chart.getChartConfigAfterProcessing().title.text = document.getElementById('chartTitle').value;
-    chart.getChartConfigAfterProcessing().title.subtext = document.getElementById('chartExplain').value;
-    chart.getChartConfigAfterProcessing().xAxis.name = document.getElementById('xLabel').value;
-    chart.getChartConfigAfterProcessing().yAxis.name = document.getElementById('yLabel').value;
+    chart.getChartConfigAfterProcess().title.text = document.getElementById('chartTitle').value;
+    chart.getChartConfigAfterProcess().title.subtext = document.getElementById('chartExplain').value;
+    chart.getChartConfigAfterProcess().xAxis.name = document.getElementById('xLabel').value;
+    chart.getChartConfigAfterProcess().yAxis.name = document.getElementById('yLabel').value;
 }
 
 /**
  * 初始化 图表参数
  */
 function initChartConfig() {
-    chart.getChartConfigAfterProcessing().series.forEach((seriesItem, index) => {
+    chart.getChartConfigAfterProcess().series.forEach((seriesItem, index) => {
         seriesItem.name = chart.getAxisLabels()['yColNames'][index];
     }); // 将各个数据序列命名为对应的 Y 轴标签
 
     updateChartConfigAfterProcessing();
-}
-
-/**
- * 绘制图表
- * @returns {Promise<void>}
- */
-async function plotChart() {
-    populateFormWithSavedData([
-        'xData', 'yData', 'zData',
-        'chartTitle', 'chartExplain', 'xLabel', 'yLabel'
-    ])
-
-    // 将前端选择的坐标轴标签发送到后端
-    pullJSON('http://localhost:8080/api/chart/axisLabels', 'POST', getAxisLabels());
-    // 将前端选择的图表类型发送到后端
-    const chartType = document.getElementById('chartOptions').value
-    const isReadChartConfig = await fetch(`http://localhost:8080/api/chart/chartConfig?chartType=${chartType}`);
-    if (!isReadChartConfig.ok) {
-        throw new Error(`HTTP 错误! 状态: ${isReadChartConfig.status}`);
-    }
-
-
-    // 指定 绘图策略
-    if (chartType === 'LineChart') {
-        await fetch(`http://localhost:8080/api/chart/columnStrategy?columnStrategy=${PlotStrategy.MULTI_COLUMN}`);
-    }
-
-    const response = await fetch('http://localhost:8080/api/chart/chartConfigAfterProcess');
-    const data = await response.json();
-    console.log(data);
-    // console.log(response);
-
-
-    // <- delete
-    chart.setAxisLabels(getAxisLabels()); // 设置图表的坐标轴标签
-    const rawAxisData = getAxisData(chart.getAxisLabels(), jsonData.data) // 获取原始坐标轴数据
-    chart.setAxisData(sortAxisData(rawAxisData, chart.getChartConfig())); // 设置图表的坐标轴数据
-    chart.getAxisData().values = splitAxisValues(chart.getAxisData().values); // 设置图表的坐标轴数据
-
-
-    chart.setStrategy(new MultiColumnStrategy()); // 设置图表的绘图策略
-    chart.applyChartStyles(); // 设置图表的细节
-    initChartConfig(); // 初始化图表参数
-
-
-    chart.plotWithConfig(chart.getChartConfigAfterProcessing()); // 绘制图表
 }
 
 /**
@@ -286,6 +175,43 @@ function populateFormWithSavedData(elements) {
 }
 
 /**
+ * 绘制图表
+ * @returns {Promise<void>}
+ */
+async function plotChart() {
+    populateFormWithSavedData([
+        'xData', 'yData', 'zData',
+        'chartTitle', 'chartExplain', 'xLabel', 'yLabel'
+    ])
+
+    // 将前端选择的坐标轴标签发送到后端
+    pullJSON('http://localhost:8080/api/chart/axisLabels', 'POST', getAxisLabels());
+    // 将前端选择的图表类型发送到后端
+    const chartType = document.getElementById('chartOptions').value
+    const isReadChartConfig = await fetch(`http://localhost:8080/api/chart/chartConfig?chartType=${chartType}`);
+    if (!isReadChartConfig.ok) {
+        throw new Error(`HTTP 错误! 状态: ${isReadChartConfig.status}`);
+    }
+
+    // 指定 绘图策略
+    if (chartType === 'LineChart') {
+        await fetch(`http://localhost:8080/api/chart/columnStrategy?columnStrategy=${PlotStrategy.MULTI_COLUMN}`);
+    }
+
+    // 获取 后端的图表信息
+    fetch('http://localhost:8080/api/chart/chartConfigAfterProcess')
+        .then(response => response.json()).then(chartConfigAfterProcess => {
+            chart.setChartConfigAfterProcess(chartConfigAfterProcess);
+            chart.setAxisLabels(getAxisLabels());
+
+            initChartConfig(); // 初始化图表参数
+
+            chart.plotWithConfig(chart.getChartConfigAfterProcess()); // 绘制图表
+        }
+    );
+}
+
+/**
  * 页面加载时调用的初始化函数
  */
 window.onload = async function () {
@@ -300,30 +226,12 @@ window.onload = async function () {
     let response = await fetch('http://localhost:8080/data/fetch-csv');
     jsonData = await response.json();
 
-
-    // <-可以删除
-    chart.setChartType(document.getElementById('chartOptions').value); // 设置图表类型
-    response = await fetch(`plotCharts/configs/${chart.getChartType()}.json`)
-    chart.setChartConfig(await response.json());
-    // 可以删除->
-
-
     // 设置表单数据
     createSeriesLabel(jsonData['colTypes']['currentColType']);
 
     // 绘制图表
     await plotChart();
 }
-
-
-
-
-
-
-
-
-
-
 
 
 // 选择多个Y轴标签
@@ -381,16 +289,9 @@ document.getElementById('tab2').addEventListener('input', function () {
 });
 
 /**
- * 当 chartOptions 发生变化时，更新 图表类型 和 图表配置
+ * 当 chartOptions 发生变化时，重新绘制图表
  */
 document.getElementById('chartOptions').addEventListener('change', async function () {
-    // 获取图表类型
-    chart.setChartType(this.value);
-
-    // 获取图表配置
-    let response = await fetch(`plotCharts/configs/${chart.getChartType()}.json`);
-    chart.setChartConfig(await response.json());
-
     // 绘制图表
     await plotChart();
 });

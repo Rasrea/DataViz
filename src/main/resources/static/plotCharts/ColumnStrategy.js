@@ -22,6 +22,17 @@ class SingleColumnStrategy extends ColumnStrategy {
     }
 }
 
+// 绘制多列数据
+class MultiColumnStrategy extends ColumnStrategy {
+    applyDataFormat(data) {
+        return {
+            xAxis: {type: 'category'},
+            yAxis: {},
+            series: data.values
+        };
+    }
+}
+
 // 双列数据：适用于双坐标轴
 class DoubleColumnStrategy extends ColumnStrategy {
     applyDataFormat(data) {
@@ -32,17 +43,6 @@ class DoubleColumnStrategy extends ColumnStrategy {
                 {data: data.values}
             ]
         }
-    }
-}
-
-// 绘制多列数据
-class MultiColumnStrategy extends ColumnStrategy {
-    applyDataFormat(data) {
-        return {
-            xAxis: {type: 'category'},
-            yAxis: {},
-            series: data.values
-        };
     }
 }
 

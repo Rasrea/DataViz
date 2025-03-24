@@ -8,5 +8,5 @@ import java.util.Map;
 // 统一绘图策略的基类
 public abstract class ColumnStrategy {
     // 设计数据表现形式
-    public abstract JsonNode designDataForm(List<Map<String, List<Object>>> chartData);
+    public abstract JsonNode designDataForm(Object chartData);
 }
