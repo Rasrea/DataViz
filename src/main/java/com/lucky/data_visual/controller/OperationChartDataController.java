@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +33,10 @@ public class OperationChartDataController {
         this.operateJsonResult = operateJsonResult;
     }
 
+    @Operation(
+            summary = "读取指定列的数据",
+            description = "读取指定列的数据"
+    )
     @GetMapping("/readColData")
     public ResponseEntity<String> readColData(@RequestParam String colName) {
         colData = chartServer.readLineData(operateJsonResult.getData(), colName);
@@ -43,8 +48,8 @@ public class OperationChartDataController {
             description = "获取指定列的空值和非空值的数量"
     )
     @GetMapping("/emptyAndNonEmptyData")
-    public List<Map<String, Object>> getEmptyAndNonEmptyData(@RequestParam String colName) {
-//        colData = chartServer.readLineData(operateJsonResult.getData(), colName);
+    public List<Map<String, Object>> getEmptyAndNonEmptyData() {
+
         return chartServer.countEmptyAndNonEmptyData(colData);
     }
 
@@ -54,7 +59,6 @@ public class OperationChartDataController {
     )
     @GetMapping("/topKFrequency")
     public List<Map<String, Object>> getTopKFrequency(@RequestParam int K) {
-//        List<Object> colData = chartServer.readLineData(operateJsonResult.getData(), colName);
         return chartServer.countTopKFrequency(colData, K);
     }
 
@@ -64,13 +68,31 @@ public class OperationChartDataController {
     )
     @GetMapping("/singleLabelsAndValues")
     public List<Object> getSingleLabelsAndValues() {
-//        List<Object> colData = chartServer.readLineData(operateJsonResult.getData(), colName);
         return chartServer.convertSingleColumnDataToLabelsAndValues(colData);
     }
 
-//    @GetMapping("/quartilesAndWhisker")
-//    public List<Double> getQuartilesAndWhisker(@RequestParam String colName) {
-//        List<Object> colData = chartServer.readLineData(operateJsonResult.getData(), colName);
-//        return chartServer.calculateQuartilesAndWhisker(colData);
-//    }
+    @Operation(
+            summary = "获取四分位数，上下须和离群点",
+            description = "获取指定列的四分位数，上下须和离群点"
+    )
+    @GetMapping("/quartilesAndWhisker")
+    public Map<String, List<Double>> getQuartilesAndWhisker(@RequestParam boolean isGetOutliers) {
+        // 将数据列转换为 Double 类型
+        List<Double> numbers = colData.stream()
+                .filter(e -> e instanceof Number)
+                .map(e -> (Number) e)
+                .map(Number::doubleValue)
+                .toList();
+
+        // 计算 四分位数 和 离群点
+        Map<String, List<Double>> result = new HashMap<>();
+        List<Double> quartilesAndWhiskers = chartServer.calculateQuartilesAndWhisker(numbers);
+        result.put("quartilesAndWhisker", quartilesAndWhiskers);
+
+        if (isGetOutliers) {
+            List<Double> outliers = chartServer.calculateOutliers(numbers, quartilesAndWhiskers.get(0), quartilesAndWhiskers.get(quartilesAndWhiskers.size() - 1));
+            result.put("outliers", outliers);
+        }
+        return result;
+    }
 }

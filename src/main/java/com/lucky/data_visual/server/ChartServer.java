@@ -7,8 +7,11 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.lucky.data_visual.model.Chart;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class ChartServer {
@@ -169,7 +172,7 @@ public class ChartServer {
         // 统计空值数量
         double nullCount = 0;
         for (Object data : colData) {
-            if (data.equals("")) {
+            if (data == null || data.equals("")) {
                 nullCount++;
             }
         }
@@ -227,6 +230,7 @@ public class ChartServer {
 
     /**
      * 将单列数据转换为标签和值
+     *
      * @param colData 单列数据
      * @return [[1, values1], [2, values2], ...]
      */
@@ -243,37 +247,41 @@ public class ChartServer {
 
     /**
      * 计算四分位数和上下须
-     * @param colData 数据列
+     *
+     * @param numbers 数据列
      * @return [Q1, Q2, Q3, lowerWhisker, upperWhisker]
      */
-    public List<Double> calculateQuartilesAndWhisker(List<Object> colData) {
+    public List<Double> calculateQuartilesAndWhisker(List<Double> numbers) {
         // 将数据列转换为 Double 类型 并排序
-        List<Double> numbers = colData.stream()
-                .filter(e -> e instanceof Number)
-                .map(e -> (Number) e)
-                .map(Number::doubleValue)
+        List<Double> sortedNumbers = numbers.stream()
                 .sorted()
                 .toList();
 
         // 计算四分位数
-        double Q1 = calculateQuartile(numbers, 25);
-        double Q2 = calculateQuartile(numbers, 50);
-        double Q3 = calculateQuartile(numbers, 75);
+        double Q1 = calculateQuartile(sortedNumbers, 25);
+        double Q2 = calculateQuartile(sortedNumbers, 50);
+        double Q3 = calculateQuartile(sortedNumbers, 75);
 
-        // 计算四分位距
+        // 计算 四分位距 和 上下须
         double IQR = Q3 - Q1;
+        double lowerWhisker = Math.max(Q1 - 1.5 * IQR, sortedNumbers.get(0));
+        double upperWhisker = Math.min(Q3 + 1.5 * IQR, sortedNumbers.get(sortedNumbers.size() - 1));
 
-        // 计算上下须
-        double lowerWhisker = Q1 - 1.5 * IQR;
-        double upperWhisker = Q3 + 1.5 * IQR;
-
-        return List.of(Q1, Q2, Q3, lowerWhisker, upperWhisker);
+        return Stream.of(lowerWhisker, Q1, Q2, Q3, upperWhisker)
+                .map(e -> BigDecimal.valueOf(e).setScale(2, RoundingMode.HALF_UP).doubleValue())
+                .collect(Collectors.toList());
     }
 
+    public List<Double> calculateOutliers(List<Double> numbers, Double lowerWhisker, Double upperWhisker) {
+        return numbers.stream()
+                .filter(e -> e < lowerWhisker || e > upperWhisker)
+                .collect(Collectors.toList());
+    }
 
 
     /**
      * 计算四分位数
+     *
      * @param sortedData 排序后的数据
      * @param percentile 百分位数
      * @return 四分位数

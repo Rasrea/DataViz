@@ -18,6 +18,8 @@
     "yAxis": {
         "type": "value",
         "name": "Value",
+        "min": "dataMin",
+        "max": "dataMax",
         "nameTextStyle": {
             "fontWeight": "bold",
             "fontSize": 14
