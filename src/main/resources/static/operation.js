@@ -10,6 +10,9 @@ function createCharts(data, colName) {
     const colData = data["data"][colName];
     const currentColType = data["colTypes"]["currentColType"][colName];
 
+    // 将 列名 传入后端
+
+
     // 创建统计空值个数的饼图
     fetch('plotCharts/configs/PieChart.json')
         .then(response => response.json())
@@ -33,7 +36,7 @@ function createCharts(data, colName) {
     fetch('plotCharts/configs/PieChart.json')
         .then(response => response.json())
         .then(pieChartElements => {
-            fetch(`http://localhost:8080/api/operation/topKFrequency?colName=${colName}&K=5`)
+            fetch(`http://localhost:8080/api/operation/topKFrequency?K=5`)
                 .then(response => response.json())
                 .then(data => {
                     pieChartElements.series[0].radius = ["0%", "65%"]; // 修改饼图大小
@@ -49,18 +52,26 @@ function createCharts(data, colName) {
 
     if (currentColType === "Number") {
         // 绘制散点图
-        // fetch('plotCharts/configs/ScatterChart.json')
-        //     .then(response => response.json())
-        //     .then(scatterChartElements => {
-        //         scatterChartElements.title.text = `${colName} 散点分析`;
-        //         scatterChartElements.title.subtext = '';
-        //         scatterChartElements.xAxis.name = 'Index';
-        //         scatterChartElements.yAxis.name = `${colName}`;
-        //         scatterChartElements.legend.show = false;
-        //         scatterChartElements.tooltip.formatter = `数据1：<br/>Index: {b0}<br/>${colName}: {c0}`;
-        //         const chart = new Chart('chart3', chartServer.convertSingleColumnDataToLabelsAndValues(colData), scatterChartElements, new DoubleColumnStrategy());
-        //         chart.plot();
-        //     })
+        fetch('plotCharts/configs/ScatterChart.json')
+            .then(response => response.json())
+            .then(scatterChartElements => {
+                fetch(`http://localhost:8080/api/operation/singleLabelsAndValues`)
+                    .then(response => response.json())
+                    .then(data => {
+                        scatterChartElements.title.text = `${colName} 散点分析`;
+                        scatterChartElements.title.subtext = '';
+                        scatterChartElements.xAxis.name = 'Index';
+                        scatterChartElements.yAxis.name = `${colName}`;
+                        scatterChartElements.legend.show = false;
+                        scatterChartElements.tooltip.formatter = `数据点：<br/>Index: {b0}<br/>${colName}: {c0}`;
+                        scatterChartElements.series[0].data = data;
+
+                        console.log(scatterChartElements);
+
+                        chart.setContainerId('chart3');
+                        chart.plotWithConfig(scatterChartElements);
+                    })
+            })
 
         // 绘制箱线图
         // fetch('plotCharts/configs/BoxChart.json')
@@ -82,6 +93,7 @@ function createCharts(data, colName) {
         //         };
         //         boxChartElements.title.text = `${colName} 箱线分析`;
         //         boxChartElements.series[0].markLine.data[0].yAxis = boxData[2];
+        //
         //         boxChartElements.series[1].data = outliers.map(value => ['数据集', value]);
         //         const boxChart = new Chart('chart2', null, boxChartElements, new NullColumnStrategy());
         //         boxChart.plot();
@@ -92,7 +104,7 @@ function createCharts(data, colName) {
         fetch('plotCharts/configs/WordCloudChart.json')
             .then(response => response.json())
             .then(wordCloudChartElements => {
-                fetch(`http://localhost:8080/api/operation/topKFrequency?colName=${colName}&K=1000`)
+                fetch(`http://localhost:8080/api/operation/topKFrequency?K=1000`)
                     .then(response => response.json())
                     .then(data => {
                         wordCloudChartElements.series[0].textStyle.color = function () { // 随机生成颜色
@@ -108,16 +120,25 @@ function createCharts(data, colName) {
             .catch(error => console.error('配置文件有误:', error));
 
         // 绘制条形图
-        // fetch('plotCharts/configs/BarChart.json')
-        //     .then(response => response.json())
-        //     .then(barChartElements => {
-        //         barChartElements.title.text = `${colName} 条形分析`;
-        //         barChartElements.title.subtext = '';
-        //         barChartElements.xAxis.name = `${colName}`;
-        //         barChartElements.yAxis.name = 'Value';
-        //         const chart = new Chart('chart3', chartServer.topKWordFrequency(colData, 10), barChartElements, new DoubleColumnStrategy());
-        //         chart.plot();
-        //     })
+        fetch('plotCharts/configs/BarChart.json')
+            .then(response => response.json())
+            .then(barChartElements => {
+                fetch(`http://localhost:8080/api/operation/topKFrequency?K=10`)
+                    .then(response => response.json())
+                    .then(data => {
+                        barChartElements.title.text = `${colName} 条形分析`;
+                        barChartElements.title.subtext = '';
+                        barChartElements.xAxis.name = `${colName}`;
+                        barChartElements.xAxis.data = data.map(item => item.name);
+                        barChartElements.yAxis.name = 'Value';
+                        barChartElements.series[0].data = data;
+
+                        console.log(barChartElements);
+
+                        chart.setContainerId('chart3');
+                        chart.plotWithConfig(barChartElements);
+                    })
+            })
     } else {
         displayChartText('chart2Text', '图二：<br>Number类型绘制箱线图;<br>String类型绘制词云图;<br>Date类型同String;<br>错误列不显示;');
         displayChartText('chart3Text', '图三：<br>Number类型绘制散点图;<br>String类型绘制条形图;<br>Date类型同String;<br>错误列不显示;');

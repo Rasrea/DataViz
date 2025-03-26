@@ -224,4 +224,62 @@ public class ChartServer {
 
         return resultList;
     }
+
+    /**
+     * 将单列数据转换为标签和值
+     * @param colData 单列数据
+     * @return [[1, values1], [2, values2], ...]
+     */
+    public List<Object> convertSingleColumnDataToLabelsAndValues(List<Object> colData) {
+        List<Object> data = new ArrayList<>();
+        for (int i = 0; i < colData.size(); i++) {
+            List<Object> dataCouple = new ArrayList<>();
+            dataCouple.add(i + 1);
+            dataCouple.add(colData.get(i));
+            data.add(dataCouple);
+        }
+        return data;
+    }
+
+    /**
+     * 计算四分位数和上下须
+     * @param colData 数据列
+     * @return [Q1, Q2, Q3, lowerWhisker, upperWhisker]
+     */
+    public List<Double> calculateQuartilesAndWhisker(List<Object> colData) {
+        // 将数据列转换为 Double 类型 并排序
+        List<Double> numbers = colData.stream()
+                .filter(e -> e instanceof Number)
+                .map(e -> (Number) e)
+                .map(Number::doubleValue)
+                .sorted()
+                .toList();
+
+        // 计算四分位数
+        double Q1 = calculateQuartile(numbers, 25);
+        double Q2 = calculateQuartile(numbers, 50);
+        double Q3 = calculateQuartile(numbers, 75);
+
+        // 计算四分位距
+        double IQR = Q3 - Q1;
+
+        // 计算上下须
+        double lowerWhisker = Q1 - 1.5 * IQR;
+        double upperWhisker = Q3 + 1.5 * IQR;
+
+        return List.of(Q1, Q2, Q3, lowerWhisker, upperWhisker);
+    }
+
+
+
+    /**
+     * 计算四分位数
+     * @param sortedData 排序后的数据
+     * @param percentile 百分位数
+     * @return 四分位数
+     */
+    private static double calculateQuartile(List<Double> sortedData, double percentile) {
+        int index = (int) Math.ceil(percentile / 100.0 * sortedData.size()) - 1;
+        return sortedData.get(index);
+    }
 }
