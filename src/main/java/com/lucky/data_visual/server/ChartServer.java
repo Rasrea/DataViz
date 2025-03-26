@@ -272,6 +272,13 @@ public class ChartServer {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * 计算离群点
+     * @param numbers 数据序列
+     * @param lowerWhisker 上须
+     * @param upperWhisker 下须
+     * @return [1, 2, 3, ...]
+     */
     public List<Double> calculateOutliers(List<Double> numbers, Double lowerWhisker, Double upperWhisker) {
         return numbers.stream()
                 .filter(e -> e < lowerWhisker || e > upperWhisker)
@@ -290,4 +297,5 @@ public class ChartServer {
         int index = (int) Math.ceil(percentile / 100.0 * sortedData.size()) - 1;
         return sortedData.get(index);
     }
+
 }
