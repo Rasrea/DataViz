@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.lucky.data_visual.model.Chart;
+import com.lucky.data_visual.model.columnStrategy.MultiColumnStrategy;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -89,12 +90,12 @@ public class ChartServer {
      * 处理图表数据，返回数据类型：
      * data: [[[x1, y11], [x1, y12], ...], [[x1, y21], [x1, y22], ...], ...]
      */
-    public List<Map<String, List<Object>>> processedChartData(Map<String, Object> sortedOrGroupAxisData) {
+    public List<Map<String, Object>> processedChartData(Map<String, Object> sortedOrGroupAxisData) {
         List<Object> labels = (List<Object>) sortedOrGroupAxisData.get("labels");
         List<List<Object>> values = (List<List<Object>>) sortedOrGroupAxisData.get("values");
         int yAxisSize = values.get(0).size(); // Y 轴数据列数
 
-        List<Map<String, List<Object>>> result = new ArrayList<>();
+        List<Map<String, Object>> result = new ArrayList<>();
         for (int i = 0; i < yAxisSize; i++) {
             List<Object> yAxisData = new ArrayList<>();
             for (int j = 0; j < values.size(); j++) {
@@ -103,7 +104,7 @@ public class ChartServer {
                 dataCouple.add(values.get(j).get(i));
                 yAxisData.add(dataCouple);
             }
-            Map<String, List<Object>> map = new HashMap<>();
+            Map<String, Object> map = new HashMap<>();
             map.put("data", yAxisData); // 一列数据
             result.add(map);
         }
@@ -119,7 +120,12 @@ public class ChartServer {
     public JsonNode insertDataIntoChartConfig(Chart chart) {
         JsonNode chartConfigAfterProcess = chart.getColumnStrategy().designDataForm(chart.getProcessedChartData());
         JsonNode chartConfig = chart.getChartConfig(); // 原始图表配置信息
-        String[] elementConfig = {"title", "xAxis", "yAxis", "series", "tooltip", "legend"};
+
+        // 根据绘图策略设置不同的 elementConfig
+        String[] elementConfig = {"title", "series", "tooltip", "legend"};
+        if (chart.getColumnStrategy().getClass() ==  MultiColumnStrategy.class) {
+            elementConfig = new String[]{"title", "xAxis", "yAxis", "series", "tooltip", "legend"};
+        }
 
         for (String element : elementConfig) {
             if (chartConfig.has(element)) {

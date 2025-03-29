@@ -2,12 +2,22 @@
 let chart = new Chart('chartContainer');
 let jsonData // 后端数据
 
-const PlotStrategy = {
+// 设置绘图策略
+const STRATEGY = {
     'SINGLE_COLUMN': 'SINGLE_COLUMN',
     'DOUBLE_COLUMN': 'DOUBLE_COLUMN',
     'MULTI_COLUMN': 'MULTI_COLUMN',
     'NULL_COLUMN': 'NULL_COLUMN'
 }
+
+// 设置图表对应的绘图策略
+const CHART_TYPE = {
+    'LineChart': STRATEGY.MULTI_COLUMN,
+    'ScatterChart': STRATEGY.MULTI_COLUMN,
+    'BarChart': STRATEGY.MULTI_COLUMN,
+    'PieChart': STRATEGY.SINGLE_COLUMN,
+}
+
 
 /**
  * 将 JSON 数据发送到后端
@@ -40,23 +50,6 @@ async function pullJSON(url, method = 'POST', data = null) {
 }
 
 /**
- * 创建数据列选项
- * @param currentColType
- */
-function createSeriesLabel(currentColType) {
-    const labelID = ['xData', 'yData', 'zData'];
-    labelID.forEach(elementID => {
-        const labelSelect = document.getElementById(elementID);
-        if (elementID === 'yData') {
-            labelSelect.innerHTML = `<option value="无法选中" class="String-label" style="font-family: '黑体', serif">可选择多个</option>` +
-                Object.entries(currentColType).map(([key, value]) => `<option value="${key}" class="${value}-label">${key}</option>`).join('');
-        } else {
-            labelSelect.innerHTML = Object.entries(currentColType).map(([key, value]) => `<option value="${key}" class="${value}-label">${key}</option>`).join('');
-        }
-    });
-}
-
-/**
  * 显示选项卡
  * @param tabNumber
  */
@@ -72,51 +65,6 @@ function showTab(tabNumber) {
     // 显示选择的tab内容和标签
     document.getElementById('tab' + tabNumber).classList.add('active');
     document.getElementById('scene' + tabNumber).classList.add('active');
-}
-
-/**
- * 获取 x轴 和 y 轴标签的列表
- * @returns {{xColName: *, yColNames: *[]}}
- */
-function getAxisLabels() {
-    // 获取所有 selected-y-item 元素
-    let selectedItems = document.querySelectorAll('.selected-y-item');
-
-    // 创建存储 x轴 和 y 轴标签的列表
-    const xColName = document.getElementById('xData').value;
-    let yColNames = [];
-
-    // 遍历每个元素，获取 data-value 属性值并放入列表中
-    selectedItems.forEach(item => {
-        yColNames.push(item.getAttribute('data-value'));
-    });
-
-    return {
-        'xColName': xColName,
-        'yColNames': yColNames
-    }
-}
-
-
-/**
- * 根据用户填写的表格更新图像配置信息
- */
-function updateChartConfigAfterProcessing() {
-    chart.getChartConfigAfterProcess().title.text = document.getElementById('chartTitle').value;
-    chart.getChartConfigAfterProcess().title.subtext = document.getElementById('chartExplain').value;
-    chart.getChartConfigAfterProcess().xAxis.name = document.getElementById('xLabel').value;
-    chart.getChartConfigAfterProcess().yAxis.name = document.getElementById('yLabel').value;
-}
-
-/**
- * 初始化 图表参数
- */
-function initChartConfig() {
-    chart.getChartConfigAfterProcess().series.forEach((seriesItem, index) => {
-        seriesItem.name = chart.getAxisLabels()['yColNames'][index];
-    }); // 将各个数据序列命名为对应的 Y 轴标签
-
-    updateChartConfigAfterProcessing();
 }
 
 /**
@@ -147,6 +95,79 @@ function addYDataItem(container, value, text) {
 }
 
 /**
+ * 为指定的元素添加事件监听器，并在事件发生时更新图表
+ * @param {string[]} elementIds - 元素ID数组
+ * @param {string} eventType - 事件类型
+ */
+function addPlotChartEventListeners(elementIds, eventType) {
+    elementIds.forEach(elementId => {
+        document.getElementById(elementId).addEventListener(eventType, function () {
+            plotChart();
+        });
+    });
+}
+
+
+/**
+ * 创建数据列选项
+ * @param currentColType
+ */
+function createSeriesLabel(currentColType) {
+    const labelID = ['xData', 'yData', 'zData'];
+    labelID.forEach(elementID => {
+        const labelSelect = document.getElementById(elementID);
+        if (elementID === 'yData') {
+            labelSelect.innerHTML = `<option value="无法选中" class="String-label" style="font-family: '黑体', serif">可选择多个</option>` +
+                Object.entries(currentColType).map(([key, value]) => `<option value="${key}" class="${value}-label">${key}</option>`).join('');
+        } else {
+            labelSelect.innerHTML = Object.entries(currentColType).map(([key, value]) => `<option value="${key}" class="${value}-label">${key}</option>`).join('');
+        }
+    });
+}
+
+/**
+ * 获取 x轴 和 y 轴标签的列表
+ * @returns {{xColName: *, yColNames: *[]}}
+ */
+function getAxisLabels() {
+    // 获取所有 selected-y-item 元素
+    let selectedItems = document.querySelectorAll('.selected-y-item');
+
+    // 创建存储 x轴 和 y 轴标签的列表
+    const xColName = document.getElementById('xData').value;
+    let yColNames = [];
+
+    // 遍历每个元素，获取 data-value 属性值并放入列表中
+    selectedItems.forEach(item => {
+        yColNames.push(item.getAttribute('data-value'));
+    });
+
+    return {
+        'xColName': xColName,
+        'yColNames': yColNames
+    }
+}
+
+/**
+ * 初始化 图表表单配置
+ */
+function initChartConfig() {
+    // 将各个数据序列命名为对应的 Y 轴标签
+    chart.getChartConfigAfterProcess().series.forEach((seriesItem, index) => {
+        seriesItem.name = chart.getAxisLabels()['yColNames'][index];
+    });
+
+    // 根据用户填写的表格更新图像配置信息
+    if (CHART_TYPE[chart.getChartType()] === STRATEGY.MULTI_COLUMN) {
+        chart.getChartConfigAfterProcess().xAxis.name = document.getElementById('xLabel').value;
+        chart.getChartConfigAfterProcess().yAxis.name = document.getElementById('yLabel').value;
+    }
+
+    chart.getChartConfigAfterProcess().title.text = document.getElementById('chartTitle').value;
+    chart.getChartConfigAfterProcess().title.subtext = document.getElementById('chartExplain').value;
+}
+
+/**
  * 为 elements 中的元素添加 eventType 事件监听器，当事件发生时将元素的值保存到 sessionStorage
  * @param elements
  * @param eventType
@@ -168,8 +189,6 @@ function populateFormWithSavedData(elements) {
         const savedValue = sessionStorage.getItem(elementId);
         if (savedValue) {
             document.getElementById(elementId).value = savedValue;
-
-            console.log(savedValue);
         }
     });
 }
@@ -182,30 +201,24 @@ async function plotChart() {
     populateFormWithSavedData([
         'xData', 'yData', 'zData',
         'chartTitle', 'chartExplain', 'xLabel', 'yLabel'
+
     ])
 
-    // 将前端选择的坐标轴标签发送到后端
-    pullJSON('http://localhost:8080/api/chart/axisLabels', 'POST', getAxisLabels());
-    // 将前端选择的图表类型发送到后端
+    // 将 图表类型 和 绘图策略 传给后端
     const chartType = document.getElementById('chartOptions').value
-    const isReadChartConfig = await fetch(`http://localhost:8080/api/chart/chartConfig?chartType=${chartType}`);
-    if (!isReadChartConfig.ok) {
-        throw new Error(`HTTP 错误! 状态: ${isReadChartConfig.status}`);
-    }
+    chart.setChartType(chartType);
+    await fetch(`http://localhost:8080/api/chart/chartConfig?chartType=${chartType}`);
+    await fetch(`http://localhost:8080/api/chart/columnStrategy?columnStrategy=${CHART_TYPE[chartType]}`);
 
-    // 指定 绘图策略
-    if (chartType === 'LineChart') {
-        await fetch(`http://localhost:8080/api/chart/columnStrategy?columnStrategy=${PlotStrategy.MULTI_COLUMN}`);
-    }
+    // 将前端选择的 坐标轴标签 发送到后端
+    await pullJSON('http://localhost:8080/api/chart/axisLabels', 'POST', getAxisLabels());
 
-    // 获取 后端的图表信息
+    // 获取后端的 图表信息
     fetch('http://localhost:8080/api/chart/chartConfigAfterProcess')
         .then(response => response.json()).then(chartConfigAfterProcess => {
             chart.setChartConfigAfterProcess(chartConfigAfterProcess);
             chart.setAxisLabels(getAxisLabels());
-
             initChartConfig(); // 初始化图表参数
-
             chart.plotWithConfig(chart.getChartConfigAfterProcess()); // 绘制图表
         }
     );
@@ -261,6 +274,12 @@ document.getElementById("yData").addEventListener("change", function () {
     sessionStorage.setItem('selectedYData', JSON.stringify(savedYData));
 });
 
+
+// 为 tab1, tab2 和 chartOptions 添加事件监听器
+addPlotChartEventListeners(['tab1', 'chartOptions'], 'change');
+addPlotChartEventListeners(['tab2'], 'input');
+
+// 为指定的元素添加事件监听器，并将值保存到 sessionStorage
 addEventListenersToSaveElements(
     [
         'chartTitle', 'chartExplain', 'xLabel', 'yLabel',
@@ -273,25 +292,3 @@ addEventListenersToSaveElements(
     ],
     'change' // 适用于 下拉框
 )
-
-/**
- * 当 tab1 表单发生变化时更新图表
- */
-document.getElementById('tab1').addEventListener('change', function () {
-    plotChart().then(r => r);
-})
-
-/**
- * 当 tab2 中的表单元素发生变化时，更新图表
- */
-document.getElementById('tab2').addEventListener('input', function () {
-    plotChart().then(r => r);
-});
-
-/**
- * 当 chartOptions 发生变化时，重新绘制图表
- */
-document.getElementById('chartOptions').addEventListener('change', async function () {
-    // 绘制图表
-    await plotChart();
-});
