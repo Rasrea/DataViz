@@ -5,6 +5,7 @@ class Chart {
         this.axisLabels = null; // 坐标轴标签
         this.chartConfigAfterProcess = null; // 处理后的图表配置
         this.eChart = null; // ECharts 实例
+        this.chartType = null; // 图表类型
     }
 
     // 初始化 ECharts 实例
@@ -48,5 +49,13 @@ class Chart {
 
     setAxisLabels(axisLabels) {
         this.axisLabels = axisLabels;
+    }
+
+    getChartType() {
+        return this.chartType;
+    }
+
+    setChartType(chartType) {
+        this.chartType = chartType;
     }
 }

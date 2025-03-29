@@ -16,7 +16,7 @@ public class Chart {
     private Map<String, List<String>> axisLabels; // x, y 轴标签名
     private String chartType; // 图表类型
     private Map<String, Object> rawChartData; // 原始数据
-    private List<Map<String, List<Object>>> processedChartData; // 处理后的数据
+    private List<Map<String, Object>> processedChartData; // 处理后的数据
     private ColumnStrategy columnStrategy; // 列策略
 
     // Getter and Setter
@@ -60,11 +60,11 @@ public class Chart {
         this.rawChartData = rawChartData;
     }
 
-    public List<Map<String, List<Object>>> getProcessedChartData() {
+    public List<Map<String, Object>> getProcessedChartData() {
         return processedChartData;
     }
 
-    public void setProcessedChartData(List<Map<String, List<Object>>> processedChartData) {
+    public void setProcessedChartData(List<Map<String, Object>> processedChartData) {
         this.processedChartData = processedChartData;
     }
 

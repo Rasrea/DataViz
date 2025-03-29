@@ -1,32 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>API 测试</title>
+    <title>简单饼图示例</title>
+    <!-- 引入 ECharts 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 </head>
 <body>
-<h1>API 测试</h1>
-<label for="chartType">图表类型:</label>
-<input type="text" id="chartType" name="chartType">
-<button onclick="testApi()">测试 API</button>
-<pre id="result"></pre>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 600px; height: 400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的 DOM，初始化 ECharts 实例
+        var myChart = echarts.init(document.getElementById('main'));
 
-<script>
-    async function testApi() {
-        const chartType = document.getElementById('chartType').value;
-        const resultElement = document.getElementById('result');
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '某站点用户访问来源',
+                subtext: '纯属虚构',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left'
+            },
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        {value: 1048, name: '搜索引擎'},
+                        {value: 735, name: '直接访问'},
+                        {value: 580, name: '邮件营销'},
+                        {value: 484, name: '联盟广告'},
+                        {value: 300, name: '视频广告'}
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
 
-        try {
-            const response = await fetch(`http://localhost:8080/api/chart/chartConfig?chartType=LineChart`);
-            if (!response.ok) {
-                throw new Error(`HTTP 错误! 状态: ${response.status}`);
-            }
-            const data = await response.json();
-            resultElement.textContent = JSON.stringify(data, null, 2);
-        } catch (error) {
-            resultElement.textContent = `错误: ${error.message}`;
-        }
-    }
-</script>
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
 </body>
 </html>

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import java.util.List;
 import java.util.Map;
 
 public class SingleColumnStrategy extends ColumnStrategy{
@@ -16,9 +17,9 @@ public class SingleColumnStrategy extends ColumnStrategy{
     @Override
     public JsonNode designDataForm(Object objectChartData) {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, Double> chartData = (Map<String, Double>) objectChartData;
+        List<Map<String, Object>> chartData = (List<Map<String, Object>>) objectChartData;
         ObjectNode jsonNodes = mapper.createObjectNode();
-        jsonNodes.set("data", mapper.valueToTree(chartData));
+        jsonNodes.set("series", mapper.valueToTree(chartData));
         return jsonNodes;
     }
 }
