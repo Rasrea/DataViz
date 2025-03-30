@@ -61,12 +61,31 @@ DataViz 是一个基于 Spring Boot 和前端技术的可视化数据平台，�
 
 ![可视化数据](images/visualize.png)
 
-## 🎯 5. 未来规划
+## 🏗️ 5. 项目结构
+
+```
+📂 src
+├── 📂 config              # ⚙️ 存放配置文件（JSON配置等）  
+├── 📂 controller          # 🎮 处理前端请求的控制器类  
+├── 📂 enums               # 🔢 存放枚举类（如数据列策略名）  
+├── 📂 interfaces          # 🔌 定义文件处理相关的接口类  
+├── 📂 model               # 🏗️ 数据模型类，定义数据结构  
+├── 📂 server              # 🖥️ 业务逻辑处理的服务类  
+├── 📜 MyApplication.java  # 🚀 Spring Boot 启动类
+
+📂 resources
+├── 📂 python-script       # 🐍 Python 脚本，进行数据预处理与可视化  
+├── 📂 sampleData          # 📊 系统自带的样本数据  
+├── 📂 static              # 🎨 前端静态资源（HTML、CSS、JavaScript）  
+├── 📜 application.yml     # ⚙️ Spring Boot 配置文件  
+``` 
+
+## 🎯 6. 未来规划
 - 🚀 **完善数据可视化功能**，增加多种图表类型。
 - 🎨 **优化用户体验**，提升页面交互效果。
 - 🔄 **支持更多数据格式**，如 JSON、SQL 数据库导入。
 
-## 💻 6. 本地运行指南
+## 💻 7. 本地运行指南
 ### ⚙️ 环境要求
 - ☕ JDK 17 及以上
 - 🗄 MySQL 数据库
@@ -90,9 +109,9 @@ DataViz 是一个基于 Spring Boot 和前端技术的可视化数据平台，�
 5. **🌐 访问网站**
    打开浏览器，访问 `http://localhost:63342/data-visual/static/DataViz.html`。
 
-## 🤝 7. 贡献指南
+## 🤝 8. 贡献指南
 欢迎贡献代码！请提交 Pull Request，或者在 Issues 反馈 Bug 和建议。作为一名水大学生，我会尽快回复🤥。
 
-## 📜 8. 许可证
+## 📜 9. 许可证
 本项目遵循 MIT 许可证，详细信息请查看 LICENSE 文件。
 
