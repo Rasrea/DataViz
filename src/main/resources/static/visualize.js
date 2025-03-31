@@ -149,25 +149,6 @@ function getAxisLabels() {
 }
 
 /**
- * 初始化 图表表单配置
- */
-function initChartConfig() {
-    // 将各个数据序列命名为对应的 Y 轴标签
-    chart.getChartConfigAfterProcess().series.forEach((seriesItem, index) => {
-        seriesItem.name = chart.getAxisLabels()['yColNames'][index];
-    });
-
-    // 根据用户填写的表格更新图像配置信息
-    if (CHART_TYPE[chart.getChartType()] === STRATEGY.MULTI_COLUMN) {
-        chart.getChartConfigAfterProcess().xAxis.name = document.getElementById('xLabel').value;
-        chart.getChartConfigAfterProcess().yAxis.name = document.getElementById('yLabel').value;
-    }
-
-    chart.getChartConfigAfterProcess().title.text = document.getElementById('chartTitle').value;
-    chart.getChartConfigAfterProcess().title.subtext = document.getElementById('chartExplain').value;
-}
-
-/**
  * 为 elements 中的元素添加 eventType 事件监听器，当事件发生时将元素的值保存到 sessionStorage
  * @param elements
  * @param eventType
@@ -194,15 +175,43 @@ function populateFormWithSavedData(elements) {
 }
 
 /**
+ * 初始化 图表表单配置
+ */
+function initChartConfig() {
+    // tab2
+    chart.getChartConfigAfterProcess().series.forEach((seriesItem, index) => {
+        // 将各个数据序列命名为对应的 Y 轴标签
+        seriesItem.name = chart.getAxisLabels()['yColNames'][index];
+    });
+
+    // 根据用户填写的表格更新图像配置信息
+    if (CHART_TYPE[chart.getChartType()] === STRATEGY.MULTI_COLUMN) {
+        chart.getChartConfigAfterProcess().xAxis.name = document.getElementById('xLabel').value;
+        chart.getChartConfigAfterProcess().yAxis.name = document.getElementById('yLabel').value;
+        chart.getChartConfigAfterProcess().xAxis.nameTextStyle.fontSize = document.getElementById('xLabelFontSize').value;
+        chart.getChartConfigAfterProcess().yAxis.nameTextStyle.fontSize = document.getElementById('yLabelFontSize').value;
+    }
+    chart.getChartConfigAfterProcess().title.text = document.getElementById('chartTitle').value;
+    chart.getChartConfigAfterProcess().title.subtext = document.getElementById('chartExplain').value;
+
+
+    // tab3
+    chart.getChartConfigAfterProcess().title.textStyle.fontSize = document.getElementById('titleFontSize').value;
+}
+
+/**
  * 绘制图表
  * @returns {Promise<void>}
  */
 async function plotChart() {
     populateFormWithSavedData([
-        'xData', 'yData', 'zData',
-        'chartTitle', 'chartExplain', 'xLabel', 'yLabel'
+        'xData', 'yData', 'zData',                             // tab1
+        'chartTitle', 'chartExplain', 'xLabel', 'yLabel',      // tab2
+        'titleFontSize', 'xLabelFontSize', 'yLabelFontSize'    // tab3
 
     ])
+
+
 
     // 将 图表类型 和 绘图策略 传给后端
     const chartType = document.getElementById('chartOptions').value
@@ -277,18 +286,19 @@ document.getElementById("yData").addEventListener("change", function () {
 
 // 为 tab1, tab2 和 chartOptions 添加事件监听器
 addPlotChartEventListeners(['tab1', 'chartOptions'], 'change');
-addPlotChartEventListeners(['tab2'], 'input');
+addPlotChartEventListeners(['tab2', 'tab3'], 'input');
 
 // 为指定的元素添加事件监听器，并将值保存到 sessionStorage
 addEventListenersToSaveElements(
     [
-        'chartTitle', 'chartExplain', 'xLabel', 'yLabel',
+        'chartTitle', 'chartExplain', 'xLabel', 'yLabel',    // tab2
+        'titleFontSize', 'xLabelFontSize', 'yLabelFontSize'  // tab3
     ],
     'input' // 适用于 文本输入框
 )
 addEventListenersToSaveElements(
     [
-        'chartOptions', 'xData', 'zData',
+        'chartOptions', 'xData', 'zData', // tab1
     ],
     'change' // 适用于 下拉框
 )

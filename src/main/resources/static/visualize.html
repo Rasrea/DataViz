@@ -24,7 +24,7 @@
             display: block;
         }
 
-        /* 设置placeholder的颜色和透明度 */
+        /* 设置 placeholder 的颜色和透明度 */
         #chartTitle::placeholder,
         #chartExplain::placeholder,
         #xLabel::placeholder,
@@ -165,14 +165,21 @@
                 <div class="mb-3">
                     <label for="titleFontSize">标题大小</label>
                     <input type="number" id="titleFontSize" name="chartFontSize" class="form-control"
-                           placeholder="设置标题大小" min="10" max="50" value="16">
+                           min="10" max="50" value="20">
                 </div>
 
                 <div class="mb-3">
-                    <label for="labelFontSize">标签大小</label>
-                    <input type="number" id="labelFontSize" name="chartFontSize" class="form-control"
-                           placeholder="设置标签大小" min="10" max="50" value="12">
+                    <label for="xLabelFontSize">X轴标签</label>
+                    <input type="number" id="xLabelFontSize" name="chartFontSize" class="form-control"
+                           min="10" max="50" value="14">
                 </div>
+
+                <div class="mb-3">
+                    <label for="yLabelFontSize">Y轴标签</label>
+                    <input type="number" id="yLabelFontSize" name="chartFontSize" class="form-control"
+                           min="10" max="50" value="14">
+                </div>
+
             </form>
         </div>
 
