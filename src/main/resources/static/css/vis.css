@@ -1,0 +1,234 @@
+/* 共享的导航栏样式 */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 20px;
+    z-index: 1000;
+}
+
+.navbar-nav .nav-link,
+.secondary-navbar .nav-link {
+    color: white;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.navbar-nav .nav-link:hover,
+.option-link:hover {
+    color: #8addaa;
+}
+
+/* 次导航栏 */
+.secondary-navbar .navbar-nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.secondary-navbar .nav-item {
+    margin: 0 20px;
+}
+
+.secondary-navbar .nav-item.active .nav-link {
+    color: #6bd4c8;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .top-navbar, .secondary-navbar {
+        padding: 10px;
+    }
+}
+
+/* 避免固定导航栏遮挡内容 */
+body {
+    padding-top: 56px;
+}
+
+/* 字体样式 */
+.display, .lead {
+    font-family: '华文新魏', sans-serif;
+}
+
+.display {
+    font-size: 50px;
+}
+
+.lead {
+    font-size: 1.5rem;
+    color: #333;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* 动画 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 英雄部分 */
+.hero-section4 {
+    font-family: '宋体', sans-serif;
+    background: linear-gradient(to right, rgb(41, 85, 168), rgb(135, 250, 237));
+    padding: 50px 0;
+    margin: auto;
+}
+
+/* 图像选择框 */
+.select-chart-container {
+    position: absolute;
+    top: 170px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* 选项样式 */
+.operation-label {
+    font-family: '宋体', sans-serif;
+    width: 85%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: box-shadow 0.3s;
+}
+
+.operation-label:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 标签不同类型的颜色 */
+.operation-label option {
+    font-weight: 600;
+}
+
+.operation-label .Nan-label { color: #e11414; }
+.operation-label .Number-label { color: #278bf4; }
+.operation-label .String-label { color: #070707; }
+.operation-label .Date-label { color: #39A832; }
+
+/* 场景切换条 */
+.switch-scene {
+    display: flex;
+    margin-left: 80px;
+    width: 450px;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.option-link {
+    color: black;
+    font-size: 1.1rem;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.scene-item.active .option-link {
+    color: #6bd4c8;
+}
+
+/* 多个 Y 轴容器 */
+.selected-y-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.selected-y-item {
+    display: flex;
+    align-items: center;
+    background-color: rgba(135, 250, 237, 0.6);
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.selected-y-item:hover {
+    background-color: #00ffe3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 删除按钮 */
+.selected-y-item .remove-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.selected-y-item .remove-btn:hover {
+    color: #ffcccc;
+}
+
+/* 可视化表单 */
+.vis-form-container {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    width: 600px;
+    max-height: 400px;
+    overflow-y: auto;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    margin-left: 30px;
+}
+
+.vis-form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.vis-form-label {
+    width: 300px;
+    font-weight: bold;
+}
+
+/* 输入框 */
+.vis-form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+}
+
+.vis-form-container input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* 标签 */
+.vis-form-container label {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+/* 输入框间距 */
+.mb-3 {
+    margin-bottom: 15px;
+}
