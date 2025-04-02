@@ -211,7 +211,8 @@ body {
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 20px;
+    font-family: '华文楷体', sans-serif;
     transition: all 0.3s ease-in-out;
 }
 

@@ -51,7 +51,7 @@ async function pullJSON(url, method = 'POST', data = null) {
 
 /**
  * 显示选项卡
- * @param tabNumber
+ * @param tabNumber 选项卡编号
  */
 function showTab(tabNumber) {
     // 隐藏所有tab内容和标签
@@ -69,9 +69,9 @@ function showTab(tabNumber) {
 
 /**
  * 添加 Y 轴标签，并保存到 sessionStorage
- * @param container
- * @param value
- * @param text
+ * @param container 选项容器
+ * @param value 对应数据
+ * @param text 标签
  */
 function addYDataItem(container, value, text) {
     let item = document.createElement("div");
@@ -204,42 +204,6 @@ function initChartConfig() {
 
 }
 
-/** 根据图像类型隐藏部分表项
- * @param chartType 图表类型
- */
-function hideElementsByChartType(chartType) {
-    const plotStrategy = CHART_TYPE[chartType]; // 绘图策略
-    const xAxisID = ['xLabelNameContainer', 'xLabelFontSizeContainer'];
-    const yAxisID = ['selectedYDataListContainer', 'yLabelNameContainer', 'yLabelFontSizeContainer'];
-
-    // 单轴类型与多轴类型的处理
-    if (plotStrategy === STRATEGY.SINGLE_COLUMN) {
-        // 隐藏 X, Y 轴标签和字体大小
-        for (let i = 0; i < xAxisID.length; i++) {
-            document.getElementById(xAxisID[i]).style.display = 'none';
-        }
-        for (let i = 0; i < yAxisID.length; i++) {
-            document.getElementById(yAxisID[i]).style.display = 'none';
-        }
-
-        // 显示数据块数（如扇形个数）
-        document.getElementById('seriesCountContainer').style.display = 'block';
-    } else {
-        // 显示 X, Y 轴标签和字体大小
-        for (let i = 0; i < xAxisID.length; i++) {
-            document.getElementById(xAxisID[i]).style.display = 'block';
-        }
-        for (let i = 0; i < yAxisID.length; i++) {
-            document.getElementById(yAxisID[i]).style.display = 'block';
-        }
-
-        // 隐藏数据块数（如扇形个数）
-        document.getElementById('seriesCountContainer').style.display = 'none';
-    }
-
-
-}
-
 /**
  * 绘制图表
  * @returns {Promise<void>}
@@ -257,7 +221,7 @@ async function plotChart() {
     const chartType = document.getElementById('chartOptions').value
     chart.setChartType(chartType);
 
-    hideElementsByChartType(chartType)
+    // hideElementsByChartType(chartType)
 
     await fetch(`http://localhost:8080/api/chart/chartConfig?chartType=${chartType}`); // 发送图表类型到后端
     await fetch(`http://localhost:8080/api/chart/columnStrategy?columnStrategy=${CHART_TYPE[chartType]}`); // 发送绘图策略到后端
@@ -325,6 +289,17 @@ document.getElementById("yData").addEventListener("change", function () {
     sessionStorage.setItem('selectedYData', JSON.stringify(savedYData));
 });
 
+// 根据图表类型，显示不同的表单项
+document.getElementById("chartOptions").addEventListener("change", function () {
+    let selectedChart = this.value;
+    document.querySelectorAll(".chart-specific").forEach(el => {
+        let applicableCharts = el.getAttribute("data-chart").split(" ");
+        el.style.display = applicableCharts.includes(selectedChart) ? "block" : "none";
+    });
+});
+// 触发一次以初始化界面
+document.getElementById("chartOptions").dispatchEvent(new Event("change"));
+
 
 // 为 tab1, tab2 和 chartOptions 添加事件监听器
 addPlotChartEventListeners(['tab1', 'chartOptions'], 'change');
@@ -344,3 +319,5 @@ addEventListenersToSaveElements(
     ],
     'change' // 适用于 下拉框
 )
+
+

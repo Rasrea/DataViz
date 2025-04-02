@@ -20,6 +20,7 @@
         .tab-content {
             display: none;
         }
+
         .tab-content.active {
             display: block;
         }
@@ -91,40 +92,36 @@
 
             <!-- 界面一：数据列选择 -->
             <form id="tab1" class="tab-content active vis-form-container">
-<!--                <div class="mb-3">-->
-<!--                    <label for="xData" class="vis-form-label">选择 X 轴</label>-->
-<!--                    <select id="xData" class="operation-label" name="xData">-->
-<!--                        &lt;!&ndash; 动态增加选项 &ndash;&gt;-->
-<!--                    </select>-->
-<!--                </div>-->
 
-                <div class="mb-3 vis-form-group">
+                <!-- 通用表项 -->
+                <div class="mb-3">
                     <label for="xData" class="vis-form-label">选择 X 轴：</label>
-                    <select id="xData" class="operation-label vis-form-select" name="xData" style="margin-left: -30px">
+                    <select id="xData" class="operation-label vis-form-select" style="width: 100%" name="xData">
                         <!-- 动态增加选项 -->
                     </select>
                 </div>
 
 
-                <div class="mb-3 vis-form-group" id="yDataContainer">
+                <div class="mb-3 chart-specific" id="yDataContainer" data-chart="LineChart ScatterChart BarChart">
                     <label for="yData" class="vis-form-label">添加 Y 轴：</label>
                     <div class="input-group">
-                        <select id="yData" class="operation-label vis-form-select" style="width: 360px">
+                        <select id="yData" class="operation-label vis-form-select" style="width: 100%" name="yData">
                             <!-- 这里动态填充选项 -->
                         </select>
                     </div>
                 </div>
 
                 <!-- 已选 Y 轴列表 -->
-                <div class="mb-3" id="selectedYDataListContainer">
+                <div class="mb-3 chart-specific" id="selectedYDataListContainer"
+                     data-chart="LineChart ScatterChart BarChart">
                     <label id="yDataList" class="vis-form-label">已选 Y 轴：</label>
                     <div id="selectedYDataContainer" class="selected-y-container">
                         <!-- 这里动态显示已选择的列 -->
                     </div>
                 </div>
 
-
-                <div class="mb-3" id="Z" style="display: none"> <!-- 默认隐藏Z轴 -->
+                <!-- 默认隐藏Z轴 -->
+                <div class="mb-3" id="Z" style="display: none">
                     <label for="zData" class="vis-form-label">选择Z轴</label>
                     <select id="zData" class="operation-label" name="zData">
                         <!-- 动态增加选项 -->
@@ -134,12 +131,15 @@
 
             <!-- 界面二：添加注释 -->
             <form id="tab2" class="tab-content vis-form-container">
+
+                <!-- 通用表项 -->
                 <div class="mb-3">
                     <label for="chartTitle" class="vis-form-label">标题</label>
                     <input type="text" id="chartTitle" name="chartTitle" class="form-control"
                            placeholder="在此处插入标题">
                 </div>
 
+                <!-- 通用表项 -->
                 <div class="mb-3">
                     <label for="chartExplain" class="vis-form-label">说明</label>
                     <textarea id="chartExplain" name="chartColor" class="form-control"
@@ -147,13 +147,13 @@
                               rows="4" cols="50"></textarea>
                 </div>
 
-                <div class="mb-3" id="xLabelNameContainer">
+                <div class="mb-3 chart-specific" id="xLabelNameContainer" data-chart="LineChart ScatterChart BarChart">
                     <label for="xLabel" class="vis-form-label">X轴标签</label>
                     <input type="text" id="xLabel" name="chartTitle" class="form-control"
                            placeholder="输入X轴标签">
                 </div>
 
-                <div class="mb-3" id="yLabelNameContainer">
+                <div class="mb-3 chart-specific" id="yLabelNameContainer" data-chart="LineChart ScatterChart BarChart">
                     <label for="yLabel" class="vis-form-label">Y轴标签</label>
                     <input type="text" id="yLabel" name="chartTitle" class="form-control"
                            placeholder="输入Y轴标签">
@@ -162,25 +162,29 @@
 
             <!-- 界面三：详细优化 -->
             <form id="tab3" class="tab-content vis-form-container">
+
+                <!-- 通用表项 -->
                 <div class="mb-3">
                     <label for="titleFontSize">标题大小</label>
                     <input type="number" id="titleFontSize" name="chartFontSize" class="form-control"
                            min="10" max="50" value="20">
                 </div>
 
-                <div class="mb-3" id="xLabelFontSizeContainer">
-                    <label for="xLabelFontSize">X轴标签</label>
+                <div class="mb-3 chart-specific" id="xLabelFontSizeContainer"
+                     data-chart="LineChart ScatterChart BarChart">
+                    <label for="xLabelFontSize">X轴标签大小</label>
                     <input type="number" id="xLabelFontSize" name="chartFontSize" class="form-control"
                            min="10" max="50" value="14">
                 </div>
 
-                <div class="mb-3" id="yLabelFontSizeContainer">
-                    <label for="yLabelFontSize">Y轴标签</label>
+                <div class="mb-3 chart-specific" id="yLabelFontSizeContainer"
+                     data-chart="LineChart ScatterChart BarChart">
+                    <label for="yLabelFontSize">Y轴标签大小</label>
                     <input type="number" id="yLabelFontSize" name="chartFontSize" class="form-control"
                            min="10" max="50" value="14">
                 </div>
 
-                <div class="mb-3" id="seriesCountContainer">
+                <div class="mb-3 chart-specific" id="seriesCountContainer" data-chart="PieChart">
                     <label for="seriesCount">数据块</label>
                     <input type="number" id="seriesCount" name="chartFontSize" class="form-control"
                            min="1" max="1000000" value="5">
