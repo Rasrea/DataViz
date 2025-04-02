@@ -106,7 +106,7 @@
                 </div>
 
 
-                <div class="mb-3 vis-form-group">
+                <div class="mb-3 vis-form-group" id="yDataContainer">
                     <label for="yData" class="vis-form-label">添加 Y 轴：</label>
                     <div class="input-group">
                         <select id="yData" class="operation-label vis-form-select" style="width: 360px">
@@ -116,7 +116,7 @@
                 </div>
 
                 <!-- 已选 Y 轴列表 -->
-                <div class="mb-3">
+                <div class="mb-3" id="selectedYDataListContainer">
                     <label id="yDataList" class="vis-form-label">已选 Y 轴：</label>
                     <div id="selectedYDataContainer" class="selected-y-container">
                         <!-- 这里动态显示已选择的列 -->
@@ -147,13 +147,13 @@
                               rows="4" cols="50"></textarea>
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-3" id="xLabelNameContainer">
                     <label for="xLabel" class="vis-form-label">X轴标签</label>
                     <input type="text" id="xLabel" name="chartTitle" class="form-control"
                            placeholder="输入X轴标签">
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-3" id="yLabelNameContainer">
                     <label for="yLabel" class="vis-form-label">Y轴标签</label>
                     <input type="text" id="yLabel" name="chartTitle" class="form-control"
                            placeholder="输入Y轴标签">
@@ -168,16 +168,22 @@
                            min="10" max="50" value="20">
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-3" id="xLabelFontSizeContainer">
                     <label for="xLabelFontSize">X轴标签</label>
                     <input type="number" id="xLabelFontSize" name="chartFontSize" class="form-control"
                            min="10" max="50" value="14">
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-3" id="yLabelFontSizeContainer">
                     <label for="yLabelFontSize">Y轴标签</label>
                     <input type="number" id="yLabelFontSize" name="chartFontSize" class="form-control"
                            min="10" max="50" value="14">
+                </div>
+
+                <div class="mb-3" id="seriesCountContainer">
+                    <label for="seriesCount">数据块</label>
+                    <input type="number" id="seriesCount" name="chartFontSize" class="form-control"
+                           min="1" max="1000000" value="5">
                 </div>
 
             </form>

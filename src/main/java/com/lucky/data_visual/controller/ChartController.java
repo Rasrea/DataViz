@@ -122,48 +122,6 @@ public class ChartController {
     }
 
     @Operation(
-            summary = "插入数据到图表配置中",
-            description = "此接口用于将数据列插入到图表配置中，返回处理后的图表配置。",
-            parameters = {
-                    @Parameter(
-                            name = "chartType",
-                            description = "图表类型",
-                            required = true,
-                            content = @Content(mediaType = "application/json")
-                    )
-            }
-    )
-    @GetMapping("/chartConfigAfterProcess")
-    public JsonNode getChartConfigAfterProcess() {
-        // 根据不同策略，设置不同的数据处理方式
-        if (chart.getColumnStrategy().getClass() == MultiColumnStrategy.class) {
-            // 包括 排序 和 格式转换
-            chart.setRawChartData(chartServer.getRawAxisData(chart.getAxisLabels(), operateJsonResult.getData()));
-            Map<String, Object> sortedOrGroupedData = chartServer.sortedOrGroupAxisData(chart.getRawChartData(), chart.getChartConfig());
-            chart.setProcessedChartData(chartServer.processedChartData(sortedOrGroupedData));
-        } else if (chart.getColumnStrategy().getClass() == SingleColumnStrategy.class) {
-            // 读取 并 聚合 数据
-            List<Object> colData = chartServer.readLineData(operateJsonResult.getData(), chart.getAxisLabels().get("xColName").get(0));
-            Map<String, Object> map = new HashMap<>();
-            map.put("data", chartServer.countTopKFrequency(colData, 5));
-            chart.setProcessedChartData(List.of(map));
-        }
-
-        // 将数据列插入到图表配置中
-        JsonNode chartConfigAfterProcess = chartServer.insertDataIntoChartConfig(chart);
-        chart.setChartConfigAfterProcess(chartConfigAfterProcess);
-
-        return chart.getChartConfigAfterProcess();
-    }
-
-    @GetMapping("/")
-    public JsonNode getChart() {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.valueToTree(chart);
-    }
-
-
-    @Operation(
             summary = "读取原始数据列",
             description = "此接口用于读取原始数据列，返回原始数据列。",
             parameters = {
@@ -218,4 +176,48 @@ public class ChartController {
         chart.setProcessedChartData(chartServer.processedChartData(sortedOrGroupedData));
         return chart.getProcessedChartData();
     }
+
+
+    @Operation(
+            summary = "插入数据到图表配置中",
+            description = "此接口用于将数据列插入到图表配置中，返回处理后的图表配置。",
+            parameters = {
+                    @Parameter(
+                            name = "chartType",
+                            description = "图表类型",
+                            required = true,
+                            content = @Content(mediaType = "application/json")
+                    )
+            }
+    )
+    @GetMapping("/chartConfigAfterProcess")
+    public JsonNode getChartConfigAfterProcess(@RequestParam int seriesCount) {
+        // 根据不同策略，设置不同的数据处理方式
+        if (chart.getColumnStrategy().getClass() == MultiColumnStrategy.class) {
+            // 包括 排序 和 格式转换
+            chart.setRawChartData(chartServer.getRawAxisData(chart.getAxisLabels(), operateJsonResult.getData()));
+            Map<String, Object> sortedOrGroupedData = chartServer.sortedOrGroupAxisData(chart.getRawChartData(), chart.getChartConfig());
+            chart.setProcessedChartData(chartServer.processedChartData(sortedOrGroupedData));
+        } else if (chart.getColumnStrategy().getClass() == SingleColumnStrategy.class) {
+            // 读取 并 聚合 数据
+            List<Object> colData = chartServer.readLineData(operateJsonResult.getData(), chart.getAxisLabels().get("xColName").get(0));
+            Map<String, Object> map = new HashMap<>();
+            map.put("data", chartServer.countTopKFrequency(colData, seriesCount));
+            chart.setProcessedChartData(List.of(map));
+        }
+
+        // 将数据列插入到图表配置中
+        JsonNode chartConfigAfterProcess = chartServer.insertDataIntoChartConfig(chart);
+        chart.setChartConfigAfterProcess(chartConfigAfterProcess);
+
+        return chart.getChartConfigAfterProcess();
+    }
+
+    @GetMapping("/")
+    public JsonNode getChart() {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.valueToTree(chart);
+    }
+
+
 }

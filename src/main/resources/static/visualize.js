@@ -102,7 +102,7 @@ function addYDataItem(container, value, text) {
 function addPlotChartEventListeners(elementIds, eventType) {
     elementIds.forEach(elementId => {
         document.getElementById(elementId).addEventListener(eventType, function () {
-            plotChart();
+            plotChart().then(r => r);
         });
     });
 }
@@ -194,9 +194,45 @@ function initChartConfig() {
     chart.getChartConfigAfterProcess().title.text = document.getElementById('chartTitle').value;
     chart.getChartConfigAfterProcess().title.subtext = document.getElementById('chartExplain').value;
 
-
     // tab3
     chart.getChartConfigAfterProcess().title.textStyle.fontSize = document.getElementById('titleFontSize').value;
+
+}
+
+/** 根据图像类型隐藏部分表项
+ * @param chartType 图表类型
+ */
+function hideElementsByChartType(chartType) {
+    const plotStrategy = CHART_TYPE[chartType]; // 绘图策略
+    const xAxisID = ['xLabelNameContainer', 'xLabelFontSizeContainer'];
+    const yAxisID = ['selectedYDataListContainer', 'yLabelNameContainer', 'yLabelFontSizeContainer'];
+
+    // 单轴类型与多轴类型的处理
+    if (plotStrategy === STRATEGY.SINGLE_COLUMN) {
+        // 隐藏 X, Y 轴标签和字体大小
+        for (let i = 0; i < xAxisID.length; i++) {
+            document.getElementById(xAxisID[i]).style.display = 'none';
+        }
+        for (let i = 0; i < yAxisID.length; i++) {
+            document.getElementById(yAxisID[i]).style.display = 'none';
+        }
+
+        // 显示数据块数（如扇形个数）
+        document.getElementById('seriesCountContainer').style.display = 'block';
+    } else {
+        // 显示 X, Y 轴标签和字体大小
+        for (let i = 0; i < xAxisID.length; i++) {
+            document.getElementById(xAxisID[i]).style.display = 'block';
+        }
+        for (let i = 0; i < yAxisID.length; i++) {
+            document.getElementById(yAxisID[i]).style.display = 'block';
+        }
+
+        // 隐藏数据块数（如扇形个数）
+        document.getElementById('seriesCountContainer').style.display = 'none';
+    }
+
+
 }
 
 /**
@@ -205,25 +241,26 @@ function initChartConfig() {
  */
 async function plotChart() {
     populateFormWithSavedData([
-        'xData', 'yData', 'zData',                             // tab1
-        'chartTitle', 'chartExplain', 'xLabel', 'yLabel',      // tab2
-        'titleFontSize', 'xLabelFontSize', 'yLabelFontSize'    // tab3
+        'xData', 'yData', 'zData', // tab1
+        'chartTitle', 'chartExplain', 'xLabel', 'yLabel', // tab2
+        'titleFontSize', 'xLabelFontSize', 'yLabelFontSize', 'seriesCount' // tab3
 
     ])
-
 
 
     // 将 图表类型 和 绘图策略 传给后端
     const chartType = document.getElementById('chartOptions').value
     chart.setChartType(chartType);
-    await fetch(`http://localhost:8080/api/chart/chartConfig?chartType=${chartType}`);
-    await fetch(`http://localhost:8080/api/chart/columnStrategy?columnStrategy=${CHART_TYPE[chartType]}`);
 
-    // 将前端选择的 坐标轴标签 发送到后端
-    await pullJSON('http://localhost:8080/api/chart/axisLabels', 'POST', getAxisLabels());
+    hideElementsByChartType(chartType)
+
+    await fetch(`http://localhost:8080/api/chart/chartConfig?chartType=${chartType}`); // 发送图表类型到后端
+    await fetch(`http://localhost:8080/api/chart/columnStrategy?columnStrategy=${CHART_TYPE[chartType]}`); // 发送绘图策略到后端
+    await pullJSON('http://localhost:8080/api/chart/axisLabels', 'POST', getAxisLabels()); // 发送 x轴 和 y 轴标签到后端
 
     // 获取后端的 图表信息
-    fetch('http://localhost:8080/api/chart/chartConfigAfterProcess')
+    const seriesCount = document.getElementById('seriesCount').value;
+    fetch(`http://localhost:8080/api/chart/chartConfigAfterProcess?seriesCount=${seriesCount}`)
         .then(response => response.json()).then(chartConfigAfterProcess => {
             chart.setChartConfigAfterProcess(chartConfigAfterProcess);
             chart.setAxisLabels(getAxisLabels());
@@ -291,8 +328,8 @@ addPlotChartEventListeners(['tab2', 'tab3'], 'input');
 // 为指定的元素添加事件监听器，并将值保存到 sessionStorage
 addEventListenersToSaveElements(
     [
-        'chartTitle', 'chartExplain', 'xLabel', 'yLabel',    // tab2
-        'titleFontSize', 'xLabelFontSize', 'yLabelFontSize'  // tab3
+        'chartTitle', 'chartExplain', 'xLabel', 'yLabel', // tab2
+        'titleFontSize', 'xLabelFontSize', 'yLabelFontSize', 'seriesCount'  // tab3
     ],
     'input' // 适用于 文本输入框
 )
