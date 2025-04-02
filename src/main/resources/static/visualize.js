@@ -190,6 +190,11 @@ function initChartConfig() {
         chart.getChartConfigAfterProcess().yAxis.name = document.getElementById('yLabel').value;
         chart.getChartConfigAfterProcess().xAxis.nameTextStyle.fontSize = document.getElementById('xLabelFontSize').value;
         chart.getChartConfigAfterProcess().yAxis.nameTextStyle.fontSize = document.getElementById('yLabelFontSize').value;
+
+        // 如果坐标轴的横坐标是数值型，则控制显示范围
+        if (chart.getChartConfigAfterProcess().xAxis.type === 'value') {
+            chart.getChartConfigAfterProcess().xAxis.min = 'dataMin';
+        }
     }
     chart.getChartConfigAfterProcess().title.text = document.getElementById('chartTitle').value;
     chart.getChartConfigAfterProcess().title.subtext = document.getElementById('chartExplain').value;
