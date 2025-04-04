@@ -15,7 +15,9 @@ const CHART_TYPE = {
     'LineChart': STRATEGY.MULTI_COLUMN,
     'ScatterChart': STRATEGY.MULTI_COLUMN,
     'BarChart': STRATEGY.MULTI_COLUMN,
+
     'PieChart': STRATEGY.SINGLE_COLUMN,
+    'WordCloudChart': STRATEGY.SINGLE_COLUMN,
 }
 
 
@@ -39,7 +41,7 @@ async function pullJSON(url, method = 'POST', data = null) {
 
         let response = await fetch(url, options);
         if (!response.ok) {
-            throw new Error(`请求失败: ${response.status}`);
+            console.error(`请求失败: ${response.status}`);
         }
 
         return await response.json(); // 解析 JSON 响应
@@ -212,7 +214,7 @@ async function plotChart() {
     populateFormWithSavedData([
         'xData', 'yData', 'zData', // tab1
         'chartTitle', 'chartExplain', 'xLabel', 'yLabel', // tab2
-        'titleFontSize', 'xLabelFontSize', 'yLabelFontSize', 'seriesCount' // tab3
+        'titleFontSize', 'xLabelFontSize', 'yLabelFontSize', 'sectorsCount', 'focusCount' // tab3
 
     ])
 
@@ -220,17 +222,27 @@ async function plotChart() {
     // 将 图表类型 和 绘图策略 传给后端
     const chartType = document.getElementById('chartOptions').value
     chart.setChartType(chartType);
-
-    // hideElementsByChartType(chartType)
-
     await fetch(`http://localhost:8080/api/chart/chartConfig?chartType=${chartType}`); // 发送图表类型到后端
     await fetch(`http://localhost:8080/api/chart/columnStrategy?columnStrategy=${CHART_TYPE[chartType]}`); // 发送绘图策略到后端
     await pullJSON('http://localhost:8080/api/chart/axisLabels', 'POST', getAxisLabels()); // 发送 x轴 和 y 轴标签到后端
 
     // 获取后端的 图表信息
-    const seriesCount = document.getElementById('seriesCount').value;
-    fetch(`http://localhost:8080/api/chart/chartConfigAfterProcess?seriesCount=${seriesCount}`)
+    let sectorsCount = 0;
+    if (chartType === 'PieChart') {
+        sectorsCount = document.getElementById('sectorsCount').value; // 扇形个数
+    } else if (chartType === 'WordCloudChart') {
+        sectorsCount = document.getElementById('focusCount').value; // 焦点个数
+    }
+
+    // 将表单数据嵌入配置信息
+    fetch(`http://localhost:8080/api/chart/chartConfigAfterProcess?seriesCount=${sectorsCount}`)
         .then(response => response.json()).then(chartConfigAfterProcess => {
+            if (chartType === 'WordCloudChart') {
+                chartConfigAfterProcess.series[0].textStyle.color = function () { // 随机生成颜色
+                    return "rgb(" + [Math.round(Math.random() * 160), Math.round(Math.random() * 160), Math.round(Math.random() * 160)].join(",") + ")";
+                };
+            }
+
             chart.setChartConfigAfterProcess(chartConfigAfterProcess);
             chart.setAxisLabels(getAxisLabels());
             initChartConfig(); // 初始化图表参数
@@ -309,7 +321,7 @@ addPlotChartEventListeners(['tab2', 'tab3'], 'input');
 addEventListenersToSaveElements(
     [
         'chartTitle', 'chartExplain', 'xLabel', 'yLabel', // tab2
-        'titleFontSize', 'xLabelFontSize', 'yLabelFontSize', 'seriesCount'  // tab3
+        'titleFontSize', 'xLabelFontSize', 'yLabelFontSize', 'sectorsCount', 'focusCount'  // tab3
     ],
     'input' // 适用于 文本输入框
 )

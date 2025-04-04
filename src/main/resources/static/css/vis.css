@@ -205,7 +205,8 @@ body {
 }
 
 /* 输入框 */
-.vis-form-container input {
+.vis-form-container input,
+.vis-form-container textarea {
     width: 100%;
     padding: 10px;
     margin-top: 5px;

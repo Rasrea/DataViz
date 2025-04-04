@@ -67,6 +67,7 @@
             <option value="ScatterChart">散点图</option>
             <option value="BarChart">柱状图</option>
             <option value="PieChart">饼图</option>
+            <option value="WordCloudChart">词云图</option>
         </select>
     </div>
 </section>
@@ -184,10 +185,16 @@
                            min="10" max="50" value="14">
                 </div>
 
-                <div class="mb-3 chart-specific" id="seriesCountContainer" data-chart="PieChart">
-                    <label for="seriesCount">数据块</label>
-                    <input type="number" id="seriesCount" name="chartFontSize" class="form-control"
+                <div class="mb-3 chart-specific" id="sectorsCountContainer" data-chart="PieChart">
+                    <label for="sectorsCount">扇形个数</label>
+                    <input type="number" id="sectorsCount" name="chartFontSize" class="form-control"
                            min="1" max="1000000" value="5">
+                </div>
+
+                <div class="mb-3 chart-specific" id="focusCountContainer" data-chart="WordCloudChart">
+                    <label for="focusCount">焦点个数</label>
+                    <input type="number" id="focusCount" name="chartFontSize" class="form-control"
+                           min="1" max="1000000" value="100">
                 </div>
 
             </form>
