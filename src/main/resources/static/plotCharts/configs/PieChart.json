@@ -10,7 +10,6 @@
     },
     "tooltip": {
         "trigger": "item",
-        "formatter": "{a} <br/>{b}: {c} ({d}%)",
         "borderWidth": 1
     },
     "legend": {

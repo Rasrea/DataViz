@@ -16,7 +16,7 @@ function createCharts(data, colName) {
                 console.error('读取数据失败');
             }
 
-            // 创建统计空值个数的饼图
+            // 创建统计空值个数的玫瑰图
             fetch('plotCharts/configs/PieChart.json')
                 .then(response => response.json())
                 .then(roseChartElements => {
@@ -38,7 +38,7 @@ function createCharts(data, colName) {
                 })
                 .catch(error => console.error('配置文件有误(PieChart):', error));
 
-            // 创建统计前 K 项频数的玫瑰图
+            // 创建统计前 K 项频数的饼图
             fetch('plotCharts/configs/PieChart.json')
                 .then(response => response.json())
                 .then(pieChartElements => {

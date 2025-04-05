@@ -1,63 +1,79 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>动态表单</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>修改 JSON 示例</title>
 </head>
 <body>
 
-<div class="container mt-4">
-    <label for="chartType">选择图表类型：</label>
-    <select id="chartType" class="form-control">
-        <option value="bar">柱状图</option>
-        <option value="line">折线图</option>
-        <option value="pie">饼图</option>
-    </select>
+<h1>修改 JSON 数据</h1>
 
-    <form id="chartForm" class="mt-3">
-        <!-- 通用表单项 -->
-        <div class="mb-3">
-            <label for="titleFontSize">标题大小</label>
-            <input type="number" id="titleFontSize" class="form-control" min="10" max="50" value="20">
-        </div>
+<!-- 表单部分 -->
+<form id="jsonForm">
+    <label for="name">Name: </label>
+    <input type="text" id="name" name="name"><br><br>
 
-        <div class="mb-3">
-            <label for="seriesCount">数据块</label>
-            <input type="number" id="seriesCount" class="form-control" min="1" max="100" value="5">
-        </div>
+    <label for="age">Age: </label>
+    <input type="number" id="age" name="age"><br><br>
 
-        <!-- X轴、Y轴（柱状图 & 折线图） -->
-        <div class="mb-3 chart-specific" data-chart="bar line">
-            <label for="xLabelFontSize">X轴标签大小</label>
-            <input type="number" id="xLabelFontSize" class="form-control" min="10" max="50" value="14">
-        </div>
+    <label for="email">Email: </label>
+    <input type="email" id="email" name="email"><br><br>
 
-        <div class="mb-3 chart-specific" data-chart="bar line">
-            <label for="yLabelFontSize">Y轴标签大小</label>
-            <input type="number" id="yLabelFontSize" class="form-control" min="10" max="50" value="14">
-        </div>
+    <!-- 性别选择 -->
+    <label for="male" style="margin-right: 10px;">Male</label>
+    <input type="radio" id="male" name="gender" value="male" style="margin-right: 20px;">
 
-        <!-- 饼图特有项 -->
-        <div class="mb-3 chart-specific" data-chart="pie">
-            <label for="pieRadius">饼图半径</label>
-            <input type="number" id="pieRadius" class="form-control" min="10" max="100" value="50">
-        </div>
-    </form>
-</div>
+    <label for="female" style="margin-right: 10px;">Female</label>
+    <input type="radio" id="female" name="gender" value="female">
+
+    <h2>最新的 JSON 数据：</h2>
+    <pre id="jsonOutput"></pre>
+</form>
 
 <script>
-    document.getElementById("chartType").addEventListener("change", function () {
-        let selectedChart = this.value;
-        document.querySelectorAll(".chart-specific").forEach(el => {
-            let applicableCharts = el.getAttribute("data-chart").split(" ");
-            el.style.display = applicableCharts.includes(selectedChart) ? "block" : "none";
-        });
+    // 初始 JSON 数据
+    let jsonData = {
+        name: "John Doe",
+        age: 25,
+        email: "john.doe@example.com",
+        gender: "male" // 添加性别字段
+    };
+
+    // 将 JSON 数据显示到表单中
+    function populateForm() {
+        document.getElementById('name').value = jsonData.name;
+        document.getElementById('age').value = jsonData.age;
+        document.getElementById('email').value = jsonData.email;
+
+        // 根据 JSON 数据选择对应的性别单选框
+        if (jsonData.gender === 'male') {
+            document.getElementById('male').checked = true;
+        } else if (jsonData.gender === 'female') {
+            document.getElementById('female').checked = true;
+        }
+    }
+
+    // 实时更新 JSON 数据
+    document.getElementById('jsonForm').addEventListener('input', function () {
+        // 获取表单中的数据并更新 JSON
+        jsonData.name = document.getElementById('name').value;
+        jsonData.age = document.getElementById('age').value;
+        jsonData.email = document.getElementById('email').value;
+
+        // 更新性别字段
+        if (document.getElementById('male').checked) {
+            jsonData.gender = 'male';
+        } else if (document.getElementById('female').checked) {
+            jsonData.gender = 'female';
+        }
+
+        // 打印最新的 JSON
+        document.getElementById('jsonOutput').textContent = JSON.stringify(jsonData, null, 2);
     });
 
-    // 触发一次以初始化界面
-    document.getElementById("chartType").dispatchEvent(new Event("change"));
+    // 初始化表单
+    populateForm();
 </script>
 
 </body>

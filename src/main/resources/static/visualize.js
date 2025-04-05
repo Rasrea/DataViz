@@ -203,6 +203,10 @@ function initChartConfig() {
 
     // tab3
     chart.getChartConfigAfterProcess().title.textStyle.fontSize = document.getElementById('titleFontSize').value;
+    const roseType = document.getElementById('isPlotRose').value;
+    if (roseType) {
+        chart.getChartConfigAfterProcess().series[0].roseType = roseType;
+    }
 
 }
 
@@ -214,7 +218,8 @@ async function plotChart() {
     populateFormWithSavedData([
         'xData', 'yData', 'zData', // tab1
         'chartTitle', 'chartExplain', 'xLabel', 'yLabel', // tab2
-        'titleFontSize', 'xLabelFontSize', 'yLabelFontSize', 'sectorsCount', 'focusCount' // tab3
+        'titleFontSize', 'xLabelFontSize', 'yLabelFontSize',
+        'sectorsCount', 'focusCount' // tab3
 
     ])
 
