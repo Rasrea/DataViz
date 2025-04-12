@@ -1,31 +1,32 @@
 package com.lucky.data_visual.controller;
 
-import com.lucky.data_visual.model.JsonResult;
-import com.lucky.data_visual.server.CsvFileServer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lucky.data_visual.model.DatabaseConfPath;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/test")
 public class TestController {
-    private final JsonResult<List<Map<String, String>>> jsonResult;
-    private final CsvFileServer csvFileServer;
 
-    @Autowired
-    public TestController(@Qualifier("originalData") JsonResult<List<Map<String, String>>> jsonResult,
-                          CsvFileServer csvFileServer) {
-        this.jsonResult = jsonResult;
-        this.csvFileServer = csvFileServer;
-    }
+    @Resource
+    private DatabaseConfPath databaseConfPath;
 
-    @GetMapping("/fetch-csv")
-    public JsonResult<List<Map<String, Object>>> getCsvData() {
-        return csvFileServer.convertToNumberOrString(jsonResult);
+    @GetMapping("/databaseConfPath")
+    public JsonNode getConfPath() {
+        String mysqlConfPath = databaseConfPath.getMysqlConfPath();
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readTree(new File(mysqlConfPath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

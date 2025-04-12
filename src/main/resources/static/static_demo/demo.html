@@ -3,78 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>修改 JSON 示例</title>
+    <title>文件夹展开与收起</title>
+    <style>
+        /* 样式部分 */
+        .folder {
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .file {
+            margin-left: 20px;
+        }
+        .file, .folder {
+            font-size: 16px;
+        }
+        .folder-content {
+            display: none;
+            margin-left: 20px;
+        }
+        /* 添加展开/收起符号样式 */
+        .folder-icon {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
 
-<h1>修改 JSON 数据</h1>
+    <div id="file-system">
+        <div class="folder" onclick="toggleFolder('folder1')">
+            <span class="folder-icon" id="icon-folder1">+</span>
+            Folder 1
+        </div>
+        <div class="folder-content" id="folder1">
+            <div class="file">File 1.1</div>
+            <div class="file">File 1.2</div>
+        </div>
 
-<!-- 表单部分 -->
-<form id="jsonForm">
-    <label for="name">Name: </label>
-    <input type="text" id="name" name="name"><br><br>
+        <div class="folder" onclick="toggleFolder('folder2')">
+            <span class="folder-icon" id="icon-folder2">+</span>
+            Folder 2
+        </div>
+        <div class="folder-content" id="folder2">
+            <div class="file">File 2.1</div>
+            <div class="file">File 2.2</div>
+        </div>
 
-    <label for="age">Age: </label>
-    <input type="number" id="age" name="age"><br><br>
+        <div class="folder" onclick="toggleFolder('folder3')">
+            <span class="folder-icon" id="icon-folder3">+</span>
+            Folder 3
+        </div>
+        <div class="folder-content" id="folder3">
+            <div class="file">File 3.1</div>
+            <div class="file">File 3.2</div>
+        </div>
+    </div>
 
-    <label for="email">Email: </label>
-    <input type="email" id="email" name="email"><br><br>
+    <script>
+        // JavaScript部分，用于控制文件夹内容的显示与隐藏
+        function toggleFolder(folderId) {
+            var folderContent = document.getElementById(folderId);
+            var folderIcon = document.getElementById('icon-' + folderId);
 
-    <!-- 性别选择 -->
-    <label for="male" style="margin-right: 10px;">Male</label>
-    <input type="radio" id="male" name="gender" value="male" style="margin-right: 20px;">
-
-    <label for="female" style="margin-right: 10px;">Female</label>
-    <input type="radio" id="female" name="gender" value="female">
-
-    <h2>最新的 JSON 数据：</h2>
-    <pre id="jsonOutput"></pre>
-</form>
-
-<script>
-    // 初始 JSON 数据
-    let jsonData = {
-        name: "John Doe",
-        age: 25,
-        email: "john.doe@example.com",
-        gender: "male" // 添加性别字段
-    };
-
-    // 将 JSON 数据显示到表单中
-    function populateForm() {
-        document.getElementById('name').value = jsonData.name;
-        document.getElementById('age').value = jsonData.age;
-        document.getElementById('email').value = jsonData.email;
-
-        // 根据 JSON 数据选择对应的性别单选框
-        if (jsonData.gender === 'male') {
-            document.getElementById('male').checked = true;
-        } else if (jsonData.gender === 'female') {
-            document.getElementById('female').checked = true;
+            // 切换文件夹内容的显示/隐藏
+            if (folderContent.style.display === "none" || folderContent.style.display === "") {
+                folderContent.style.display = "block";  // 展开
+                folderIcon.textContent = "-";  // 更改为"-"
+            } else {
+                folderContent.style.display = "none";  // 收起
+                folderIcon.textContent = "+";  // 更改为"+"
+            }
         }
-    }
-
-    // 实时更新 JSON 数据
-    document.getElementById('jsonForm').addEventListener('input', function () {
-        // 获取表单中的数据并更新 JSON
-        jsonData.name = document.getElementById('name').value;
-        jsonData.age = document.getElementById('age').value;
-        jsonData.email = document.getElementById('email').value;
-
-        // 更新性别字段
-        if (document.getElementById('male').checked) {
-            jsonData.gender = 'male';
-        } else if (document.getElementById('female').checked) {
-            jsonData.gender = 'female';
-        }
-
-        // 打印最新的 JSON
-        document.getElementById('jsonOutput').textContent = JSON.stringify(jsonData, null, 2);
-    });
-
-    // 初始化表单
-    populateForm();
-</script>
+    </script>
 
 </body>
 </html>

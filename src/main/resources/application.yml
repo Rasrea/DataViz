@@ -35,3 +35,8 @@ python-scripts-path:
   pythonPath: "E:/python3.12/python.exe"
   # 数据预处理脚本
   dataVizPath: "src/main/resources/python-scripts/dataViz.py"
+
+# 数据库配置信息
+database-conf-path:
+  # MySQL
+  mysqlConfPath: "src/main/resources/database-conf/MySQLConf.json"
