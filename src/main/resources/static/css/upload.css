@@ -77,12 +77,6 @@ body {
     text-align: center; /* 居中对齐 */
 }
 
-/* 加粗 .lead 类中的 <strong> 标签 */
-.lead strong {
-    font-weight: bold; /* 加粗字体 */
-    color: #297EA8; /* 设置加粗字体颜色 */
-}
-
 
 /* 自定义按钮 */
 #hero-button {
@@ -254,18 +248,127 @@ th {
     outline: none; /* 移除默认焦点外框 */
 }
 
-/*!* 数据库连接 *!*/
-/*.database a {*/
-/*    display: inline-block;*/
-/*    background-color: #007bff; !* 蓝色背景 *!*/
-/*    color: #fff; !* 白色文字 *!*/
-/*    text-decoration: none; !* 去掉下划线 *!*/
-/*    border-radius: 5px; !* 圆角 *!*/
-/*    transition: background-color 0.3s, transform 0.3s; !* 平滑过渡效果 *!*/
-/*}*/
+/* 数据库连接 */
+.container.main-content {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 110px); /* 减去导航栏和英雄部分的高度 */
+    margin: 0;
+    padding: 0;
+    max-width: none; /* 覆盖 Bootstrap 默认的 max-width */
+    position: relative;
+    overflow: hidden;
+}
 
-/*.database a:hover {*/
-/*    background-color: #0056b3; !* 悬停时更深的蓝色 *!*/
-/*    transform: scale(1.05); !* 悬停时稍微放大 *!*/
-/*}*/
+.chartArea {
+    flex: 1;
+    padding: 20px;
+    overflow: auto;
+    min-width: 300px;
+}
 
+.resizer {
+    width: 6px;
+    background-color: #ddd;
+    cursor: ew-resize;
+    position: relative;
+}
+
+/* 数据库列表 */
+.databaseList {
+    width: 300px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    overflow-y: scroll; /* 改为scroll确保始终显示滚动条 */
+    border-left: 1px solid #ddd;
+    scrollbar-width: thin; /* Firefox滚动条样式 */
+    scrollbar-color: #6bd4c8 #ddd; /* Firefox滚动条颜色 */
+}
+
+/* Webkit浏览器自定义滚动条样式 */
+.databaseList::-webkit-scrollbar {
+    width: 8px;
+}
+
+.databaseList::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.databaseList::-webkit-scrollbar-thumb {
+    background: #6bd4c8;
+    border-radius: 4px;
+}
+
+.databaseList::-webkit-scrollbar-thumb:hover {
+    background: #4a87d3;
+}
+
+/* 数据库标题和添加按钮的布局 */
+.database-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.database-header h2 {
+    margin: 0;
+}
+
+.add-database-btn {
+    background-color: rgba(45, 179, 0, 0.75);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-database-btn:hover {
+    background-color: rgba(45, 179, 0, 0.75);
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.add-database-btn i {
+    font-size: 14px;
+}
+
+.databaseItem h3 {
+    cursor: pointer;
+    padding: 8px;
+    background-color: #e9ecef;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.tableList {
+    padding-left: 20px;
+    display: none;
+}
+
+.arrow {
+    float: right;
+    transition: transform 0.3s;
+}
+
+.arrow.collapsed {
+    transform: rotate(0deg);
+}
+
+.arrow:not(.collapsed) {
+    transform: rotate(90deg);
+}
+
+/* 调整样本数据集选择框的位置，避免被flex布局影响 */
+.datasetSelect {
+    position: absolute;
+    z-index: 100;
+}

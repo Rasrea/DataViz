@@ -168,6 +168,7 @@ function fetchDataAndCreateTable() {
         });
 }
 
+
 // 等待页面加载完成后执行
 window.onload = function () {
     fetchDataAndCreateTable()
@@ -188,3 +189,68 @@ window.onload = function () {
         selectExcelData(excelValue);
     })
 }
+
+
+
+// 数据库列表缩放
+const resizer = document.querySelector('.resizer');
+const chartArea = document.querySelector('.chartArea');
+const databaseList = document.querySelector('.databaseList');
+
+let isResizing = false;
+
+// 调整宽度功能 - 开始调整
+resizer.addEventListener('mousedown', (e) => {
+    isResizing = true;
+    document.body.style.cursor = 'ew-resize';
+    e.preventDefault(); // 防止拖动时选中文本
+});
+
+// 调整宽度功能 - 拖动过程
+document.addEventListener('mousemove', (e) => {
+    if (!isResizing) return;
+
+    // 获取容器位置和尺寸信息
+    const container = resizer.parentElement;
+    const containerRect = container.getBoundingClientRect();
+
+    // 计算鼠标相对于容器的位置
+    const mouseX = e.clientX - containerRect.left;
+    const containerWidth = containerRect.width;
+
+    // 设置最小宽度限制
+    const minChartWidth = 200;
+    const minDatabaseWidth = 150;
+
+    // 确保新宽度在合理范围内
+    if (mouseX > minChartWidth && containerWidth - mouseX - resizer.offsetWidth > minDatabaseWidth) {
+        // 直接设置宽度而不是使用flex属性
+        chartArea.style.width = `${mouseX}px`;
+        chartArea.style.flex = 'none';
+        databaseList.style.width = `${containerWidth - mouseX - resizer.offsetWidth}px`;
+    }
+});
+
+// 调整宽度功能 - 结束调整
+document.addEventListener('mouseup', () => {
+    isResizing = false;
+    document.body.style.cursor = 'default';
+});
+
+// 折叠/展开功能
+const databaseHeaders = document.querySelectorAll('.databaseItem h3');
+
+databaseHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+        const tableList = header.nextElementSibling;
+        const arrow = header.querySelector('.arrow');
+
+        if (tableList.style.display === 'none' || tableList.style.display === '') {
+            tableList.style.display = 'block';
+            arrow.classList.remove('collapsed');
+        } else {
+            tableList.style.display = 'none';
+            arrow.classList.add('collapsed');
+        }
+    });
+});
