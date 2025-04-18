@@ -1,5 +1,6 @@
 package com.lucky.data_visual.controller;
 
+import com.lucky.data_visual.enums.FileType;
 import com.lucky.data_visual.enums.HttpStatusCode;
 import com.lucky.data_visual.interfaces.FileController;
 import com.lucky.data_visual.model.JsonResult;
@@ -54,6 +55,7 @@ public class ExcelController implements FileController {
         operateJsonResult.setMsgList(result.getMsgList());
         operateJsonResult.setColTypes(result.getColTypes());
         operateJsonResult.setData(result.getData());
+//        operateJsonResult.setFileType(FileType.EXCEL);
     }
 
     @Operation(
@@ -88,6 +90,7 @@ public class ExcelController implements FileController {
                 // 将第一个表格注入操作JSON中
                 JsonResult<List<Map<String, Object>>> result = csvFileServer.convertToNumberOrString(jsonResult);
                 setOperateJsonResult(result);
+                operateJsonResult.setFileType(FileType.EXCEL);
 
                 logger.info("====== 用户文件上传成功 ======");
                 return ResponseEntity.ok("文件上传成功！");
@@ -129,10 +132,10 @@ public class ExcelController implements FileController {
         jsonResult.setData(excelJsonResult.getData().get(sheetName));
         jsonResult.addMsg(sheetName + "数据表读取成功");
         jsonResult.setStatusCode(HttpStatusCode.OK);
-
         // 将操作数据替换成新数据
         JsonResult<List<Map<String, Object>>> result = csvFileServer.convertToNumberOrString(jsonResult);
         setOperateJsonResult(result);
+        operateJsonResult.setFileType(FileType.EXCEL);
 
         return operateJsonResult;
     }

@@ -1,5 +1,6 @@
 package com.lucky.data_visual.controller;
 
+import com.lucky.data_visual.enums.FileType;
 import com.lucky.data_visual.enums.HttpStatusCode;
 import com.lucky.data_visual.model.JsonResult;
 import com.lucky.data_visual.model.SampleDataPath;
@@ -52,12 +53,12 @@ public class DataController {
         operateJsonResult.setMsgList(result.getMsgList());
         operateJsonResult.setColTypes(result.getColTypes());
         operateJsonResult.setData(result.getData());
+        operateJsonResult.setFileType(FileType.CSV);
     }
 
     @Operation(summary = "获取 CSV/Excel 操作数据", description = "存储操作数据")
     @GetMapping("/fetch-csv")
     public JsonResult<List<Map<String, Object>>> getTableData() {
-        if (operateJsonResult.getStatusCode() != HttpStatusCode.OK) logger.error("!!!!!! 操作数据上传错误 !!!!!!");
         return operateJsonResult;
     }
 

@@ -1,5 +1,6 @@
 package com.lucky.data_visual.controller;
 
+import com.lucky.data_visual.enums.FileType;
 import com.lucky.data_visual.enums.HttpStatusCode;
 import com.lucky.data_visual.interfaces.FileController;
 import com.lucky.data_visual.model.JsonResult;
@@ -46,6 +47,7 @@ public class CsvController implements FileController {
         operateJsonResult.setMsgList(result.getMsgList());
         operateJsonResult.setColTypes(result.getColTypes());
         operateJsonResult.setData(result.getData());
+        operateJsonResult.setFileType(FileType.CSV);
     }
 
     @Operation(

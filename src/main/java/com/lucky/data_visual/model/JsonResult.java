@@ -1,5 +1,6 @@
 package com.lucky.data_visual.model;
 
+import com.lucky.data_visual.enums.FileType;
 import com.lucky.data_visual.enums.HttpStatusCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,9 @@ public class JsonResult<T> {
 
     @Schema(description = "数据列的类型")
     private Map<String, Map<String, Object>> colTypes = null;
+
+    @Schema(description = "数据类型", example = "CSV")
+    private FileType fileType = FileType.CSV;
 
     @Schema(description = "返回信息（如User）")
     private T data = null;
@@ -60,5 +64,13 @@ public class JsonResult<T> {
 
     public void setStatusCode(HttpStatusCode statusCode) {
         this.statusCode = statusCode;
+    }
+
+    public FileType getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(FileType fileType) {
+        this.fileType = fileType;
     }
 }

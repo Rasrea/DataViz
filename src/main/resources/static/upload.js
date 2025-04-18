@@ -21,8 +21,6 @@ function uploadAndFetchData() {
     // 根据文件后缀判断请求接口
     let apiUrl;
     if (fileExtension === 'csv') {
-        const excelSelect = document.getElementById("excelDataSelect");
-        excelSelect.style.display = "none";
         apiUrl = "http://localhost:8080/api/csv/upload"; // CSV 文件上传接口
     } else if (fileExtension === 'xls' || fileExtension === 'xlsx') {
         apiUrl = "http://localhost:8080/api/excel/upload"; // Excel 文件上传接口
@@ -142,8 +140,38 @@ function selectExcelData(sheetName) {
         .catch((error => console.error(`${sheetName}表读取失败：`, error)));
 }
 
+// 获取数据并创建表格
+function fetchDataAndCreateTable() {
+    // 显示“请稍等”消息
+    const loadingMessage = document.getElementById("loadingMessage");
+    loadingMessage.style.display = "block";
+
+    fetch('http://localhost:8080/data/fetch-csv') // 获取样本数据集
+        .then(response => response.json())
+        .then(data => {
+            if (data.data !== null) {
+                createTable(data.data) // 创建 CSV 表格
+                loadingMessage.style.display = "none"; // 隐藏“请稍等”消息
+            }
+
+            if (data.fileType === 'EXCEL') {
+                createExcelSelect()
+            } else {
+                const selectElement = document.getElementById("excelDataSelect");
+                selectElement.style.display = "none";
+
+            }
+        })
+        .catch(error => {
+            console.error("操作失败：", error)
+            loadingMessage.style.display = "none"; // 隐藏“请稍等”消息
+        });
+}
+
 // 等待页面加载完成后执行
 window.onload = function () {
+    fetchDataAndCreateTable()
+
     document.getElementById("fileInput").addEventListener("change", uploadAndFetchData);
 
     // 根据 样本标签 实时修改数据表
