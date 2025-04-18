@@ -10,7 +10,7 @@
     <!-- 引入 Font Awesome 图标库 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- 自建CSS -->
-    <link rel="stylesheet" href="css/upload.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -50,13 +50,6 @@
         <option value="metacritic-games">Metacritic游戏</option>
         <option value="random-data">randomData</option>
     </select>
-
-<!--    <ul class="database">-->
-<!--        <li id="databaseLink">-->
-<!--            <a href="database.html">使用数据库</a>-->
-<!--        </li>-->
-<!--    </ul>-->
-
 </div>
 
 <!-- Excel表格选择框 -->
@@ -75,6 +68,11 @@
             <input type="file" class="form-control" id="fileInput" accept=".csv, .xls, .xlsx">
         </div>
     </div>
+
+            <!-- 数据库上传按钮 -->
+            <div class="mb-3">
+        <button type="button" class="btn btn-primary" onclick="window.location.href='database-upload.html'">从数据库上传</button>
+            </div>
 
     <!-- 表格容器，限制显示范围 -->
     <div id="tableContainer">
@@ -106,3 +104,4 @@
 <script src="upload.js"></script>
 </body>
 </html>
+

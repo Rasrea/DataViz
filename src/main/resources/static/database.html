@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据库表单UI</title>
+    <link rel="icon" href="images/图标.png">
+    <!-- 引入 Font Awesome 图标库 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- 自建CSS -->
+    <link rel="stylesheet" href="css/database.css">
+</head>
+<body>
+<div class="container">
+    <!-- 图表区域 -->
+    <div class="chartArea">
+        <h2>图表展示区</h2>
+        <p>这里是图表内容。</p>
+        <!-- 模拟图表 -->
+        <div style="width: 100%; height: 300px; background-color: #ddd; display: flex; align-items: center; justify-content: center;">
+            <span>图表占位符</span>
+        </div>
+    </div>
+
+    <!-- 分隔条 -->
+    <div class="resizer"></div>
+
+    <!-- 数据库列表 -->
+    <div class="databaseList">
+        <h2>数据库列表</h2>
+
+        <div class="databaseItem">
+            <h3>数据库 1 <span class="arrow collapsed">▶</span></h3>
+            <ul class="tableList">
+                <li>表 1.1</li>
+                <li>表 1.2</li>
+                <li>表 1.3</li>
+            </ul>
+        </div>
+
+        <div class="databaseItem">
+            <h3>数据库 2 <span class="arrow collapsed">▶</span></h3>
+            <ul class="tableList">
+                <li>表 2.1</li>
+                <li>表 2.2</li>
+            </ul>
+        </div>
+        <div class="databaseItem">
+            <h3>数据库 3 <span class="arrow collapsed">▶</span></h3>
+            <ul class="tableList">
+                <li>表 3.1</li>
+                <li>表 3.2</li>
+                <li>表 3.3</li>
+                <li>表 3.4</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<!-- 引入自建 JS -->
+<script src="database.js"></script>
+</body>
+</html>
