@@ -8,7 +8,7 @@ import java.util.Set;
 public class Test {
 
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/?serverTimezone=UTC"; // 不指定数据库
+        String url = "jdbc:mysql://localhost:3306"; // 不指定数据库
         String user = "dataViz";
         String password = "password";
 

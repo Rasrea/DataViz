@@ -1,5 +1,0 @@
-{
-    "url": "jdbc:mysql://localhost:3306/test?serverTimezone=UTC",
-    "username": "dataViz",
-    "password": "password"
-}

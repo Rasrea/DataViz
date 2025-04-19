@@ -101,42 +101,53 @@
 
         <div class="database-header">
             <h2>数据库列表</h2>
-            <button class="add-database-btn" title="添加新数据库">
+            <button class="add-database-btn" id="openDialogBtn" title="添加新数据库">
                 <i class="fas fa-plus"></i>
             </button>
+
+            <!-- 对话框 -->
+            <div id="addDbDialogOverlay" class="add-database-dialog-overlay" style="display: none;">
+                <div id="linkParam" class="dialog-box">
+                    <div class="dialog-header">
+                        <h5>添加新数据库</h5>
+                        <button id="closeDialogBtn" class="close-dialog-btn">&times;</button>
+                    </div>
+                    <div class="dialog-body">
+                        <label for="databaseType">类型</label>
+                        <select id="databaseType">
+                            <option value="MySQL">MySQL</option>
+<!--                            <option value="Redis">Redis</option>-->
+<!--                            <option value="PostgreSQL">PostgreSQL</option>-->
+                        </select>
+
+                        <label for="databaseUrl">URL</label>
+                        <input type="text" id="databaseUrl" placeholder="请输入数据库URL">
+
+                        <label for="databaseUsername">用户名</label>
+                        <input type="text" id="databaseUsername" placeholder="请输入用户名">
+
+                        <label for="databaseName">名称</label>
+                        <input type="text" id="databaseName" placeholder="请输入数据库名称">
+
+                        <label for="databasePassword">密码</label>
+                        <input type="password" id="databasePassword" placeholder="请输入密码">
+                    </div>
+                    <div class="dialog-footer">
+                        <button id="saveBtn" class="dialog-btn">应用</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="databaseItem">
-            <h3>数据库 1 <span class="arrow collapsed">▶</span></h3>
-            <ul class="tableList">
-                <li>表 1.1</li>
-                <li>表 1.2</li>
-                <li>表 1.3</li>
-            </ul>
-        </div>
+        <!-- 数据库项目 -->
 
-        <div class="databaseItem">
-            <h3>数据库 2 <span class="arrow collapsed">▶</span></h3>
-            <ul class="tableList">
-                <li>表 2.1</li>
-                <li>表 2.2</li>
-            </ul>
-        </div>
-        <div class="databaseItem">
-            <h3>数据库 3 <span class="arrow collapsed">▶</span></h3>
-            <ul class="tableList">
-                <li>表 3.1</li>
-                <li>表 3.2</li>
-                <li>表 3.3</li>
-                <li>表 3.4</li>
-            </ul>
-        </div>
     </div>
+
 </div>
 
 <!-- 引入 Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- JavaScript 实现 CSV 文件解析 -->
-<script src="upload.js"></script>
+<script src="js/upload.js"></script>
 </body>
 </html>

@@ -168,10 +168,86 @@ function fetchDataAndCreateTable() {
         });
 }
 
+// 动态添加数据库项
+function addDatabaseItem(dbName, dbType, tableNames) {
+    const databaseItem = document.createElement('div');
+    databaseItem.className = 'databaseItem';
+
+    // 创建标题
+    const h3 = document.createElement('h3');
+    const img = document.createElement('img');
+    img.alt = '数据库图标'
+    img.style = 'width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;';
+    if (dbType === 'MySQL') {
+        img.src = 'images/database/MySQL.png';
+    } else if (dbType === 'PostgreSQL') {
+        img.src = 'images/database/PostgreSQL.png';
+    } else if (dbType === 'Redis') {
+        img.src = 'images/database/Redis.png';
+    }
+    h3.appendChild(img);
+
+    const textNode = document.createTextNode(dbName);
+    h3.appendChild(textNode);
+
+    const arrow = document.createElement('span');
+    arrow.className = 'arrow';
+    arrow.classList.add('collapsed')
+    arrow.textContent = '▶'; // 向下箭头
+    h3.appendChild(arrow);
+
+    databaseItem.appendChild(h3);
+
+    // 创建表格列表
+    const tableList = document.createElement('ul');
+    tableList.className = 'tableList';
+    tableNames.forEach(tableName => {
+        const li = document.createElement('li');
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-table'; // Font Awesome 图标类
+        li.appendChild(icon);
+
+        const tableText = document.createTextNode(tableName);
+        li.appendChild(tableText);
+
+        tableList.appendChild(li);
+    })
+
+    databaseItem.appendChild(tableList);
+
+    // 将创建的数据库项添加到页面中
+    const databaseList = document.querySelector('.databaseList');
+    databaseList.appendChild(databaseItem);
+
+    bindDatabaseToggle(); // 绑定折叠/展开事件
+}
+
+function bindDatabaseToggle() {
+    const databaseHeaders = document.querySelectorAll('.databaseItem h3');
+    databaseHeaders.forEach(header => {
+        if (!header.dataset.bound) { // 防止重复绑定
+            header.dataset.bound = 'true';
+            header.addEventListener('click', () => {
+                const tableList = header.nextElementSibling;
+                const arrow = header.querySelector('.arrow');
+
+                if (tableList.style.display === 'none' || tableList.style.display === '') {
+                    tableList.style.display = 'block';
+                    arrow.classList.remove('collapsed');
+                } else {
+                    tableList.style.display = 'none';
+                    arrow.classList.add('collapsed');
+                }
+            });
+        }
+    });
+}
+
 
 // 等待页面加载完成后执行
 window.onload = function () {
     fetchDataAndCreateTable()
+    bindDatabaseToggle(); // 绑定折叠/展开事件
 
     document.getElementById("fileInput").addEventListener("change", uploadAndFetchData);
 
@@ -189,7 +265,6 @@ window.onload = function () {
         selectExcelData(excelValue);
     })
 }
-
 
 
 // 数据库列表缩放
@@ -254,3 +329,78 @@ databaseHeaders.forEach(header => {
         }
     });
 });
+
+
+// 获取元素
+const openDialogBtn = document.getElementById('openDialogBtn');
+const addDbDialogOverlay = document.getElementById('addDbDialogOverlay');
+const closeDialogBtn = document.getElementById('closeDialogBtn');
+const saveBtn = document.getElementById('saveBtn');
+
+// 打开对话框
+openDialogBtn.addEventListener('click', () => {
+    addDbDialogOverlay.style.display = 'flex';
+});
+
+// 关闭对话框
+const closeDialog = () => {
+    addDbDialogOverlay.style.display = 'none';
+};
+
+closeDialogBtn.addEventListener('click', closeDialog);
+
+// 保存按钮逻辑
+saveBtn.addEventListener('click', () => {
+    // 获取连接信息
+    const dbType = document.getElementById('databaseType').value;
+    const dbName = document.getElementById('databaseName').value.trim();
+    const dbUrl = document.getElementById('databaseUrl').value.trim();
+    const dbUser = document.getElementById('databaseUsername').value.trim();
+    const dbPassword = document.getElementById('databasePassword').value.trim();
+
+    // 验证输入
+    if (dbName === '' || dbUrl === '' || dbUser === '' || dbPassword === '') {
+        alert('请输入完整的数据库连接信息！');
+        return;
+    }
+
+    // 构造请求体
+    const DBRequest = {
+        dbType,
+        dbName,
+        dbUrl,
+        dbUser,
+        dbPassword
+    };
+
+    console.log('请求体:', DBRequest);
+
+    // 发送 POST 请求
+    fetch('http://localhost:8080/api/db/addDB', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(DBRequest)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('网络响应失败');
+            }
+            return response.json(); // 解析 JSON 数据
+        })
+        .then(tableNames => {
+            // 动态添加数据库项
+            addDatabaseItem(dbName, dbType, tableNames);
+            // 调用此函数以启用点击展开/折叠功能
+            // bindDatabaseItemClickEvent();
+
+            alert(`新数据库 "${dbName}" 已添加！`);
+            closeDialog();
+        })
+        .catch(error => {
+            console.error('错误:', error);
+            alert('数据库添加失败！');
+        });
+});
+

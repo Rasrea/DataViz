@@ -310,6 +310,7 @@ th {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    font-family: '华文行楷', sans-serif;
 }
 
 .database-header h2 {
@@ -347,11 +348,34 @@ th {
     background-color: #e9ecef;
     margin-top: 10px;
     border-radius: 4px;
+    font-family: '华文隶书', sans-serif;
 }
 
 .tableList {
     padding-left: 20px;
     display: none;
+    font-family: '楷体', sans-serif;
+    font-size: 18px;
+}
+
+.tableList li {
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.tableList li i {
+    margin-right: 8px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.tableList li:hover i {
+    transform: scale(1.2); /* 图标放大 */
+    color: #4a87d3; /* 更改图标颜色 */
+}
+
+.tableList li:hover {
+    color: #4a87d3; /* 更改文字颜色 */
 }
 
 .arrow {
@@ -360,15 +384,151 @@ th {
 }
 
 .arrow.collapsed {
-    transform: rotate(0deg);
+    transform: rotate(30deg);
 }
 
 .arrow:not(.collapsed) {
-    transform: rotate(90deg);
+    transform: rotate(-10deg);
 }
 
 /* 调整样本数据集选择框的位置，避免被flex布局影响 */
 .datasetSelect {
     position: absolute;
     z-index: 100;
+}
+
+
+/* 添加数据库对话框 */
+.add-database-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 更深的背景遮罩 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease; /* 渐入动画 */
+}
+
+/* 对话框样式 */
+.dialog-box {
+    background-color: #f9f9f9; /* 更柔和的背景色 */
+    padding: 25px;
+    border-radius: 12px; /* 更圆润的边角 */
+    width: 350px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 更明显的阴影 */
+    font-family: 'Segoe UI', Arial, sans-serif; /* 更现代的字体 */
+    transform: scale(0.9);
+    animation: scaleUp 0.3s ease forwards; /* 弹出动画 */
+}
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd; /* 添加分隔线 */
+    padding-bottom: 10px;
+}
+
+.dialog-header h5 {
+    margin: 0;
+    font-size: 18px;
+    color: #333; /* 更深的标题颜色 */
+}
+
+.close-dialog-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #888; /* 更柔和的关闭按钮颜色 */
+    transition: color 0.3s ease;
+}
+
+.close-dialog-btn:hover {
+    color: #ff5c5c; /* 悬停时的红色 */
+}
+
+.dialog-body {
+    margin-bottom: 20px;
+    display: flex; /* 启用 Flexbox 布局 */
+    flex-direction: column; /* 设置为竖向排列 */
+    gap: 10px; /* 添加子元素之间的间距 */
+}
+
+.dialog-body input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.dialog-body input:focus {
+    border-color: #4a87d3; /* 聚焦时的边框颜色 */
+    outline: none;
+}
+
+.dialog-footer {
+    display: flex; /* 启用 Flexbox 布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    gap: 12px; /* 按钮之间的间距 */
+}
+
+.dialog-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dialog-btn:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px); /* 悬停时的轻微上移效果 */
+}
+
+.dialog-btn:active {
+    transform: translateY(0); /* 点击时恢复 */
+}
+
+.dialog-btn:first-child {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.dialog-btn:last-child {
+    background-color: #4a87d3;
+    color: #fff;
+}
+
+.dialog-btn:last-child:hover {
+    background-color: #3a6fb3;
+}
+
+/* 渐入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 弹出动画 */
+@keyframes scaleUp {
+    from {
+        transform: scale(0.9);
+    }
+    to {
+        transform: scale(1);
+    }
 }
