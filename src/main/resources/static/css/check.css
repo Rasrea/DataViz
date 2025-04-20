@@ -268,7 +268,7 @@ th {
 
 /* 数据框设置 */
 #checkTableContainer {
-    max-height: 550px; /* 表格容器的固定高度 */
+    height: 550px; /* 表格容器的固定高度 */
     max-width: 50%; /* 表格容器的宽度为页面宽度 */
     overflow: auto; /* 超出范围时添加滚动条 */
     border: 1px solid #ddd; /* 添加边框 */

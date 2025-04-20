@@ -241,7 +241,8 @@ async function plotChart() {
 
     // 将表单数据嵌入配置信息
     fetch(`http://localhost:8080/api/chart/chartConfigAfterProcess?seriesCount=${sectorsCount}`)
-        .then(response => response.json()).then(chartConfigAfterProcess => {
+        .then(response => response.json())
+        .then(chartConfigAfterProcess => {
             if (chartType === 'WordCloudChart') {
                 chartConfigAfterProcess.series[0].textStyle.color = function () { // 随机生成颜色
                     return "rgb(" + [Math.round(Math.random() * 160), Math.round(Math.random() * 160), Math.round(Math.random() * 160)].join(",") + ")";

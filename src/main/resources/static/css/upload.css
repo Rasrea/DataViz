@@ -420,7 +420,8 @@ th {
     border-radius: 12px; /* 更圆润的边角 */
     width: 350px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 更明显的阴影 */
-    font-family: 'Segoe UI', Arial, sans-serif; /* 更现代的字体 */
+    font-family: '华文宋体', Arial, sans-serif; /* 更现代的字体 */
+    font-size: 18px; /* 更大的字体 */
     transform: scale(0.9);
     animation: scaleUp 0.3s ease forwards; /* 弹出动画 */
 }
@@ -465,7 +466,6 @@ th {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 14px;
     transition: border-color 0.3s ease;
 }
 

@@ -67,7 +67,12 @@ public class CsvFileServer implements FileProcessor {
         return "CSV";
     }
 
-    // 将数据列转为整型或浮点型
+    /**
+     * 将数据列转为整型或浮点型
+     *
+     * @param jsonResult 原始数据
+     * @return 转换后的数据
+     */
     public JsonResult<List<Map<String, Object>>> convertToNumberOrString(JsonResult<List<Map<String, String>>> jsonResult) {
         List<Map<String, String>> csvData = new ArrayList<>(jsonResult.getData());
         List<Map<String, Object>> convertedData = new ArrayList<>();

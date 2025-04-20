@@ -7,6 +7,17 @@ public class DBRequest {
     private String dbUser;
     private String dbPassword;
 
+    @Override
+    public String toString() {
+        return "DBRequest{" +
+                "dbType='" + dbType + '\'' +
+                ", dbName='" + dbName + '\'' +
+                ", dbUrl='" + dbUrl + '\'' +
+                ", dbUser='" + dbUser + '\'' +
+                ", dbPassword='" + dbPassword + '\'' +
+                '}';
+    }
+
     // getters and setters
     public String getDbType() {
         return dbType;
@@ -47,5 +58,4 @@ public class DBRequest {
     public void setDbPassword(String dbPassword) {
         this.dbPassword = dbPassword;
     }
-
 }

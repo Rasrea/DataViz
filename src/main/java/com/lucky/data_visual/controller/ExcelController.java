@@ -55,7 +55,6 @@ public class ExcelController implements FileController {
         operateJsonResult.setMsgList(result.getMsgList());
         operateJsonResult.setColTypes(result.getColTypes());
         operateJsonResult.setData(result.getData());
-//        operateJsonResult.setFileType(FileType.EXCEL);
     }
 
     @Operation(

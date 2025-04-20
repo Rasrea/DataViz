@@ -169,7 +169,7 @@ function fetchDataAndCreateTable() {
 }
 
 // 动态添加数据库项
-function addDatabaseItem(dbName, dbType, tableNames) {
+function addDatabaseItem(DBRequest, tableNames) {
     const databaseItem = document.createElement('div');
     databaseItem.className = 'databaseItem';
 
@@ -178,16 +178,16 @@ function addDatabaseItem(dbName, dbType, tableNames) {
     const img = document.createElement('img');
     img.alt = '数据库图标'
     img.style = 'width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;';
-    if (dbType === 'MySQL') {
+    if (DBRequest['dbType'] === 'MySQL') {
         img.src = 'images/database/MySQL.png';
-    } else if (dbType === 'PostgreSQL') {
+    } else if (DBRequest['dbType'] === 'PostgreSQL') {
         img.src = 'images/database/PostgreSQL.png';
-    } else if (dbType === 'Redis') {
+    } else if (DBRequest['dbType'] === 'Redis') {
         img.src = 'images/database/Redis.png';
     }
     h3.appendChild(img);
 
-    const textNode = document.createTextNode(dbName);
+    const textNode = document.createTextNode(DBRequest['dbName']);
     h3.appendChild(textNode);
 
     const arrow = document.createElement('span');
@@ -205,6 +205,15 @@ function addDatabaseItem(dbName, dbType, tableNames) {
         const li = document.createElement('li');
         const icon = document.createElement('i');
         icon.className = 'fas fa-table'; // Font Awesome 图标类
+        DBRequest['tName'] = tableName; // 设置表名
+        // 设置数据库连接信息
+        li.dataset.dbType = DBRequest['dbType'];
+        li.dataset.dbName = DBRequest['dbName'];
+        li.dataset.dbUrl = DBRequest['dbUrl'];
+        li.dataset.dbUser = DBRequest['dbUser'];
+        li.dataset.dbPassword = btoa(DBRequest['dbPassword']); // 使用 Base64 编码加密
+        li.dataset.tName = tableName; // 设置表名
+        li.className = 'tableItem';
         li.appendChild(icon);
 
         const tableText = document.createTextNode(tableName);
@@ -222,6 +231,7 @@ function addDatabaseItem(dbName, dbType, tableNames) {
     bindDatabaseToggle(); // 绑定折叠/展开事件
 }
 
+// 重新绑定折叠与展开事件
 function bindDatabaseToggle() {
     const databaseHeaders = document.querySelectorAll('.databaseItem h3');
     databaseHeaders.forEach(header => {
@@ -243,11 +253,26 @@ function bindDatabaseToggle() {
     });
 }
 
+// 保存数据库条目到 sessionStorage
+function saveDatabaseToSessionStorage(DBRequest, tableNames) {
+    const savedDatabases = JSON.parse(sessionStorage.getItem('databaseItem')) || [];
+    savedDatabases.push({ DBRequest, tableNames });
+    sessionStorage.setItem('databaseItem', JSON.stringify(savedDatabases));
+}
+
+// 从 sessionStorage 加载数据库条目
+function loadDatabasesFromSessionStorage() {
+    const savedDatabases = JSON.parse(sessionStorage.getItem('databaseItem')) || [];
+    savedDatabases.forEach(({ DBRequest, tableNames }) => {
+        addDatabaseItem(DBRequest, tableNames);
+    });
+}
 
 // 等待页面加载完成后执行
 window.onload = function () {
     fetchDataAndCreateTable()
     bindDatabaseToggle(); // 绑定折叠/展开事件
+    loadDatabasesFromSessionStorage(); // 加载并渲染数据库条目
 
     document.getElementById("fileInput").addEventListener("change", uploadAndFetchData);
 
@@ -349,7 +374,7 @@ const closeDialog = () => {
 
 closeDialogBtn.addEventListener('click', closeDialog);
 
-// 保存按钮逻辑
+// 保存连接信息按钮逻辑
 saveBtn.addEventListener('click', () => {
     // 获取连接信息
     const dbType = document.getElementById('databaseType').value;
@@ -366,14 +391,12 @@ saveBtn.addEventListener('click', () => {
 
     // 构造请求体
     const DBRequest = {
-        dbType,
-        dbName,
-        dbUrl,
-        dbUser,
-        dbPassword
+        'dbType': dbType,
+        'dbName': dbName,
+        'dbUrl': dbUrl,
+        'dbUser': dbUser,
+        'dbPassword': dbPassword
     };
-
-    console.log('请求体:', DBRequest);
 
     // 发送 POST 请求
     fetch('http://localhost:8080/api/db/addDB', {
@@ -384,16 +407,14 @@ saveBtn.addEventListener('click', () => {
         body: JSON.stringify(DBRequest)
     })
         .then(response => {
-            if (!response.ok) {
-                throw new Error('网络响应失败');
-            }
+            if (!response.ok) throw new Error('网络响应失败');
             return response.json(); // 解析 JSON 数据
         })
         .then(tableNames => {
             // 动态添加数据库项
-            addDatabaseItem(dbName, dbType, tableNames);
-            // 调用此函数以启用点击展开/折叠功能
-            // bindDatabaseItemClickEvent();
+            addDatabaseItem(DBRequest, tableNames);
+
+            saveDatabaseToSessionStorage(DBRequest, tableNames); // 保存到 localStorage
 
             alert(`新数据库 "${dbName}" 已添加！`);
             closeDialog();
@@ -404,3 +425,50 @@ saveBtn.addEventListener('click', () => {
         });
 });
 
+// 处理点击事件
+document.querySelector('.databaseList').addEventListener('click', (event) => {
+    const tableBtn = event.target.closest('.tableItem');
+    if (tableBtn) {
+        const encryptedPassword = tableBtn.dataset.dbPassword; // 获取加密的密码
+        const dbPassword = atob(encryptedPassword); // 使用 Base64 解码
+        const tName = tableBtn.dataset.tName; // 获取表名
+
+        // 连接信息
+        const DBRequest = {
+            'dbType': tableBtn.dataset.dbType,
+            'dbName': tableBtn.dataset.dbName,
+            'dbUrl': tableBtn.dataset.dbUrl,
+            'dbUser': tableBtn.dataset.dbUser,
+            'dbPassword': dbPassword,
+        };
+
+        // 读取表格数据
+        const loadingMessage = document.getElementById("loadingMessage");
+        loadingMessage.style.display = "block";
+
+        fetch("http://localhost:8080/api/db/readTable", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                dbRequest: DBRequest, // 传递 dfrequest 参数
+                tName: tName      // 传递 tname 参数
+            })
+        })
+            .then(response => response)
+            .then(() => {
+                // 获取数据库数据集
+                return fetch('http://localhost:8080/data/fetch-csv');
+            })
+            .then(response => response.json())
+            .then(data => {
+                createTable(data.data); // 创建 CSV 表格
+                loadingMessage.style.display = "none"; // 隐藏“请稍等”消息
+            })
+            .catch(error => {
+                console.error("操作失败：", error);
+                loadingMessage.style.display = "none"; // 隐藏“请稍等”消息
+            });
+    }
+});
