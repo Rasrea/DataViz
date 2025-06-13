@@ -107,21 +107,21 @@ DataViz 是一个基于 `Spring Boot` 和`前端技术`的可视化数据平台�
 - 🐍 Python 用于数据处理
 
 ### 🚀 启动步骤
-1. **📥 克隆项目**
+1. **📥 克隆项目** <br>
    ```bash
    git clone https://github.com/Rasrea/DataViz.git
    cd DataViz
    ```
-2. **⚙️ 配置数据库**
-   在 `application.yml` 中修改数据库连接信息。
-3. **🔧 运行后端**
+2. **⚙️ 配置数据库** <br>
+   如需使用数据库数据，可直接在**上传数据**页面添加配置。
+3. **🔧 运行后端** <br>
    ```bash
    mvn spring-boot:run
    ```
-4. **🌍 启动服务器**
+4. **🌍 启动服务器** <br>
    进入 `com.lucky.data_visual`，使用 IDE 或 VS Code 运行 `MyApplication.java`。
-5. **🌐 访问网站**
-   打开浏览器，访问 `http://localhost:63342/data-visual/static/DataViz.html`。
+5. **🌐 访问网站** <br>
+   打开浏览器，访问 `http://localhost:63342/data-visual/static/DataViz.html` （因配置而异，可直接在项目中打开**DataViz.html**）。
 
 ## 🤝 8. 贡献指南
 欢迎贡献代码！请提交 Pull Request，或者在 Issues 反馈 Bug 和建议。作为一名水大学生，我会尽快回复🤥。
@@ -129,3 +129,4 @@ DataViz 是一个基于 `Spring Boot` 和`前端技术`的可视化数据平台�
 ## 📜 9. 许可证
 本项目遵循 MIT 许可证，详细信息请查看 LICENSE 文件。
 
+> *注：由于在准备考研，因此本项目暂时停更（2025-06）。*

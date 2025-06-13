@@ -23,9 +23,6 @@ function createCharts(data, colName) {
                     fetch(`http://localhost:8080/api/operation/emptyAndNonEmptyData`)
                         .then(response => response.json())
                         .then(data => {
-                            console.log(data);
-
-
                             roseChartElements.series[0].radius = ["0%", "55%"]; // 修改饼图大小
                             roseChartElements.title.text = `${colName} 数据空值统计`;
                             roseChartElements.title.subtext = `空值: ${data[0].value}个, 非空值: ${data[1].value}个`;
