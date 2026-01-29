@@ -58,6 +58,7 @@ public class DBController {
 
         // 连接数据库
         logger.info("连接信息: {}", dbRequest);
+        // dbUrl = jdbc:mysql://<主机地址>:<端口号>
         try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword)) {
             // 查询对应数据库的所有表
             List<String> tableNames = new ArrayList<>(); // 存储对应数据库的列表

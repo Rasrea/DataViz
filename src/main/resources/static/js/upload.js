@@ -1,5 +1,21 @@
+let API_CONFIG = null;
+
+async function initApiConfig() {
+    if (API_CONFIG) return API_CONFIG;
+
+    const res = await fetch("js/api.json");
+    if (!res.ok) {
+        throw new Error("无法加载 api.json");
+    }
+
+    API_CONFIG = await res.json();
+    return API_CONFIG;
+}
+
 // 上传文件并获取数据
-function uploadAndFetchData() {
+async function uploadAndFetchData() {
+    const CONFIG = await initApiConfig(); // 读取全局 api 配置
+
     const file = document.getElementById("fileInput").files[0]; // 获取上传的文件
 
     // 检查文件后缀
@@ -21,9 +37,9 @@ function uploadAndFetchData() {
     // 根据文件后缀判断请求接口
     let apiUrl;
     if (fileExtension === 'csv') {
-        apiUrl = "http://localhost:8080/api/csv/upload"; // CSV 文件上传接口
+        apiUrl = `${CONFIG.baseUrl}/api/csv/upload`; // CSV 文件上传接口
     } else if (fileExtension === 'xls' || fileExtension === 'xlsx') {
-        apiUrl = "http://localhost:8080/api/excel/upload"; // Excel 文件上传接口
+        apiUrl = `${CONFIG.baseUrl}/api/excel/upload`; // Excel 文件上传接口
     } else {
         alert("不支持的文件类型！");
         return;
@@ -31,12 +47,11 @@ function uploadAndFetchData() {
 
     // 上传文件到后端并获取数据
     fetch(apiUrl, {
-        method: "POST",
-        body: formData,
+        method: "POST", body: formData,
     })
         .then((response) => {
             if (!response.ok) throw new Error("上传失败");
-            return fetch("http://localhost:8080/data/fetch-csv"); // 上传成功后获取数据
+            return fetch(`${CONFIG.baseUrl}/data/fetch-csv`); // 上传成功后获取数据
         })
         .then(response => response.json())
         .then(data => {
@@ -53,9 +68,11 @@ function uploadAndFetchData() {
 }
 
 // 创建Excel数据选择框
-function createExcelSelect() {
+async function createExcelSelect() {
+    const CONFIG = await initApiConfig(); // 读取全局 api 配置
+
     // 获取表格列表名称
-    fetch('http://localhost:8080/api/excel/sheetNames')
+    fetch(`${CONFIG.baseUrl}/api/excel/sheetNames`)
         .then(response => response.json())
         .then(sheetNames => {
             const selectElement = document.getElementById("excelDataSelect");
@@ -101,28 +118,30 @@ function createTable(tableData) {
 }
 
 // 选择样本数据
-function selectSampleData(selectValue) {
+async function selectSampleData(selectValue) {
+    const CONFIG = await initApiConfig(); // 读取全局 api 配置
+
     switch (selectValue) {
         case 'douban-books':
-            fetch('http://localhost:8080/data/douban-books') // 获取样本数据集
+            fetch(`${CONFIG.baseUrl}/data/douban-books`) // 获取样本数据集
                 .then(response => response.json())
                 .then(date => createTable(date.data))// cao！应该是data，拼成date了！
                 .catch(error => console.error("操作失败：", error));
             break;
         case 'maoyan-films':
-            fetch('http://localhost:8080/data/maoyan-films') // 获取样本数据集
+            fetch(`${CONFIG.baseUrl}/data/maoyan-films`) // 获取样本数据集
                 .then(response => response.json())
                 .then(date => createTable(date.data))
                 .catch(error => console.error("操作失败：", error));
             break;
         case 'metacritic-games':
-            fetch('http://localhost:8080/data/metacritic-games') // 获取样本数据集
+            fetch(`${CONFIG.baseUrl}/data/metacritic-games`) // 获取样本数据集
                 .then(response => response.json())
                 .then(date => createTable(date.data))
                 .catch(error => console.error("操作失败：", error));
             break;
         case 'random-data':
-            fetch('http://localhost:8080/data/random-data') // 获取样本数据集
+            fetch(`${CONFIG.baseUrl}/data/random-data`) // 获取样本数据集
                 .then(response => response.json())
                 .then(date => createTable(date.data))
                 .catch(error => console.error("操作失败：", error));
@@ -133,20 +152,24 @@ function selectSampleData(selectValue) {
 }
 
 // 获取指定Excel数据表
-function selectExcelData(sheetName) {
-    fetch(`http://localhost:8080/api/excel/data?sheetName=${sheetName}`)
+async function selectExcelData(sheetName) {
+    const CONFIG = await initApiConfig(); // 读取全局 api 配置
+
+    fetch(`${CONFIG.baseUrl}/api/excel/data?sheetName=${sheetName}`)
         .then(response => response.json())
         .then(data => createTable(data.data))
         .catch((error => console.error(`${sheetName}表读取失败：`, error)));
 }
 
 // 获取数据并创建表格
-function fetchDataAndCreateTable() {
+async function fetchDataAndCreateTable() {
+    const CONFIG = await initApiConfig(); // 读取全局 api 配置
+
     // 显示“请稍等”消息
     const loadingMessage = document.getElementById("loadingMessage");
     loadingMessage.style.display = "block";
 
-    fetch('http://localhost:8080/data/fetch-csv') // 获取样本数据集
+    fetch(`${CONFIG.baseUrl}/data/fetch-csv`) // 获取样本数据集
         .then(response => response.json())
         .then(data => {
             if (data.data !== null) {
@@ -256,14 +279,14 @@ function bindDatabaseToggle() {
 // 保存数据库条目到 sessionStorage
 function saveDatabaseToSessionStorage(DBRequest, tableNames) {
     const savedDatabases = JSON.parse(sessionStorage.getItem('databaseItem')) || [];
-    savedDatabases.push({ DBRequest, tableNames });
+    savedDatabases.push({DBRequest, tableNames});
     sessionStorage.setItem('databaseItem', JSON.stringify(savedDatabases));
 }
 
 // 从 sessionStorage 加载数据库条目
 function loadDatabasesFromSessionStorage() {
     const savedDatabases = JSON.parse(sessionStorage.getItem('databaseItem')) || [];
-    savedDatabases.forEach(({ DBRequest, tableNames }) => {
+    savedDatabases.forEach(({DBRequest, tableNames}) => {
         addDatabaseItem(DBRequest, tableNames);
     });
 }
@@ -375,7 +398,10 @@ const closeDialog = () => {
 closeDialogBtn.addEventListener('click', closeDialog);
 
 // 保存连接信息按钮逻辑
-saveBtn.addEventListener('click', () => {
+saveBtn.addEventListener('click', async () => {
+    // 获取全局配置API
+    const CONFIG = await initApiConfig();
+
     // 获取连接信息
     const dbType = document.getElementById('databaseType').value;
     const dbName = document.getElementById('databaseName').value.trim();
@@ -391,20 +417,14 @@ saveBtn.addEventListener('click', () => {
 
     // 构造请求体
     const DBRequest = {
-        'dbType': dbType,
-        'dbName': dbName,
-        'dbUrl': dbUrl,
-        'dbUser': dbUser,
-        'dbPassword': dbPassword
+        'dbType': dbType, 'dbName': dbName, 'dbUrl': dbUrl, 'dbUser': dbUser, 'dbPassword': dbPassword
     };
 
     // 发送 POST 请求
-    fetch('http://localhost:8080/api/db/addDB', {
-        method: 'POST',
-        headers: {
+    fetch(`${CONFIG.baseUrl}/api/db/addDB`, {
+        method: 'POST', headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(DBRequest)
+        }, body: JSON.stringify(DBRequest)
     })
         .then(response => {
             if (!response.ok) throw new Error('网络响应失败');
@@ -425,8 +445,10 @@ saveBtn.addEventListener('click', () => {
         });
 });
 
-// 处理点击事件
-document.querySelector('.databaseList').addEventListener('click', (event) => {
+// 处理点击数据表事件
+document.querySelector('.databaseList').addEventListener('click', async (event) => {
+    const CONFIG = await initApiConfig();
+
     const tableBtn = event.target.closest('.tableItem');
     if (tableBtn) {
         const encryptedPassword = tableBtn.dataset.dbPassword; // 获取加密的密码
@@ -446,12 +468,10 @@ document.querySelector('.databaseList').addEventListener('click', (event) => {
         const loadingMessage = document.getElementById("loadingMessage");
         loadingMessage.style.display = "block";
 
-        fetch("http://localhost:8080/api/db/readTable", {
-            method: "POST",
-            headers: {
+        fetch(`${CONFIG.baseUrl}/api/db/readTable`, {
+            method: "POST", headers: {
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
+            }, body: JSON.stringify({
                 dbRequest: DBRequest, // 传递 dfrequest 参数
                 tName: tName      // 传递 tname 参数
             })
@@ -459,7 +479,7 @@ document.querySelector('.databaseList').addEventListener('click', (event) => {
             .then(response => response)
             .then(() => {
                 // 获取数据库数据集
-                return fetch('http://localhost:8080/data/fetch-csv');
+                return fetch(`${CONFIG.baseUrl}/data/fetch-csv`);
             })
             .then(response => response.json())
             .then(data => {

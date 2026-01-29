@@ -31,7 +31,7 @@ sample-data-path:
 
 # Python编译器配置
 python-scripts-path:
-  # 解释器路径
+  # 解释器路径 ！！！根据自身配置修改！！！
   pythonPath: "D:/Software/Pythons/3.13/python.exe"
   # 数据预处理脚本
   dataVizPath: "src/main/resources/python-scripts/dataViz.py"
