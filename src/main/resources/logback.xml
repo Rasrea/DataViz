@@ -1,7 +1,7 @@
 <configuration>
         <!-- 定义日志输出格式和存储路径 -->
         <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
-        <property name="FILE_PATH" value="D:/Study/logs/data-visual/logger.%d{yyyy-MM-dd}.log" />
+        <property name="FILE_PATH" value="logs/logger.%d{yyyy-MM-dd}.log" />
 
         <!-- 定义控制台输出 -->
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
