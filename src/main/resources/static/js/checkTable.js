@@ -1,10 +1,26 @@
+let API_CONFIG = null;
+
+async function initApiConfig() {
+    if (API_CONFIG) return API_CONFIG;
+
+    const res = await fetch("js/api.json");
+    if (!res.ok) {
+        throw new Error("无法加载 api.json");
+    }
+
+    API_CONFIG = await res.json();
+    return API_CONFIG;
+}
+
 // 获取JSON数据并创建表格
-function fetchDataAndCreateTable() {
+async function fetchDataAndCreateTable() {
+    const CONFIG = await initApiConfig(); // 读取全局API配置
+
     // 显示“请稍等”消息
     const loadingMessage = document.getElementById("loadingMessage");
     loadingMessage.style.display = "block";
 
-    fetch('http://localhost:8080/data/fetch-csv') // 获取样本数据集
+    fetch(`${CONFIG.baseUrl}/data/fetch-csv`) // 获取样本数据集
         .then(response => response.json())
         .then(data => {
             createCsvTable(data["data"], data["colTypes"]) // 创建 CSV 表格
@@ -61,9 +77,11 @@ function handleHeaderClick(columnKey) {
 }
 
 // 下载逻辑
-function downloadTable() {
+async function downloadTable() {
+    const CONFIG = await initApiConfig(); // 读取全局API配置
+
     // 请求后端数据
-    fetch('http://localhost:8080/data/fetch-csv')
+    fetch(`${CONFIG.baseUrl}/data/fetch-csv`)
         .then(response => response.json()) // 将响应数据解析为 JSON
         .then(data => {
             // 将 JSON 数据转换为 CSV
@@ -112,9 +130,11 @@ function jsonToCSV(jsonData) {
 }
 
 // 初始化表格数据
-function initializeTable() {
+async function initializeTable() {
+    const CONFIG = await initApiConfig(); // 读取全局API配置
+
     // 发送请求到后端的初始化接口
-    fetch('http://localhost:8080/api/csv/initData', {
+    fetch(`${CONFIG.baseUrl}/api/csv/initData`, {
         method: 'POST'
     })
         .then(response => {

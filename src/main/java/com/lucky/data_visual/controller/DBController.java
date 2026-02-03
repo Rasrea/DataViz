@@ -112,8 +112,6 @@ public class DBController {
                  ResultSet rs = stmt.executeQuery(query)) {
                 List<Map<String, String>> tableData = convertTableToJson(rs);
 
-                logger.info("查询到的表数据: {}", tableData);
-
                 // 将表数据注入 jsonResult
                 jsonResult.setData(tableData);
                 jsonResult.setStatusCode(HttpStatusCode.OK);

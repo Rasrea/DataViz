@@ -1,3 +1,17 @@
+let API_CONFIG = null;
+
+async function initApiConfig() {
+    if (API_CONFIG) return API_CONFIG;
+
+    const res = await fetch("js/api.json");
+    if (!res.ok) {
+        throw new Error("无法加载 api.json");
+    }
+
+    API_CONFIG = await res.json();
+    return API_CONFIG;
+}
+
 const chart = new Chart();
 
 // 获取相关列名
@@ -6,11 +20,12 @@ function fetchColName() {
 }
 
 // 创建相关图表
-function createCharts(data, colName) {
+async function createCharts(data, colName) {
+    const CONFIG = await initApiConfig(); // 读取全局API配置
     const currentColType = data["colTypes"]["currentColType"][colName];
 
     // 将 列名 传入后端
-    fetch(`http://localhost:8080/api/operation/readColData?colName=${colName}`)
+    fetch(`${CONFIG.baseUrl}/api/operation/readColData?colName=${colName}`)
         .then(isRead => {
             if (!isRead.ok) {
                 console.error('读取数据失败');
@@ -20,7 +35,7 @@ function createCharts(data, colName) {
             fetch('plotCharts/configs/PieChart.json')
                 .then(response => response.json())
                 .then(roseChartElements => {
-                    fetch(`http://localhost:8080/api/operation/emptyAndNonEmptyData`)
+                    fetch(`${CONFIG.baseUrl}/api/operation/emptyAndNonEmptyData`)
                         .then(response => response.json())
                         .then(data => {
                             roseChartElements.series[0].radius = ["0%", "55%"]; // 修改饼图大小
@@ -39,7 +54,7 @@ function createCharts(data, colName) {
             fetch('plotCharts/configs/PieChart.json')
                 .then(response => response.json())
                 .then(pieChartElements => {
-                    fetch(`http://localhost:8080/api/operation/topKFrequency?K=5`)
+                    fetch(`${CONFIG.baseUrl}/api/operation/topKFrequency?K=5`)
                         .then(response => response.json())
                         .then(data => {
                             pieChartElements.series[0].radius = ["0%", "65%"]; // 修改饼图大小
@@ -57,7 +72,7 @@ function createCharts(data, colName) {
                 fetch('plotCharts/configs/ScatterChart.json')
                     .then(response => response.json())
                     .then(scatterChartElements => {
-                        fetch(`http://localhost:8080/api/operation/singleLabelsAndValues`)
+                        fetch(`${CONFIG.baseUrl}/api/operation/singleLabelsAndValues`)
                             .then(response => response.json())
                             .then(data => {
                                 scatterChartElements.title.text = `${colName} 散点分析`;
@@ -76,7 +91,7 @@ function createCharts(data, colName) {
                 fetch('plotCharts/configs/BoxChart.json')
                     .then(response => response.json())
                     .then(boxChartElements => {
-                        fetch(`http://localhost:8080/api/operation/quartilesAndWhisker?isGetOutliers=true`)
+                        fetch(`${CONFIG.baseUrl}/api/operation/quartilesAndWhisker?isGetOutliers=true`)
                             .then(response => response.json())
                             .then(data => {
                                 console.log(data);
@@ -109,7 +124,7 @@ function createCharts(data, colName) {
                 fetch('plotCharts/configs/WordCloudChart.json')
                     .then(response => response.json())
                     .then(wordCloudChartElements => {
-                        fetch(`http://localhost:8080/api/operation/topKFrequency?K=1000`)
+                        fetch(`${CONFIG.baseUrl}/api/operation/topKFrequency?K=1000`)
                             .then(response => response.json())
                             .then(data => {
                                 wordCloudChartElements.series[0].textStyle.color = function () { // 随机生成颜色
@@ -128,7 +143,7 @@ function createCharts(data, colName) {
                 fetch('plotCharts/configs/BarChart.json')
                     .then(response => response.json())
                     .then(barChartElements => {
-                        fetch(`http://localhost:8080/api/operation/topKFrequency?K=10`)
+                        fetch(`${CONFIG.baseUrl}/api/operation/topKFrequency?K=10`)
                             .then(response => response.json())
                             .then(data => {
                                 barChartElements.title.text = `${colName} 条形分析`;
@@ -200,7 +215,8 @@ function createAlterTable(data, colName) {
 }
 
 // 将表单元素发送给后端
-function sentFormData(formId, colName) {
+async function sentFormData(formId, colName) {
+    const CONFIG = await initApiConfig(); // 读取全局API配置
     const form = document.getElementById(formId);
 
     form.addEventListener("submit", function (event) {
@@ -210,7 +226,7 @@ function sentFormData(formId, colName) {
         const formDataObject = Object.fromEntries(formData.entries());
         formDataObject["colName"] = colName;
 
-        fetch("http://localhost:8080/api/col/alterColData", {
+        fetch(`${CONFIG.baseUrl}/api/col/alterColData`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -230,10 +246,11 @@ function sentFormData(formId, colName) {
 }
 
 // 获取相关列的数据
-function fetchColData() {
+async function fetchColData() {
+    const CONFIG = await initApiConfig(); // 读取全局API配置
     const colName = fetchColName();
 
-    fetch(`http://localhost:8080/api/col/operation?column=${colName}`)
+    fetch(`${CONFIG.baseUrl}/api/col/operation?column=${colName}`)
         .then(response => response.json())
         .then(data => {
             createAlterTable(data, colName);
