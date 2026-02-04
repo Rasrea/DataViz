@@ -1,0 +1,7 @@
+server:
+  dataPath: 'http://192.168.1.128:8080/data/fetch-csv' # 后缀 "/data/fetch-csv"
+
+# Python编译器配置
+python-scripts-path:
+  # 解释器路径 ！！！根据自身配置修改！！！
+  pythonPath: "python3"

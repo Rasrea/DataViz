@@ -4,7 +4,7 @@ server:
 
 spring:
   application:
-    name: springboot-demo
+    name: data-visual
   thymeleaf:
     cache: false # 关闭缓存
   servlet:
@@ -16,7 +16,7 @@ spring:
 logging:
   config: classpath:logback.xml
   level:
-    com.lucky.spring_boot_demo: trace
+    com.lucky.data_visual: trace
 
 # 样本数据集网址
 sample-data-path:
@@ -33,5 +33,5 @@ sample-data-path:
 python-scripts-path:
   # 解释器路径 ！！！根据自身配置修改！！！
   pythonPath: "D:/Software/Pythons/3.13/python.exe"
-  # TODO 数据预处理脚本
-  dataVizPath: "src/main/resources/python-scripts/dataViz.py"
+  # 数据预处理脚本
+  dataVizPath: "classpath:python-scripts/dataViz.py"

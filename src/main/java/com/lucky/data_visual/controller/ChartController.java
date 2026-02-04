@@ -16,13 +16,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +31,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/chart")
 public class ChartController {
+    private final ResourceLoader resourceLoader;
+
     private final static Logger logger = LoggerFactory.getLogger(ChartController.class);
     private final ChartServer chartServer = new ChartServer();
     private final JsonResult<List<Map<String, Object>>> operateJsonResult; // 操作数据
@@ -38,9 +40,11 @@ public class ChartController {
 
     @Autowired
     public ChartController(@Qualifier("operationalData") JsonResult<List<Map<String, Object>>> operateJsonResult,
-                           @Qualifier("chartParams") Chart chart) {
+                           @Qualifier("chartParams") Chart chart,
+                           ResourceLoader resourceLoader) {
         this.operateJsonResult = operateJsonResult;
         this.chart = chart;
+        this.resourceLoader = resourceLoader;
     }
 
     @Operation(
@@ -90,14 +94,24 @@ public class ChartController {
     @GetMapping("/chartConfig")
     public ResponseEntity<JsonNode> setChartConfig(@RequestParam String chartType) {
         ObjectMapper objectMapper = new ObjectMapper();
-        Path basePath = Paths.get("src/main/resources/static/plotCharts/configs").toAbsolutePath();
-        Path targetPath = basePath.resolve(chartType + ".json").normalize();
+
+        String location = "classpath:static/plotCharts/configs/" + chartType + ".json";
 
         try {
-            chart.setChartConfig(objectMapper.readTree(targetPath.toFile()));
-            return ResponseEntity.ok(chart.getChartConfig());
+            Resource resource = resourceLoader.getResource(location);
+
+            if (!resource.exists()) {
+                return ResponseEntity.notFound().build();
+            }
+
+            try (InputStream in = resource.getInputStream()) {
+                JsonNode config = objectMapper.readTree(in);
+                chart.setChartConfig(config);
+                return ResponseEntity.ok(config);
+            }
+
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("加载图表配置失败：" + chartType, e);
         }
     }
 

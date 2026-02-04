@@ -1,3 +1,17 @@
+let API_CONFIG = null;
+
+async function initApiConfig() {
+    if (API_CONFIG) return API_CONFIG;
+
+    const res = await fetch("js/api.json");
+    if (!res.ok) {
+        throw new Error("无法加载 api.json");
+    }
+
+    API_CONFIG = await res.json();
+    return API_CONFIG;
+}
+
 // 设置图标参数的全局变量
 let chart = new Chart('chartContainer');
 let jsonData // 后端数据
@@ -215,6 +229,8 @@ function initChartConfig() {
  * @returns {Promise<void>}
  */
 async function plotChart() {
+    const CONFIG = await initApiConfig(); // 读取全局API配置
+
     populateFormWithSavedData([
         'xData', 'yData', 'zData', // tab1
         'chartTitle', 'chartExplain', 'xLabel', 'yLabel', // tab2
@@ -227,9 +243,9 @@ async function plotChart() {
     // 将 图表类型 和 绘图策略 传给后端
     const chartType = document.getElementById('chartOptions').value
     chart.setChartType(chartType);
-    await fetch(`http://localhost:8080/api/chart/chartConfig?chartType=${chartType}`); // 发送图表类型到后端
-    await fetch(`http://localhost:8080/api/chart/columnStrategy?columnStrategy=${CHART_TYPE[chartType]}`); // 发送绘图策略到后端
-    await pullJSON('http://localhost:8080/api/chart/axisLabels', 'POST', getAxisLabels()); // 发送 x轴 和 y 轴标签到后端
+    await fetch(`${CONFIG.baseUrl}/api/chart/chartConfig?chartType=${chartType}`); // 发送图表类型到后端
+    await fetch(`${CONFIG.baseUrl}/api/chart/columnStrategy?columnStrategy=${CHART_TYPE[chartType]}`); // 发送绘图策略到后端
+    await pullJSON(`${CONFIG.baseUrl}/api/chart/axisLabels`, 'POST', getAxisLabels()); // 发送 x轴 和 y 轴标签到后端
 
     // 获取后端的 图表信息
     let sectorsCount = 0;
@@ -240,7 +256,7 @@ async function plotChart() {
     }
 
     // 将表单数据嵌入配置信息
-    fetch(`http://localhost:8080/api/chart/chartConfigAfterProcess?seriesCount=${sectorsCount}`)
+    fetch(`${CONFIG.baseUrl}/api/chart/chartConfigAfterProcess?seriesCount=${sectorsCount}`)
         .then(response => response.json())
         .then(chartConfigAfterProcess => {
             if (chartType === 'WordCloudChart') {
@@ -261,6 +277,8 @@ async function plotChart() {
  * 页面加载时调用的初始化函数
  */
 window.onload = async function () {
+    const CONFIG = await initApiConfig(); // 读取全局API配置
+
     // 加载已保存的 Y 轴标签
     const savedYData = JSON.parse(sessionStorage.getItem('selectedYData')) || [];
     const container = document.getElementById("selectedYDataContainer");
@@ -269,7 +287,7 @@ window.onload = async function () {
     });
 
     // 获取 后端数据 和 原始图表数据
-    let response = await fetch('http://localhost:8080/data/fetch-csv');
+    let response = await fetch(`${CONFIG.baseUrl}/data/fetch-csv`);
     jsonData = await response.json();
 
     // 设置表单数据

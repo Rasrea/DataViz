@@ -18,10 +18,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +36,8 @@ import java.util.Map;
 @RequestMapping("/api/col")
 public class ColDataController {
     private final static Logger logger = LoggerFactory.getLogger(ColDataController.class);
+
+    private final ResourceLoader resourceLoader;
 
     private final JsonResult<List<Map<String, Object>>> operateJsonResult; // 操作数据
     private final JsonResult<Map<String, List<Object>>> colJsonResult; // 列数据
@@ -45,9 +52,11 @@ public class ColDataController {
 
     @Autowired
     public ColDataController(@Qualifier("operationalData") JsonResult<List<Map<String, Object>>> operateJsonResult,
-                         @Qualifier("colData") JsonResult<Map<String, List<Object>>> colJsonResult) {
+                             @Qualifier("colData") JsonResult<Map<String, List<Object>>> colJsonResult,
+                             ResourceLoader resourceLoader) {
         this.operateJsonResult = operateJsonResult;
         this.colJsonResult = colJsonResult;
+        this.resourceLoader = resourceLoader;
     }
 
     @Operation(
@@ -110,14 +119,20 @@ public class ColDataController {
         // 将 表格操作数据 转换为 JSON 字符串
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = objectMapper.writeValueAsString(submitElementMap);
-        jsonString = jsonString.replace("\"", "\\\"");  // 转义双引号
+
+        // Windows 系统下需要转义双引号, Linux 系统下不需要
+        if (System.getProperty("os.name").toLowerCase().contains("win"))
+            jsonString = jsonString.replace("\"", "\\\"");  // 转义双引号
+//        jsonString = jsonString.replace("\"", "\\\"");  // 转义双引号
 
         // 调用python脚本实现表格需求
         String[] cmd = {
                 pythonScriptsPath.getPythonPath(), // Python解释器路径
-                pythonScriptsPath.getDataVizPath(),
+                resolveScriptPath(
+                        pythonScriptsPath.getDataVizPath()
+                ),
                 "read_form_data",
-                "\"" + jsonString + "\"",  // 包裹 JSON 字符串
+                jsonString,  // 包裹 JSON 字符串
                 serverDataPath
         };
 
@@ -137,5 +152,42 @@ public class ColDataController {
 
         return ResponseEntity.ok("数据提交成功");
     }
+
+    /**
+     * 解析 Python 脚本路径
+     * @param path 脚本路径
+     * @return 解析后的脚本绝对路径
+     */
+    private String resolveScriptPath(String path) {
+        try {
+            // classpath 情况
+            if (path.startsWith("classpath:")) {
+                org.springframework.core.io.Resource resource = resourceLoader.getResource(path);
+
+                if (!resource.exists()) {
+                    throw new IllegalStateException("Python脚本不存在：" + path);
+                }
+
+                Path tempDir = Files.createTempDirectory("python-script-");
+
+                // ✅ 不要再 Path.of(path)
+                Path scriptPath = tempDir.resolve("dataViz.py");
+
+                try (InputStream in = resource.getInputStream()) {
+                    Files.copy(in, scriptPath, StandardCopyOption.REPLACE_EXISTING);
+                }
+
+                scriptPath.toFile().setExecutable(true);
+                return scriptPath.toString();
+            }
+
+            // 普通文件路径（这里只可能是纯 OS 路径）
+            return Path.of(path).toAbsolutePath().toString();
+
+        } catch (IOException e) {
+            throw new RuntimeException("解析 Python 脚本路径失败", e);
+        }
+    }
+
 
 }
