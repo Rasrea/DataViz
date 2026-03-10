@@ -1,0 +1,854 @@
+14:39:40.081 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 12936 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+14:39:40.082 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+14:39:40.083 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+14:39:40.716 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+14:39:40.723 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+14:39:40.723 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+14:39:40.725 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+14:39:40.764 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+14:39:40.764 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 660 ms
+14:39:40.935 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+14:39:41.158 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+14:39:41.180 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+14:39:41.192 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+14:39:41.203 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.318 seconds (process running for 1.709)
+14:39:41.707 [RMI TCP Connection(2)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+14:39:41.707 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+14:39:41.708 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+14:39:48.085 [http-nio-8080-exec-6] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+14:39:48.093 [http-nio-8080-exec-6] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+14:39:53.351 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+14:39:53.416 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+14:43:50.672 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 7012 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+14:43:50.677 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+14:43:50.677 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+14:43:51.293 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+14:43:51.298 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+14:43:51.299 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+14:43:51.299 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+14:43:51.338 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+14:43:51.339 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 638 ms
+14:43:51.501 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+14:43:51.729 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+14:43:51.749 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+14:43:51.760 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+14:43:51.768 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.287 seconds (process running for 1.669)
+14:43:52.271 [RMI TCP Connection(2)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+14:43:52.271 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+14:43:52.273 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+14:43:59.836 [http-nio-8080-exec-1] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+14:43:59.838 [http-nio-8080-exec-1] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+14:45:33.691 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+14:45:33.762 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+14:45:36.032 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 3576 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+14:45:36.032 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+14:45:36.032 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+14:45:36.655 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+14:45:36.660 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+14:45:36.661 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+14:45:36.661 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+14:45:36.701 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+14:45:36.701 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 648 ms
+14:45:36.784 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'colDataController': Injection of autowired dependencies failed
+14:45:36.785 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+14:45:36.797 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+14:45:36.806 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'colDataController': Injection of autowired dependencies failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:515)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1441)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:289)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1122)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1093)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1030)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.lucky.data_visual.MyApplication.main(MyApplication.java:10)
+Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'server.baseURL' in value "${server.baseURL}"
+	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81)
+	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:416)
+	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:128)
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:118)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:114)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:255)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:226)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:201)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:963)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1541)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1519)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	... 19 common frames omitted
+14:46:25.887 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 3236 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+14:46:25.888 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+14:46:25.889 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+14:46:26.503 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+14:46:26.509 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+14:46:26.510 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+14:46:26.510 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+14:46:26.549 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+14:46:26.549 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 640 ms
+14:46:26.637 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'colDataController': Injection of autowired dependencies failed
+14:46:26.638 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+14:46:26.650 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+14:46:26.657 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'colDataController': Injection of autowired dependencies failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:515)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1441)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:289)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1122)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1093)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1030)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.lucky.data_visual.MyApplication.main(MyApplication.java:10)
+Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'server.baseURL' in value "${server.baseURL}"
+	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81)
+	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:416)
+	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:128)
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:118)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:114)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:255)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:226)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:201)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:963)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1541)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1519)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	... 19 common frames omitted
+14:46:56.818 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 15760 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+14:46:56.819 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+14:46:56.820 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+14:46:57.446 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+14:46:57.446 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+14:46:57.456 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+14:46:57.456 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+14:46:57.497 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+14:46:57.497 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 655 ms
+14:46:57.673 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+14:46:57.899 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+14:46:57.918 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+14:46:57.932 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+14:46:57.934 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.304 seconds (process running for 1.678)
+14:46:58.478 [RMI TCP Connection(3)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+14:46:58.478 [RMI TCP Connection(3)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+14:46:58.478 [RMI TCP Connection(3)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+14:47:09.945 [http-nio-8080-exec-2] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+14:47:09.954 [http-nio-8080-exec-2] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+14:50:14.787 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+14:50:14.859 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+14:50:17.155 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 12996 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+14:50:17.156 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+14:50:17.157 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+14:50:17.750 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+14:50:17.756 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+14:50:17.757 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+14:50:17.757 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+14:50:17.798 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+14:50:17.798 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 622 ms
+14:50:17.956 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+14:50:18.168 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+14:50:18.188 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+14:50:18.199 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+14:50:18.207 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.234 seconds (process running for 1.601)
+14:50:18.774 [RMI TCP Connection(3)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+14:50:18.774 [RMI TCP Connection(3)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+14:50:18.775 [RMI TCP Connection(3)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+14:50:28.955 [http-nio-8080-exec-3] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+14:50:28.956 [http-nio-8080-exec-3] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+14:51:09.324 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+14:51:09.385 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+15:41:30.315 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 21816 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+15:41:30.316 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+15:41:30.317 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+15:41:31.052 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+15:41:31.058 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+15:41:31.059 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+15:41:31.059 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+15:41:31.102 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+15:41:31.102 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 761 ms
+15:41:31.287 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+15:41:31.531 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+15:41:31.552 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+15:41:31.562 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+15:41:31.571 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.522 seconds (process running for 2.064)
+15:41:31.955 [RMI TCP Connection(2)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:41:31.955 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+15:41:31.956 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+15:41:36.360 [http-nio-8080-exec-3] ERROR c.l.d.controller.ColDataController - operateJsonResult 数据为空
+15:41:40.545 [http-nio-8080-exec-10] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+15:41:40.574 [http-nio-8080-exec-10] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+15:41:44.861 [http-nio-8080-exec-1] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+15:41:45.005 [http-nio-8080-exec-1] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+15:42:22.650 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+15:42:22.718 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+15:42:24.526 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 25040 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+15:42:24.528 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+15:42:24.529 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+15:42:25.275 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+15:42:25.281 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+15:42:25.282 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+15:42:25.282 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+15:42:25.322 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+15:42:25.323 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 759 ms
+15:42:25.498 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+15:42:25.719 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+15:42:25.742 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+15:42:25.752 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+15:42:25.760 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.531 seconds (process running for 2.197)
+15:42:26.289 [RMI TCP Connection(1)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:42:26.289 [RMI TCP Connection(1)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+15:42:26.289 [RMI TCP Connection(1)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+15:42:38.984 [http-nio-8080-exec-2] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+15:42:38.988 [http-nio-8080-exec-2] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+15:42:48.000 [http-nio-8080-exec-9] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.nio.file.InvalidPathException: Illegal char <:> at index 4: http://localhost:8080] with root cause
+java.nio.file.InvalidPathException: Illegal char <:> at index 4: http://localhost:8080
+	at java.base/sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:182)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:153)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77)
+	at java.base/sun.nio.fs.WindowsPath.parse(WindowsPath.java:92)
+	at java.base/sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:232)
+	at java.base/java.nio.file.Path.of(Path.java:147)
+	at com.lucky.data_visual.controller.ConfigController.getBaseURL(ConfigController.java:22)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:257)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1088)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:978)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:114)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+15:43:13.803 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+15:43:13.876 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+15:43:15.312 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 25272 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+15:43:15.312 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+15:43:15.314 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+15:43:15.918 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+15:43:15.923 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+15:43:15.924 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+15:43:15.924 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+15:43:15.963 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+15:43:15.963 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 629 ms
+15:43:16.126 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+15:43:16.348 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+15:43:16.366 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+15:43:16.378 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+15:43:16.387 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.283 seconds (process running for 1.718)
+15:43:16.870 [RMI TCP Connection(4)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:43:16.870 [RMI TCP Connection(4)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+15:43:16.871 [RMI TCP Connection(4)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+15:43:29.073 [http-nio-8080-exec-6] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+15:43:29.081 [http-nio-8080-exec-6] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+15:44:15.325 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+15:44:15.390 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+15:44:16.840 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 7324 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+15:44:16.840 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+15:44:16.840 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+15:44:17.484 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+15:44:17.489 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+15:44:17.491 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+15:44:17.491 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+15:44:17.534 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+15:44:17.534 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 676 ms
+15:44:17.736 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+15:44:18.003 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+15:44:18.032 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+15:44:18.047 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+15:44:18.058 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.452 seconds (process running for 1.913)
+15:44:18.320 [RMI TCP Connection(2)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:44:18.320 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+15:44:18.321 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+15:45:03.680 [http-nio-8080-exec-2] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+15:45:03.684 [http-nio-8080-exec-2] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+15:45:09.845 [http-nio-8080-exec-4] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.nio.file.InvalidPathException: Illegal char <:> at index 4: http://localhost:8080] with root cause
+java.nio.file.InvalidPathException: Illegal char <:> at index 4: http://localhost:8080
+	at java.base/sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:182)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:153)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77)
+	at java.base/sun.nio.fs.WindowsPath.parse(WindowsPath.java:92)
+	at java.base/sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:232)
+	at java.base/java.nio.file.Path.of(Path.java:147)
+	at com.lucky.data_visual.controller.ConfigController.getBaseURL(ConfigController.java:22)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:257)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1088)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:978)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:114)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+15:46:25.729 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+15:46:25.799 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+15:46:27.933 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 22916 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+15:46:27.933 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+15:46:27.933 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+15:46:28.571 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+15:46:28.576 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+15:46:28.577 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+15:46:28.577 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+15:46:28.618 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+15:46:28.618 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 654 ms
+15:46:28.784 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+15:46:29.004 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+15:46:29.025 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+15:46:29.036 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+15:46:29.045 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.314 seconds (process running for 1.738)
+15:46:29.510 [RMI TCP Connection(2)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:46:29.510 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+15:46:29.511 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+15:47:33.712 [http-nio-8080-exec-1] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+15:47:33.717 [http-nio-8080-exec-1] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+15:53:09.499 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+15:53:09.572 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+15:53:11.471 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 25244 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+15:53:11.471 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+15:53:11.471 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+15:53:12.150 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+15:53:12.157 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+15:53:12.160 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+15:53:12.160 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+15:53:12.202 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+15:53:12.204 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 708 ms
+15:53:12.386 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+15:53:12.631 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+15:53:12.649 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+15:53:12.664 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+15:53:12.670 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.392 seconds (process running for 1.806)
+15:53:13.066 [RMI TCP Connection(3)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:53:13.067 [RMI TCP Connection(3)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+15:53:13.068 [RMI TCP Connection(3)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+15:53:18.399 [http-nio-8080-exec-2] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+15:53:18.404 [http-nio-8080-exec-2] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+15:53:19.812 [http-nio-8080-exec-4] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+15:53:19.826 [http-nio-8080-exec-4] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+15:54:27.885 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+15:54:27.955 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+15:54:29.406 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 15892 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+15:54:29.407 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+15:54:29.407 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+15:54:30.015 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+15:54:30.020 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+15:54:30.020 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+15:54:30.021 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+15:54:30.062 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+15:54:30.063 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 636 ms
+15:54:30.229 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+15:54:30.449 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+15:54:30.468 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+15:54:30.480 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+15:54:30.486 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.36 seconds (process running for 1.773)
+15:54:30.877 [RMI TCP Connection(1)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:54:30.877 [RMI TCP Connection(1)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+15:54:30.878 [RMI TCP Connection(1)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+15:54:39.430 [http-nio-8080-exec-5] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+15:54:39.446 [http-nio-8080-exec-5] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+15:58:36.965 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+15:58:37.040 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+15:58:39.030 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 17084 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+15:58:39.030 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+15:58:39.030 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+15:58:39.629 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+15:58:39.640 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+15:58:39.640 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+15:58:39.640 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+15:58:39.682 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+15:58:39.682 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 629 ms
+15:58:39.846 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+15:58:40.070 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+15:58:40.086 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+15:58:40.101 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+15:58:40.109 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.259 seconds (process running for 1.622)
+15:58:40.684 [RMI TCP Connection(3)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:58:40.684 [RMI TCP Connection(3)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+15:58:40.686 [RMI TCP Connection(3)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+15:58:59.274 [http-nio-8080-exec-4] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+15:58:59.280 [http-nio-8080-exec-4] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+15:59:23.651 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+15:59:23.719 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+16:00:46.921 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 25480 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+16:00:46.925 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+16:00:46.925 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+16:00:47.600 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+16:00:47.606 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+16:00:47.606 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+16:00:47.606 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+16:00:47.646 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+16:00:47.646 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 705 ms
+16:00:47.831 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+16:00:48.050 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+16:00:48.076 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+16:00:48.084 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+16:00:48.094 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.38 seconds (process running for 1.755)
+16:00:48.515 [RMI TCP Connection(3)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+16:00:48.515 [RMI TCP Connection(3)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+16:00:48.517 [RMI TCP Connection(3)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+16:01:00.679 [http-nio-8080-exec-3] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+16:01:00.682 [http-nio-8080-exec-3] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+16:04:04.812 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+16:04:04.885 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+16:04:06.314 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 23516 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+16:04:06.314 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+16:04:06.314 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+16:04:06.952 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+16:04:06.959 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+16:04:06.960 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+16:04:06.960 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+16:04:07.000 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+16:04:07.001 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 663 ms
+16:04:07.164 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+16:04:07.383 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+16:04:07.405 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+16:04:07.416 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+16:04:07.426 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.312 seconds (process running for 1.744)
+16:04:07.842 [RMI TCP Connection(1)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+16:04:07.842 [RMI TCP Connection(1)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+16:04:07.843 [RMI TCP Connection(1)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+16:04:34.351 [http-nio-8080-exec-10] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+16:04:34.356 [http-nio-8080-exec-10] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+16:09:29.247 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+16:09:29.313 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+17:10:21.904 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 8580 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:10:21.905 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:10:21.906 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:10:22.651 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:10:22.657 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:10:22.659 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:10:22.659 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:10:22.705 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:10:22.705 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 773 ms
+17:10:22.896 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:10:23.146 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:10:23.171 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:10:23.174 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+17:10:23.195 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+17:10:23.203 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+17:10:33.932 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 3472 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:10:33.933 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:10:33.933 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:10:34.578 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:10:34.583 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:10:34.584 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:10:34.584 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:10:34.623 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:10:34.623 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 669 ms
+17:10:34.790 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:10:35.018 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:10:35.038 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:10:35.050 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+17:10:35.060 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.326 seconds (process running for 1.692)
+17:10:35.626 [RMI TCP Connection(1)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:10:35.626 [RMI TCP Connection(1)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:10:35.627 [RMI TCP Connection(1)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+17:11:29.495 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+17:11:29.560 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+17:11:30.838 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 12296 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:11:30.840 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:11:30.841 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:11:31.463 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:11:31.470 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:11:31.471 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:11:31.471 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:11:31.509 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:11:31.509 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 647 ms
+17:11:31.680 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:11:31.897 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:11:31.916 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:11:31.926 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+17:11:31.935 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.293 seconds (process running for 1.687)
+17:11:32.427 [RMI TCP Connection(2)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:11:32.427 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:11:32.429 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+17:12:24.393 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+17:12:24.460 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+17:12:26.282 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 9968 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:12:26.284 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:12:26.284 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:12:26.883 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:12:26.888 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:12:26.889 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:12:26.889 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:12:26.926 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:12:26.926 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 623 ms
+17:12:27.092 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:12:27.305 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:12:27.326 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:12:27.336 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+17:12:27.344 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.246 seconds (process running for 1.607)
+17:12:27.920 [RMI TCP Connection(2)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:12:27.920 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:12:27.920 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+17:13:26.223 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+17:13:26.283 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+17:13:30.880 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 3496 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:13:30.881 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:13:30.881 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:13:31.484 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:13:31.489 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:13:31.490 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:13:31.490 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:13:31.529 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:13:31.530 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 628 ms
+17:13:31.706 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:13:31.930 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:13:31.949 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:13:31.959 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+17:13:31.967 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.273 seconds (process running for 1.654)
+17:13:32.487 [RMI TCP Connection(2)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:13:32.487 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:13:32.488 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+17:14:08.525 [http-nio-8080-exec-3] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+17:14:08.530 [http-nio-8080-exec-3] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+17:15:08.380 [http-nio-8080-exec-4] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+17:15:08.452 [http-nio-8080-exec-4] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+17:15:10.502 [http-nio-8080-exec-6] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+17:15:10.509 [http-nio-8080-exec-6] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+17:15:36.894 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+17:15:36.956 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+17:15:53.370 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 11516 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:15:53.371 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:15:53.372 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:15:53.969 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:15:53.974 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:15:53.975 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:15:53.975 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:15:54.018 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:15:54.019 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 625 ms
+17:15:54.191 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:15:54.402 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:15:54.423 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:15:54.433 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+17:15:54.441 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.272 seconds (process running for 1.728)
+17:15:54.672 [RMI TCP Connection(2)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:15:54.672 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:15:54.673 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+17:16:02.434 [http-nio-8080-exec-5] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+17:16:02.450 [http-nio-8080-exec-5] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+17:16:46.388 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+17:16:46.457 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+17:16:48.627 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 23980 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:16:48.628 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:16:48.629 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:16:49.239 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:16:49.245 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:16:49.245 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:16:49.245 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:16:49.285 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:16:49.285 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 632 ms
+17:16:49.473 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:16:49.699 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:16:49.725 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:16:49.737 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+17:16:49.745 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.299 seconds (process running for 1.667)
+17:16:50.270 [RMI TCP Connection(1)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:16:50.270 [RMI TCP Connection(1)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:16:50.271 [RMI TCP Connection(1)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+17:18:35.507 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+17:18:35.573 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+17:18:37.023 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 7592 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:18:37.025 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:18:37.025 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:18:37.634 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:18:37.639 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:18:37.639 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:18:37.640 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:18:37.681 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:18:37.681 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 636 ms
+17:18:37.843 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:18:38.060 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:18:38.079 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:18:38.090 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+17:18:38.099 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.278 seconds (process running for 1.66)
+17:18:38.650 [RMI TCP Connection(4)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:18:38.650 [RMI TCP Connection(4)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:18:38.651 [RMI TCP Connection(4)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+17:18:42.549 [http-nio-8080-exec-2] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+17:18:42.555 [http-nio-8080-exec-2] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+17:19:03.198 [http-nio-8080-exec-4] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+17:19:03.214 [http-nio-8080-exec-4] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+17:19:04.273 [http-nio-8080-exec-2] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+17:19:04.352 [http-nio-8080-exec-2] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+17:19:06.302 [http-nio-8080-exec-5] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+17:19:06.785 [http-nio-8080-exec-5] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+17:19:07.715 [http-nio-8080-exec-6] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+17:19:07.717 [http-nio-8080-exec-6] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+17:19:17.373 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+17:19:17.435 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+17:19:29.311 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 24364 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:19:29.313 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:19:29.313 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:19:29.900 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:19:29.905 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:19:29.906 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:19:29.906 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:19:29.948 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:19:29.948 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 616 ms
+17:19:30.103 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:19:30.314 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:19:30.332 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:19:30.342 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+17:19:30.351 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.223 seconds (process running for 1.586)
+17:19:30.903 [RMI TCP Connection(1)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:19:30.903 [RMI TCP Connection(1)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:19:30.904 [RMI TCP Connection(1)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+17:19:38.596 [http-nio-8080-exec-4] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+17:19:38.612 [http-nio-8080-exec-4] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+17:20:19.680 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+17:20:19.740 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+17:21:59.258 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 18296 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:21:59.259 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:21:59.260 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:22:00.167 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:22:00.175 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:22:00.176 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:22:00.177 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:22:00.224 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:22:00.225 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 940 ms
+17:22:00.432 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:22:00.681 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:22:00.705 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:22:00.717 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+17:22:00.726 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.751 seconds (process running for 2.265)
+17:22:00.889 [RMI TCP Connection(4)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:22:00.889 [RMI TCP Connection(4)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:22:00.889 [RMI TCP Connection(4)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+17:24:39.949 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+17:24:40.011 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+17:35:21.875 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 15976 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:35:21.876 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:35:21.876 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:35:22.510 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:35:22.516 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:35:22.517 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:35:22.517 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:35:22.555 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:35:22.555 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 657 ms
+17:35:22.723 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:35:22.961 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:35:22.982 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:35:22.985 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+17:35:22.998 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+17:35:23.005 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+17:35:31.597 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 13336 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:35:31.598 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:35:31.599 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:35:32.206 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:35:32.212 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:35:32.213 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:35:32.213 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:35:32.250 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:35:32.250 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 631 ms
+17:35:32.412 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:35:32.632 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:35:32.652 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:35:32.662 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+17:35:32.671 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.27 seconds (process running for 1.626)
+17:35:33.270 [RMI TCP Connection(3)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:35:33.270 [RMI TCP Connection(3)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:35:33.271 [RMI TCP Connection(3)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+17:35:44.841 [http-nio-8080-exec-8] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+17:35:44.846 [http-nio-8080-exec-8] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+17:40:54.992 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+17:40:55.057 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+17:52:24.807 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 5056 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:52:24.808 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:52:24.809 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:52:25.430 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:52:25.436 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:52:25.437 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:52:25.437 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:52:25.479 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:52:25.479 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 651 ms
+17:52:25.647 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:52:25.882 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:52:25.903 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:52:25.905 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+17:52:25.921 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+17:52:25.928 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+17:52:53.357 [main] INFO  com.lucky.data_visual.MyApplication - Starting MyApplication using Java 17.0.17 with PID 18820 (D:\Study\Java\data-visual\target\classes started by 33193 in D:\Study\Java\data-visual)
+17:52:53.357 [main] DEBUG com.lucky.data_visual.MyApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+17:52:53.358 [main] INFO  com.lucky.data_visual.MyApplication - No active profile set, falling back to 1 default profile: "default"
+17:52:53.985 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+17:52:53.991 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17:52:53.992 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:52:53.992 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+17:52:54.036 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:52:54.036 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 656 ms
+17:52:54.195 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+17:52:54.421 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+17:52:54.441 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17:52:54.451 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+17:52:54.460 [main] INFO  com.lucky.data_visual.MyApplication - Started MyApplication in 1.299 seconds (process running for 1.667)
+17:52:54.978 [RMI TCP Connection(2)-192.168.80.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:52:54.978 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:52:54.980 [RMI TCP Connection(2)-192.168.80.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+17:53:03.606 [http-nio-8080-exec-3] INFO  c.l.d.controller.DataController - ====== 样本数据读取成功 ======
+17:53:03.610 [http-nio-8080-exec-3] INFO  c.l.data_visual.server.CsvFileServer - ====== 数据列类型转换成功 ======
+17:53:09.687 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+17:53:09.755 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete

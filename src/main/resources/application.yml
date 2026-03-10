@@ -1,6 +1,9 @@
+# 根据自身配置修改 port 和 localhost
 server:
   port: 8080
-  dataPath: 'http://localhost:8080/data/fetch-csv' # 后缀 "/data/fetch-csv"
+
+config:
+  baseURL: http://localhost:${server.port}
 
 spring:
   application:

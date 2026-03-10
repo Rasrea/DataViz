@@ -47,8 +47,8 @@ public class ColDataController {
     @Resource
     private PythonScriptsPath pythonScriptsPath;
 
-    @Value("${server.dataPath}")
-    private String serverDataPath;
+    @Value("${config.baseURL}")
+    private String baseURL;
 
     @Autowired
     public ColDataController(@Qualifier("operationalData") JsonResult<List<Map<String, Object>>> operateJsonResult,
@@ -126,6 +126,7 @@ public class ColDataController {
 //        jsonString = jsonString.replace("\"", "\\\"");  // 转义双引号
 
         // 调用python脚本实现表格需求
+        String serverDataPath = baseURL + "/data/fetch-csv";
         String[] cmd = {
                 pythonScriptsPath.getPythonPath(), // Python解释器路径
                 resolveScriptPath(

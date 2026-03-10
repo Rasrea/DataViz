@@ -3,9 +3,12 @@ let API_CONFIG = null;
 async function initApiConfig() {
     if (API_CONFIG) return API_CONFIG;
 
-    const res = await fetch("js/api.json");
+    const res = await fetch("/config/api", {
+        cache: "no-cache"
+    });
+
     if (!res.ok) {
-        throw new Error("无法加载 api.json");
+        throw new Error("无法加载配置");
     }
 
     API_CONFIG = await res.json();
